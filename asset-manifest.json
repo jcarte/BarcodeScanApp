@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/BarcodeScanApp/static/js/main.453e32d2.js",
+    "main.js": "/BarcodeScanApp/static/js/main.d31ad79b.js",
     "static/js/637.924d35c0.js": "/BarcodeScanApp/static/js/637.924d35c0.js",
     "favicon.ico": "/BarcodeScanApp/favicon.ico",
     "index.html": "/BarcodeScanApp/index.html",
@@ -8,11 +8,11 @@
     "favicon-16.png": "/BarcodeScanApp/favicon-16.png",
     "manifest.json": "/BarcodeScanApp/manifest.json",
     "serve.json": "/BarcodeScanApp/serve.json",
-    "main.453e32d2.js.map": "/BarcodeScanApp/static/js/main.453e32d2.js.map",
+    "main.d31ad79b.js.map": "/BarcodeScanApp/static/js/main.d31ad79b.js.map",
     "637.924d35c0.js.map": "/BarcodeScanApp/static/js/637.924d35c0.js.map"
   },
   "entrypoints": [
     "static/js/637.924d35c0.js",
-    "static/js/main.453e32d2.js"
+    "static/js/main.d31ad79b.js"
   ]
 }
