@@ -4,7 +4,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeScreen } from './HomeScreen';
-import { ScannerScreen } from './ScannerScreen';
+import { ScannerScreenCAM } from './ScannerScreenCAM';
 
 
 export const Stack = createNativeStackNavigator();
@@ -16,7 +16,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={HomeScreen} initialParams={{ barcode: ''}}/>
-        <Stack.Screen name="Scanner" component={ScannerScreen} />
+        <Stack.Screen name="Scanner" component={ScannerScreenCAM} />
       </Stack.Navigator>
     </NavigationContainer>
   );

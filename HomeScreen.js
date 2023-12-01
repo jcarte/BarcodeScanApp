@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, StyleSheet } from 'react-native';
+import { Text, View, Button, StyleSheet, Image, Dimensions} from 'react-native';
 
 
 
@@ -8,14 +8,6 @@ export function HomeScreen({ route, navigation }) {
   const {barcode} = route.params;
 
   //https://world.openfoodfacts.org/api/v2/product/01041859.json
-  //json.product.product_name
-  //json.product.brands
-
-  // type Product = {
-  //   name: string;
-  //   brand: string;
-  // }
-
   
   const[product, setProduct] = useState(null)
 
@@ -37,6 +29,7 @@ export function HomeScreen({ route, navigation }) {
         let p = {
           name: json.product.product_name,
           brand: json.product.brands,
+          imgUrl: json.product.image_url,
           ingredients: json.product.ingredients.map((i) => 
           ({
             name: i.text,
@@ -62,38 +55,61 @@ export function HomeScreen({ route, navigation }) {
     }
   },[barcode])
 
- 
-
+  const prodImageSize = Dimensions.get('window').width*.6
+  const thumbImageSize = Dimensions.get('window').width*.3
+//<View style={ (product ? (product.hasIrritants? styles.containerR : styles.containerG ) : styles.containerW) }>
   return (
-    <View style={ (product ? (product.hasIrritants? styles.containerR : styles.containerG ) : styles.containerW) }>
+    <View style={styles.container}>
       
-      {barcode != '' && <Text>Barcode: {barcode}</Text>}
-      {product && <Text>Product: {product.brand} {product.name}</Text>}
-      <Button 
-        title='Scan Barcode'
-        onPress={() => navigation.navigate('Scanner')}
-      />
+      <View style= {{flex:2, justifyContent: 'flex-end', alignItems: 'center'}}>
+        {product && <Image style={[styles.thumb_image, {height: thumbImageSize, width: thumbImageSize}]} source={product.hasIrritants ? require('./Images/thumbs_down.png') : require('./Images/thumbs_up.png')} resizeMode='cover'  />}
+        {product && <Text style={styles.thumb_text}> {(product.hasIrritants ? 'Irritants Found' : 'No Irritants Found')} </Text>}
+      </View>
+      <View style= {{flex:2, justifyContent: 'center', alignItems: 'center'}}>
+      {product && <Image style={[styles.prod_image, {height: prodImageSize, width: prodImageSize}]} source={{uri:product.imgUrl}} resizeMode='cover'  />}
+      {product && <Text style={styles.product_text}>{product.brand} {product.name}</Text>}
+      </View>
+      <View style= {{flex:1, flexDirection:'column', justifyItems: 'center', alignItems: 'center', borderWidth: 0, alignSelf:'stretch', padding: 15}}>
+        <Button 
+          title='Scan Barcode'
+          onPress={() => navigation.navigate('Scanner')}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  containerW: {
+  container: {
     flex: 1, 
+    
     alignItems: 'center', 
     justifyContent: 'center',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    fontFamily: 'sans-serif'
   },
-  containerR: {
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center',
-    backgroundColor: '#f00'
+  prod_image: {
+    borderColor: '#000',
+    borderWidth: 2,
   },
-  containerG: {
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center',
-    backgroundColor: '#0f0'
-  }
+  thumb_image: {
+    borderColor: '#000',
+    borderWidth: 0,
+  },
+  thumb_text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: 10,
+  },
+  product_text: {
+    fontSize: 18,
+    textTransform: 'capitalize',
+    marginTop: 10,
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    textAlign: 'center',
+  },
+  
 });

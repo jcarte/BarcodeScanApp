@@ -9,6 +9,12 @@
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
         }
+      ],
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
+        }
       ]
     ],
     "orientation": "portrait",
