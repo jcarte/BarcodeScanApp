@@ -1,63 +1,90 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, StyleSheet, Image, Dimensions} from 'react-native';
 import { ProductHandler } from './ProductHandler.js'
-import { ResultsComponent } from './ResultsComponent.js';
+import { ResultsSummaryComponent } from './ResultsSummaryComponent.js';
+import { FullResultsScreen } from './FullResultsScreen.js';
+import { BarcodeScannerComponent } from './BarcodeScannerComponent.js';
 
 export function HomeScreen({ route, navigation }) {
 
-  const {barcode} = route.params;
-
+  //const {barcode} = "";
+  console.log("we're home")
   const ph = new ProductHandler()
   
-  const[product, setProduct] = useState({
-    brand: "Walkers",
-    fodmapStatus: "high",
-    imgUrl: "https://images.openfoodfacts.org/images/products/51000005/front_en.34.400.jpg",
-    name: "Cheese Onion Flavour Potato Crisps"
-  })
+  const[product, setProduct] = useState(null)
+
+  // const[product, setProduct] = useState({
+  //   brand: "Walkers",
+  //   fodmapStatus: "high",
+  //   imgUrl: "https://images.openfoodfacts.org/images/products/51000005/front_en.34.400.jpg",
+  //   name: "Cheese Onion Flavour Potato Crisps"
+  // })
   
 
-  //
+  const handleBarCode = async (bc) => {
+    console.log('Handle barcode home:', bc)
+    //fetchData(bc)
 
-
-
-  const fetchData= async (id) => {
     try 
     {
-        console.log(id)
+        console.log("home barcode fetch:",bc)
         
-        //const p = await ph.FetchProduct(id)
+        const p = await ph.FetchProduct(bc)
 
-        //setProduct(p)
+        //console.log(p)
+        setProduct(p)
+
+        //navigation.navigate("Results", {product: p})
+
     } catch(error) {
         console.log(error)
     }
-  }
 
-  useEffect(() => {
-    console.log('Use Effect')
-
-    // if (!product)
-    // {
-      console.log("set initial fake product")
-      //REMOVE
-      const p = {
-        brand: "Walkers",
-        fodmapStatus: "high",
-        imgUrl: "https://images.openfoodfacts.org/images/products/51000005/front_en.34.400.jpg",
-        name: "Cheese Onion Flavour Potato Crisps"
-      }
-      setProduct(p)
-    // }
+  };
 
 
 
+  // const fetchData= async (id) => {
+  //   try 
+  //   {
+  //       console.log("home barcode fetch:",id)
+        
+  //       const p = await ph.FetchProduct(id)
 
-    if(barcode !='')
-    {
-      fetchData(barcode);
-    }
-  },[barcode])
+  //       //console.log(p)
+  //       //setProduct(p)
+
+  //       navigation.navigate("Results", {product: p})
+
+  //   } catch(error) {
+  //       console.log(error)
+  //   }
+  // }
+
+   useEffect(() => {
+     console.log('Use Effect')
+
+  //   // if (!product)
+  //   // {
+  //     // console.log("set initial fake product")
+  //     // //REMOVE
+  //     // const p = {
+  //     //   brand: "Walkers",
+  //     //   fodmapStatus: "high",
+  //     //   imgUrl: "https://images.openfoodfacts.org/images/products/51000005/front_en.34.400.jpg",
+  //     //   name: "Cheese Onion Flavour Potato Crisps"
+  //     // }
+  //     // setProduct(p)
+   })
+
+
+
+
+  //   // if(barcode !='')
+  //   // {
+  //   //   fetchData(barcode);
+  //   // }
+  // },[barcode])
 
 
 //<View style={ (product ? (product.hasIrritants? styles.containerR : styles.containerG ) : styles.containerW) }>
@@ -75,42 +102,67 @@ export function HomeScreen({ route, navigation }) {
   </View>
   
 </View> 
-*/
-
-
-  return (
-    <View style={styles.container}>
-      <View style= {[styles.row, {flex:3}]}>
+---
+<View style= {[styles.row, {flex:3}]}>
         <Button 
           title='Scan Barcode'
           onPress={() => navigation.navigate('Scanner')}
         />
       </View>
       <View style= {[styles.row, {flex:1}]}>
-        <ResultsComponent product={product}/>
+        <ResultsSummaryComponent product={product}/>
+      </View>
+*/
+
+const trayHeight = Dimensions.get('window').height*.3
+
+
+//,{height: {trayHeight}}
+
+
+  return (
+    <View style={StyleSheet.absoluteFillObject}>
+      <BarcodeScannerComponent onBarCodeScanned ={handleBarCode}/>
+      <View elevation={0} style={[styles.results_summary_container  ]}>
+          {product && <ResultsSummaryComponent product={product}/>}
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    alignSelf: "stretch",
-    alignItems: 'center', 
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    fontFamily: 'sans-serif'
-  },
+/*
+    <View style={styles.container}>
+      <FullResultsScreen product={product}/>
+    </View>
+*/
 
-  row: {
-    flex:1, 
-    
-    flexDirection:'column', 
-    justifyItems: 'center', 
-    alignItems: 'center', 
-    alignSelf:'stretch', 
-    
+const styles = StyleSheet.create({
+
+  results_summary_container:{
+    position: "absolute",
+    flex:1,
+    bottom:0,
+    height: 200,
+    width: "100%",
   }
+
+  // container: {
+  //   flex: 1, 
+  //   alignSelf: "stretch",
+  //   alignItems: 'center', 
+  //   justifyContent: 'center',
+  //   backgroundColor: '#fff',
+  //   fontFamily: 'sans-serif'
+  // },
+
+  // row: {
+  //   flex:1, 
+    
+  //   flexDirection:'column', 
+  //   justifyItems: 'center', 
+  //   alignItems: 'center', 
+  //   alignSelf:'stretch', 
+    
+  // }
   
 });

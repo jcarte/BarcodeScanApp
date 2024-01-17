@@ -1,6 +1,12 @@
 #Deploy web version to github pages
 npm run deploy
 
+#start for normal expo/android debug
+npx expo start
+
+#Refresh device
+r
+
 #Start web version locally
 npx expo start --web
 

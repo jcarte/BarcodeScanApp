@@ -57,8 +57,11 @@ export class ProductHandler {
             p.fodmapStatus = "unknown"
         }
 
-        //p.hasIrritants = p.ingredients.some((i) => i.isIrritant)
+        //remove dups
+        p.ingredients = [...new Set(p.ingredients)];///////DOESNT WORK
+
         console.log(p)
+
 
         return p
     }
