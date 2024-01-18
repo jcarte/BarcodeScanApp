@@ -19,27 +19,40 @@ export function HomeScreen({ route, navigation }) {
   const handleBarCode = async (bc) => {
     console.log('Home: Handle barcode:', bc)
 
-    try 
+    console.log("Home: stop allowing scanning")
+    setAllowScanning(false)
+
+    if(bc === product?.barcode)
     {
-        console.log("Home: stop allowing scanning")
-        setAllowScanning(false)
-
-        console.log("Home: barcode fetch:",bc)
-        
-        const p = await ph.FetchProduct(bc)
-
-        setProduct(p)
-
-        console.log("Home: allow scanning in 3 secs")
-
-        setTimeout(()=> {setAllowScanning(true)}, 3000)
-
-        
-    } catch(error) {
-        console.log(error)
+      console.log("Home: same barcode detected, skipping fetch")
     }
+    else
+    {
+      try 
+      {
+        console.log("Home: barcode fetch:",bc)
+        const p = await ph.FetchProduct(bc)
+        setProduct(p)
+      } catch(error) {
+        console.log(error)
+      }
+    }
+    
 
-  };
+    console.log("Home: allow scanning in 3 secs")
+    // await sleep(() => { setAllowScanning(true); })
+    setTimeout(() => { setAllowScanning(true); }, 3000)
+    
+  }
+
+  
+  // function timeout(ms) {
+  //   return new Promise(resolve => setTimeout(resolve, ms));
+  // }
+  // async function sleep(fn, ...args) {
+  //     await timeout(3000);
+  //     return fn(...args);
+  // }
 
   return (
     <View style={StyleSheet.absoluteFillObject}>
