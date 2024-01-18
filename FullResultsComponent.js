@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Text, View,TouchableOpacity, Button, FlatList, StyleSheet, Image, Dimensions} from 'react-native';
 import { ResultsSummaryComponent } from './ResultsSummaryComponent.js';
+import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 
-export function FullResultsScreen({ route, navigation }) {
+export function FullResultsComponent({  product }) {
     //console.log("Full results route:",route)
     
-    const {product} = route.params
+    //const {product} = route.params
     // const prodImageWidth = Dimensions.get('window').width*.3
     // const prodImageHeight = Dimensions.get('window').width*.4
    
@@ -54,76 +55,39 @@ export function FullResultsScreen({ route, navigation }) {
     ings.sort((a,b) => a.sortOrder - b.sortOrder)
     //console.log(ings)
 
-
-    const handleExit = () => {
-        console.log('Handle full results exit')
-        navigation.navigate("Home")
-      };
-
-
     return (
-        <View style={styles.container}>
-            <View style={styles.row_exit}>
-                <TouchableOpacity onPress={handleExit}> 
-                    <Text style={styles.exit_text}>✖️</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.row_list}>
-                <FlatList 
-                    data={ings}
-                    renderItem={({item}) =>
-                        <View style={styles.item_container}>
-                            <View style={styles.item_name}>
-                                <Text style={styles.text_name}>{item.name}</Text>
-                            </View>
-                            <View style={styles.item_status}>
-                                <Text style={styles.text_status}>{item.fodmapStatusText}</Text>
-                            </View>
-                        </View>
-                    }
-                    ListHeaderComponent={()=>
-                        <View style={styles.header_container}>
-                            <View elevation={2} style={styles.header_top_container}>
-                                <ResultsSummaryComponent 
-                                    product={product}/>
-                            </View>
-                            <View style={styles.header_bottom_container}>
-                                <Text style={styles.header_text}>Ingredients</Text>
-                            </View>
-                        </View>
-                    }
-                />
-            </View>
-        </View>
+      <BottomSheetFlatList 
+          data={ings}
+          keyExtractor={(i) => i.name}
+          renderItem={({item}) =>
+              <View style={styles.item_container}>
+                  <View style={styles.item_name}>
+                      <Text style={styles.text_name}>{item.name}</Text>
+                  </View>
+                  <View style={styles.item_status}>
+                      <Text style={styles.text_status}>{item.fodmapStatusText}</Text>
+                  </View>
+              </View>
+          }
+          ListHeaderComponent={()=>
+              <View style={styles.header_container}>
+                  <View elevation={2} style={styles.header_top_container}>
+                      <ResultsSummaryComponent 
+                          product={product}/>
+                  </View>
+                  <View style={styles.header_bottom_container}>
+                      <Text style={styles.header_text}>Ingredients</Text>
+                  </View>
+              </View>
+          }
+      />
     );
 }
 
 // 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1, 
-        flexDirection: 'column',
-        backgroundColor: '#fff',
-    },
-    row_exit: {
-        
-        flexDirection: "row-reverse",
-        //borderWidth: 1,
-    },
-    row_list: {
-        flexShrink: 1,
-        
-        flexDirection: "row"
-    },
-    exit_text:{
-        paddingTop: 40,
-        paddingRight: 30,
-        paddingLeft: 30,
-        paddingBottom: 10,
-        fontSize: 20,
-        //borderWidth: 1
-    },
+
     
     //HEADER
     header_container: {
@@ -136,7 +100,7 @@ const styles = StyleSheet.create({
         height: 220,
         borderColor: '#f5f5f5',
         borderBottomWidth: 1,
-        borderTopWidth: 1,
+        borderTopWidth: 0,
         
     },
     header_bottom_container:{
@@ -192,6 +156,7 @@ const styles = StyleSheet.create({
     },
 
 });
+
 
 
 
