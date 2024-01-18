@@ -25,7 +25,8 @@
     "react-native-web": "~0.19.6",
     "@expo/webpack-config": "^19.0.0",
     "react-dom": "18.2.0",
-    "expo-dev-client": "~2.4.12"
+    "expo-dev-client": "~2.4.12",
+    "@gorhom/bottom-sheet": "4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

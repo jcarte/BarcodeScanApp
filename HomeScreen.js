@@ -14,8 +14,6 @@ export function HomeScreen({ route, navigation }) {
 
   const [allowScanning, setAllowScanning] = useState(true);
 
-  
-
   const handleBarCode = async (bc) => {
     console.log('Home: Handle barcode:', bc)
 
@@ -38,21 +36,10 @@ export function HomeScreen({ route, navigation }) {
       }
     }
     
-
     console.log("Home: allow scanning in 3 secs")
-    // await sleep(() => { setAllowScanning(true); })
     setTimeout(() => { setAllowScanning(true); }, 3000)
     
   }
-
-  
-  // function timeout(ms) {
-  //   return new Promise(resolve => setTimeout(resolve, ms));
-  // }
-  // async function sleep(fn, ...args) {
-  //     await timeout(3000);
-  //     return fn(...args);
-  // }
 
   return (
     <View style={StyleSheet.absoluteFillObject}>
