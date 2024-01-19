@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef  } from 'react';
 import { Text, View, Button, StyleSheet, Image, Dimensions} from 'react-native';
 import { ProductHandler } from './ProductHandler.js'
-import { ResultsSummaryComponent } from './ResultsSummaryComponent.js';
+
 import { FullResultsComponent } from './FullResultsComponent.js';
 import { BarcodeScannerComponent } from './BarcodeScannerComponent.js';
+import { MessageComponent } from './MessageComponent.js';
+
 import BottomSheet from '@gorhom/bottom-sheet';
 
 export function HomeScreen({ route, navigation }) {
@@ -11,7 +13,7 @@ export function HomeScreen({ route, navigation }) {
   console.log("Home: start")
   const ph = new ProductHandler()
   
-  const[product, setProduct] = useState(null)
+  const[results, setResults] = useState({status: "init", product: null})
 
   const [allowScanning, setAllowScanning] = useState(true);
 
@@ -21,56 +23,72 @@ export function HomeScreen({ route, navigation }) {
     console.log("Home: stop allowing scanning")
     setAllowScanning(false)
 
-    if(bc === product?.barcode)
+    if(bc === results.product?.barcode)
     {
       console.log("Home: same barcode detected, skipping fetch")
     }
     else
     {
-      try 
-      {
-        console.log("Home: barcode fetch:",bc)
-        const p = await ph.FetchProduct(bc)
-        setProduct(p)
-      } catch(error) {
-        console.log(error)
-      }
+      console.log("Home: barcode fetch:",bc)
+      const p = await ph.FetchProduct(bc)
+      setResults(p)
     }
     
     console.log("Home: allow scanning in 3 secs")
     setTimeout(() => { setAllowScanning(true); }, 3000)
   }
 
-
+  const getMessageText = () =>
+  {
+    switch (results.status) {
+      case "init":
+        return "Scan a product barcode to start"
+      case "error":
+        return "There was a problem looking up this product, try again"
+      case "notFound":
+        return "Product not found"
+      case "incomplete":
+        return "We couldn't find enough information about this product"
+      default:
+        return "";
+    }
+  }
 
 
   // ref
   const sheetRef = useRef(null);
 
   // variables
-  const snapPoints = useMemo(() => [240, '90%'], []);
+  const snapPoints = useMemo(() => {return results.status==='ok'? [240,"90%"]: [240]});
 
+  //DOESN'T WORK
   // callbacks
   const handleSheetChanges = useCallback((index) => {
-    console.log('handleSheetChanges', index);
+    console.log('Home: handleSheetChanges', index)
+
+    //if maximising results stop scanning
+    if(index === 1)
+      setAllowScanning(false)
+    else
+      setAllowScanning(true);
   }, []);
-
-
 
   return (
     <View style={StyleSheet.absoluteFillObject}>
       <BottomSheet
         ref={sheetRef}
         index={0}
-        snapPoints={snapPoints}
         onChange={handleSheetChanges}
+        snapPoints={snapPoints}
+        handleIndicatorStyle={!results.product && {opacity: 0, height: 0}}//only show resize handle if can resize
         backdropComponent={()=>
           <View style={StyleSheet.absoluteFillObject}>
-            <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} allowScanning ={allowScanning}/>
+            <BarcodeScannerComponent onBarCodeScanned ={allowScanning? handleBarCode : undefined} allowScanning ={allowScanning}/>
           </View>
         }
       >
-        {product && <FullResultsComponent product={product}/>}
+        {results.status !== 'ok' && <MessageComponent messageText={getMessageText()}  style={StyleSheet.absoluteFillObject}/>}
+        {results.product && <FullResultsComponent product={results.product}/>}
       </BottomSheet>
     </View>
   )

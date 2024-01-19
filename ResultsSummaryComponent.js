@@ -111,36 +111,4 @@ const styles = StyleSheet.create({
 
 });
 
-
-// circle: {
-//     position: 'absolute',
-//     width: 44,
-//     height: 44,
-//     borderRadius: 44,
-//     backgroundColor: "red",
-//     margin: '7%',
-    
-//     right: 0,
-//     top: 0,
-//  },
-//   
-//   thumb_image: {
-//     borderColor: '#000',
-//     borderWidth: 0,
-//   },
-//   thumb_text: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   product_text: {
-//     fontSize: 18,
-//     textTransform: 'capitalize',
-//     marginTop: 10,
-//     marginBottom: 20,
-//     marginLeft: 20,
-//     marginRight: 20,
-//     textAlign: 'center',
-//   },
   

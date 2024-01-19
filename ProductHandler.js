@@ -96,26 +96,46 @@ export class ProductHandler {
         return result
     }
 
+
+    /*
+        status: error | notFound | incomplete | ok
+    */
     async FetchProduct( barcode ) {
-
         console.log("PH: fetch barcode:", barcode)
-        //console.log("inglist", this.ingList)
 
-        //https://world.openfoodfacts.org/api/v2/product/01041859.json
-        
         const url = `https://world.openfoodfacts.org/api/v2/product/${barcode}`
-        
+        var response, json
 
-        const response = await fetch(url)
-        const json = await response.json();
+        try {
+            response = await fetch(url)
+            json = await response.json();    
+        } catch (error) {
+            return {
+                status: "error",
+                product: null,
+            }
+        }
         
-        console.log("PH: Ings from api",json.product.ingredients)
-
         ////FOR TESTING
         //const json = require('./example_product.json')
 
-              
-        let p = {
+        if(!response.ok){
+            return {
+                status: "notFound",
+                product: null,
+            }
+        }
+            
+        if(typeof json.product.ingredients === 'undefined' || json.product.ingredients.length === 0)
+        {
+            return {
+                status: "incomplete",
+                product: null,
+            }
+        }
+
+
+        let prod = {
             barcode: barcode,
             name: json.product.product_name,
             brand: json.product.brands,
@@ -124,21 +144,24 @@ export class ProductHandler {
         }
 
         //Determine overall product status based on ingredients
-        if (p.ingredients.some((i) => i.fodmapStatus === 'high')){
-            p.fodmapStatus = "high"
+        if (prod.ingredients.some((i) => i.fodmapStatus === 'high')){
+            prod.fodmapStatus = "high"
         }
-        else if (p.ingredients.some((i) => i.fodmapStatus === 'medium')){
-            p.fodmapStatus = "medium"
+        else if (prod.ingredients.some((i) => i.fodmapStatus === 'medium')){
+            prod.fodmapStatus = "medium"
         }
-        else if (p.ingredients.some((i) => i.fodmapStatus === 'low')){
-            p.fodmapStatus = "low"
+        else if (prod.ingredients.some((i) => i.fodmapStatus === 'low')){
+            prod.fodmapStatus = "low"
         }
         else {
-            p.fodmapStatus = "unknown"
+            prod.fodmapStatus = "unknown"
         }
 
-        console.log("PH: product fetched:",p)
 
-        return p
+        //form up into searchresults object
+        return {
+            status: "ok",
+            product: prod,
+        }
     }
 }
