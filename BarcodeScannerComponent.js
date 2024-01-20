@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import CrossSvgComponent from './CrossSVG'
 import { Camera } from 'expo-camera'
 
 export function BarcodeScannerComponent(props) {
@@ -9,15 +8,17 @@ export function BarcodeScannerComponent(props) {
 
   useEffect(() => {
     console.log("BCS: use effect")
-      if (!hasPermission?.granted) requestPermissions();
-  }, []);
-
-  console.log("BCS has permission:",hasPermission)
+    console.log("BCS has permission:",hasPermission)
+    if (!hasPermission?.granted) {
+      console.log("BCS: requesting permissions")
+      requestPermissions();
+    }
+  }, []); 
 
   handleBarCodeScanned = ({ type, data }) => {
-    console.log("BCS props", props)
-    console.log("BCS data", data)
-
+    // console.log("BCS props", props)
+    // console.log("BCS data", data)
+    console.log("BCS: handle barcode")
     //Tell parent, found a barcode
     props.onBarCodeScanned(data)
   };
