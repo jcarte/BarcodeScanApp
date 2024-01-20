@@ -8,39 +8,86 @@ import { MessageComponent } from './MessageComponent.js';
 
 import BottomSheet from '@gorhom/bottom-sheet';
 
-export function HomeScreen({ route, navigation }) {
+//route, navigation }
+class HomeScreen extends React.Component  {
 
-  console.log("Home: start")
-  const ph = new ProductHandler()
+  constructor(props)
+  {
+    console.log("Home: run constructor")
+
+    super(props)
+    this.state = {
+      allowScanning: true,
+      results: {
+        status: "init",
+        product: null
+      },
+      isResultsExpanded: false,
+    }
+    this.ph = new ProductHandler()
+
+    this.handleBarCode = this.handleBarCode.bind(this)
+    this.getMessageText = this.getMessageText.bind(this)
+    this.handleSheetChanges = this.handleSheetChanges.bind(this)
+    
+
+
+    //For bottom sheet
+    //this.sheetRef = useRef(null);
+    //this.snapPoints = useMemo(() => {return results.status==='ok'? [240,"90%"]: [240]});
+  }
+
   
-  const[results, setResults] = useState({status: "init", product: null})
 
-  const [allowScanning, setAllowScanning] = useState(true);
+  // useMemo(() => {
+  //   this.snapPoints = results.status==='ok'? [240,"90%"]: [240]
+  // }, []);
 
-  const handleBarCode = async (bc) => {
+
+  //console.log("Home: start, allow scanning:", allowScanning)
+  // const ph = new ProductHandler()
+  
+  //const[results, setResults] = useState({status: "init", product: null})
+
+  //const [allowScanning, setAllowScanning] = useState(true);
+
+  handleBarCode = async (bc) => {
     console.log('Home: Handle barcode:', bc)
 
-    console.log("Home: stop allowing scanning")
-    setAllowScanning(false)
+    console.log('Home: handleBarCode: allow scanning?:', this.state.allowScanning)
+    console.log('Home: handleBarCode: is results expanded?:', this.state.isResultsExpanded)
 
-    if(bc === results.product?.barcode)
+    
+    
+
+    console.log("Home: stop allowing scanning")
+    //setAllowScanning(false)
+    this.setState({allowScanning: false})
+
+    if(this.state.isResultsExpanded)//if results are up then abandon
+    {
+      console.log('Home: handleBarCode: abandoning as results are up?')
+    }
+    else if(bc === this.state.results.product?.barcode)
     {
       console.log("Home: same barcode detected, skipping fetch")
     }
     else
     {
       console.log("Home: barcode fetch:",bc)
-      const p = await ph.FetchProduct(bc)
-      setResults(p)
+      const p = await this.ph.FetchProduct(bc)
+      //setResults(p)
+      this.setState({results: p})
     }
     
     console.log("Home: allow scanning in 3 secs")
-    setTimeout(() => { setAllowScanning(true); }, 3000)
+    // setTimeout(() => { setAllowScanning(true); }, 3000)
+    setTimeout(() => { this.setState({allowScanning: true}); }, 3000)
   }
 
-  const getMessageText = () =>
+  getMessageText = () =>
   {
-    switch (results.status) {
+    switch (this.state.results.status) {
       case "init":
         return "Scan a product barcode to start"
       case "error":
@@ -55,48 +102,50 @@ export function HomeScreen({ route, navigation }) {
   }
 
 
-  // ref
-  const sheetRef = useRef(null);
 
-  // variables
-  const snapPoints = useMemo(() => {return results.status==='ok'? [240,"90%"]: [240]});
 
   //DOESN'T WORK
   // callbacks
-  const handleSheetChanges = useCallback((index) => {
+  handleSheetChanges = (index) => {
     console.log('Home: handleSheetChanges', index)
 
     //if maximising results stop scanning
     if(index === 1)
-      setAllowScanning(false)
+    {
+      this.setState({isResultsExpanded: true})
+    }
     else
-      setAllowScanning(true);
-  }, []);
+    {
+      this.setState({isResultsExpanded: false})
+    }
+      
+  }
 
-  return (
-    <View style={StyleSheet.absoluteFillObject}>
-      <BottomSheet
-        ref={sheetRef}
-        index={0}
-        onChange={handleSheetChanges}
-        snapPoints={snapPoints}
-        handleIndicatorStyle={!results.product && {opacity: 0, height: 0}}//only show resize handle if can resize
-        backdropComponent={()=>
-          <View style={StyleSheet.absoluteFillObject}>
-            <BarcodeScannerComponent onBarCodeScanned ={allowScanning? handleBarCode : undefined} allowScanning ={allowScanning}/>
-          </View>
-        }
-      >
-        {results.status !== 'ok' && <MessageComponent messageText={getMessageText()}  style={StyleSheet.absoluteFillObject}/>}
-        {results.product && <FullResultsComponent product={results.product}/>}
-      </BottomSheet>
-    </View>
-  )
-
+  render() {
+    return (
+      <View style={StyleSheet.absoluteFillObject}>
+        <BottomSheet
+          ref={null}
+          index={0}
+          onChange={this.handleSheetChanges}
+          snapPoints={this.state.results.status==='ok'? [240,"90%"]: [240]}
+          handleIndicatorStyle={!this.state.results.product && {opacity: 0, height: 0}}//only show resize handle if can resize
+          backdropComponent={()=>
+            <View style={StyleSheet.absoluteFillObject}>
+              <BarcodeScannerComponent onBarCodeScanned ={this.state.allowScanning? this.handleBarCode : undefined} allowScanning ={this.state.allowScanning}/>
+            </View>
+          }
+        >
+          {this.state.results.status !== 'ok' && <MessageComponent messageText={this.getMessageText()}  style={StyleSheet.absoluteFillObject}/>}
+          {this.state.results.product && <FullResultsComponent product={this.state.results.product}/>}
+        </BottomSheet>
+      </View>
+    )
+  }
   
 
-
 }
+export default HomeScreen
 
 /*
 
