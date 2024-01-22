@@ -10,5 +10,5 @@ r
 #Start web version locally
 npx expo start --web
 
-#Export APK
+#Export APK (builds on and avalable from https://expo.dev/accounts/jcarte)
 eas build -p android --profile preview-apk

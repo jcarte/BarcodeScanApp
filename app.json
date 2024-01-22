@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Belly Buddy",
-    "slug": "BellyBuddy",
+    "slug": "BarcodeScanApp",
     "version": "1.0.0",
     "plugins": [
       [
