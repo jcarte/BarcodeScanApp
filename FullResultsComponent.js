@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React from 'react';
 import { Text, View,TouchableOpacity, Button, FlatList, StyleSheet, Image, Dimensions} from 'react-native';
 import { ResultsSummaryComponent } from './ResultsSummaryComponent.js';
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';

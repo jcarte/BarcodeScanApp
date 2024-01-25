@@ -14,18 +14,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         //alignContent: "center",
-        justifyContent: "center",
+        //justifyContent: "center",
         //borderWidth:1,
-        alignItems: "center",
-        //marginTop: 35,
-        // height: "100%",
+        //alignItems: "center",
+        marginTop: 80,
+         //height: 100,
         //backgroundColor: "#ddd",
     },
     text: {
         textAlign: 'center',
-        alignSelf: "center",
+        //alignSelf: "center",
         //borderWidth:1,
-        color: '#242424',//off black
+        //color: '#242424',//off black
         fontWeight: "bold",
         fontSize: 16,
 

@@ -10,14 +10,17 @@ import BottomSheet from '@gorhom/bottom-sheet';
 
 export function HomeScreen() {
 
+  console.log("Home: Start")
+
+  const[allowScanning, setAllowScanning] = useState(true)
+  const[isResultsExpanded, setIsResultsExpanded] = useState(false)
+
   const[state, setState] = useState(
     {
-      allowScanning: true,
       results: {
         status: "init",
         product: null
       },
-      isResultsExpanded: false,
     })
 
   const ph = new ProductHandler()
@@ -25,7 +28,7 @@ export function HomeScreen() {
   
     //For bottom sheet
   const sheetRef = useRef(null);
-  let snapPoints = useMemo(() => {return state?.results?.status==='ok'? [240,"90%"]: [240]});
+  const snapPoints = useMemo(() => [240,"90%"], []);
 
 
   // useMemo(() => {
@@ -43,21 +46,21 @@ export function HomeScreen() {
   handleBarCode = async (bc) => {
     console.log('Home: Handle barcode:', bc)
 
-    console.log('Home: handleBarCode: allow scanning?:', state.allowScanning)
-    console.log('Home: handleBarCode: is results expanded?:', state.isResultsExpanded)
+    console.log('Home: handleBarCode: allow scanning?:', allowScanning)
+    console.log('Home: handleBarCode: is results expanded?:', isResultsExpanded)
 
     
     
 
     console.log("Home: stop allowing scanning")
-    //setAllowScanning(false)
-    setState({
-      allowScanning: false,
-      results: state.results,
-      isResultsExpanded: state.isResultsExpanded,
-    })
+    setAllowScanning(false)
+    // setState({
+    //   allowScanning: false,
+    //   results: state.results,
+    //   isResultsExpanded: state.isResultsExpanded,
+    // })
 
-    if(state.isResultsExpanded)//if results are up then abandon
+    if(isResultsExpanded)//if results are up then abandon
     {
       console.log('Home: handleBarCode: abandoning as results are up?')
     }
@@ -71,26 +74,24 @@ export function HomeScreen() {
       const p = await ph.FetchProduct(bc)
       //setResults(p)
       setState({
-        allowScanning: state.allowScanning,
         results: p,
-        isResultsExpanded: state.isResultsExpanded,
       })
     }
     
     console.log("Home: allow scanning in 3 secs")
-    // setTimeout(() => { setAllowScanning(true); }, 3000)
-    setTimeout(() => { setState({
-      allowScanning: true,
-      results: state.results,
-      isResultsExpanded: state.isResultsExpanded,
-    }); }, 3000)
+    setTimeout(() => { setAllowScanning(true); }, 3000)
+    // setTimeout(() => { setState({
+    //   allowScanning: true,
+    //   results: state.results,
+    //   isResultsExpanded: state.isResultsExpanded,
+    // }); }, 3000)
   }
 
   getMessageText = () =>
   {
     switch (state.results.status) {
       case "init":
-        return "Scan a product barcode to start"
+        return "Scan a product barcode to start..."
       case "error":
         return "There was a problem looking up this product, try again"
       case "notFound":
@@ -112,19 +113,19 @@ export function HomeScreen() {
     //if maximising results stop scanning
     if(index === 1)
     {
-      setState({
-        allowScanning: state.allowScanning,
-        results: state.results,
-        isResultsExpanded: true,
-      })
+      setIsResultsExpanded(true)
+      // setState({
+      //   results: state.results,
+      //   isResultsExpanded: true,
+      // })
     }
     else
     {
-      setState({
-        allowScanning: state.allowScanning,
-        results: state.results,
-        isResultsExpanded: false,
-      })
+      setIsResultsExpanded(false)
+      // setState({
+      //   results: state.results,
+      //   isResultsExpanded: false,
+      // })
     }
       
   }
@@ -140,12 +141,14 @@ export function HomeScreen() {
           handleIndicatorStyle={!state.results.product && {opacity: 0, height: 0}}//only show resize handle if can resize
           backdropComponent={()=>
             <View style={StyleSheet.absoluteFillObject}>
-              <BarcodeScannerComponent onBarCodeScanned ={state.allowScanning? handleBarCode : undefined} allowScanning ={state.allowScanning}/>
+              <BarcodeScannerComponent onBarCodeScanned ={allowScanning? handleBarCode : undefined} allowScanning ={allowScanning}/>
             </View>
           }
         >
-          {state.results.status !== 'ok' && <MessageComponent messageText={getMessageText()}  style={StyleSheet.absoluteFillObject}/>}
-          {state.results.product && <FullResultsComponent product={state.results.product}/>}
+          <View style={styles.container}>
+            {state.results.status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
+            {state.results.product && <FullResultsComponent product={state.results.product}/>}
+          </View>
         </BottomSheet>
       </View>
     )
@@ -192,23 +195,22 @@ export function HomeScreen() {
 
 const styles = StyleSheet.create({
 
-  results_summary_container:{
-    //position: "absolute",
-    flex:1,
-    //bottom:0,
-    height: 200,
-    width: "100%",
-  },
-
+  // results_summary_container:{
+  //   //position: "absolute",
+  //   flex:1,
+  //   //bottom:0,
+  //   height: 200,
+  //   width: "100%",
+  // },
 
   container: {
     flex: 1,
-    padding: 24,
-    backgroundColor: 'grey',
+    //padding: 24,
+    //backgroundColor: 'grey',
   },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center',
-  },
+  // contentContainer: {
+  //   flex: 1,
+  //   alignItems: 'center',
+  // },
   
 });
