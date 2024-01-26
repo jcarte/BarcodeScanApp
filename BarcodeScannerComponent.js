@@ -3,8 +3,9 @@ import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Camera } from 'expo-camera'
 
 export function BarcodeScannerComponent(props) {
-
+  const [lastScan, setLastScan] = useState(new Date('0001-01-01T00:00:00Z'))//start at min time
   const [hasPermission, requestPermissions] = Camera.useCameraPermissions();
+
 
   useEffect(() => {
     console.log("BCS: use effect")
@@ -18,9 +19,18 @@ export function BarcodeScannerComponent(props) {
   handleBarCodeScanned = ({ type, data }) => {
     // console.log("BCS props", props)
     // console.log("BCS data", data)
-    console.log("BCS: handle barcode")
-    //Tell parent, found a barcode
-    props.onBarCodeScanned(data)
+    //console.log("BCS: handle barcode")
+    //console.log("BCS: last scan", lastScan,",    time diff:", new Date() - lastScan,",    interval:",props.scanInterval)
+
+    if((new Date() - lastScan) > props.scanInterval)//only scan at least every interval (specified in props)
+    {
+      console.log("BCS: Notify parent")
+      //Tell parent, found a barcode
+      props.onBarCodeScanned(data)
+  
+      setLastScan(new Date())
+    }
+
   };
   
 
@@ -32,7 +42,10 @@ export function BarcodeScannerComponent(props) {
       {!hasPermission?.granted ? <Text>No access to camera</Text> : undefined }
       
       <Camera
-        onBarCodeScanned={props.allowScanning ? handleBarCodeScanned : undefined}
+        barcodeSettings={{
+          interval: 2000, // scan every 2 secs
+        }}
+        onBarCodeScanned={handleBarCodeScanned}
         onMountError={(e) => console.log(e)}
         style={StyleSheet.absoluteFillObject}
       />
@@ -40,6 +53,7 @@ export function BarcodeScannerComponent(props) {
     </View>
   );
 }
+//onBarCodeScanned={props.allowScanning ? handleBarCodeScanned : undefined}
 
 const styles = StyleSheet.create({
   container: {

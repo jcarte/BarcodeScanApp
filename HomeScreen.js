@@ -12,16 +12,19 @@ export function HomeScreen() {
 
   console.log("Home: Start")
 
-  const[allowScanning, setAllowScanning] = useState(true)
+  //const[allowScanning, setAllowScanning] = useState(true)
   const[isResultsExpanded, setIsResultsExpanded] = useState(false)
 
-  const[state, setState] = useState(
-    {
-      results: {
-        status: "init",
-        product: null
-      },
-    })
+  const[status, setStatus] = useState("init")
+
+  const[product, setProduct] = useState(null)
+  // const[state, setState] = useState(
+  //   {
+  //     results: {
+  //       status: "init",
+  //       product: null
+  //     },
+  //   })
 
   const ph = new ProductHandler()
 
@@ -46,14 +49,14 @@ export function HomeScreen() {
   handleBarCode = async (bc) => {
     console.log('Home: Handle barcode:', bc)
 
-    console.log('Home: handleBarCode: allow scanning?:', allowScanning)
+    //console.log('Home: handleBarCode: allow scanning?:', allowScanning)
     console.log('Home: handleBarCode: is results expanded?:', isResultsExpanded)
 
     
     
 
     console.log("Home: stop allowing scanning")
-    setAllowScanning(false)
+    //setAllowScanning(false)
     // setState({
     //   allowScanning: false,
     //   results: state.results,
@@ -64,7 +67,7 @@ export function HomeScreen() {
     {
       console.log('Home: handleBarCode: abandoning as results are up?')
     }
-    else if(bc === state.results.product?.barcode)
+    else if(bc === product?.barcode)
     {
       console.log("Home: same barcode detected, skipping fetch")
     }
@@ -73,13 +76,15 @@ export function HomeScreen() {
       console.log("Home: barcode fetch:",bc)
       const p = await ph.FetchProduct(bc)
       //setResults(p)
-      setState({
-        results: p,
-      })
+      // setState({
+      //   results: p,
+      // })
+      setStatus(p.status)
+      setProduct(p.product)
     }
     
-    console.log("Home: allow scanning in 3 secs")
-    setTimeout(() => { setAllowScanning(true); }, 3000)
+    //console.log("Home: allow scanning in 3 secs")
+    //setTimeout(() => { setAllowScanning(true); }, 3000)
     // setTimeout(() => { setState({
     //   allowScanning: true,
     //   results: state.results,
@@ -89,7 +94,7 @@ export function HomeScreen() {
 
   getMessageText = () =>
   {
-    switch (state.results.status) {
+    switch (status) {
       case "init":
         return "Scan a product barcode to start..."
       case "error":
@@ -138,16 +143,16 @@ export function HomeScreen() {
           index={0}
           onChange={handleSheetChanges}
           snapPoints={snapPoints}
-          handleIndicatorStyle={!state.results.product && {opacity: 0, height: 0}}//only show resize handle if can resize
+          handleIndicatorStyle={!product && {opacity: 0, height: 0}}//only show resize handle if can resize
           backdropComponent={()=>
             <View style={StyleSheet.absoluteFillObject}>
-              <BarcodeScannerComponent onBarCodeScanned ={allowScanning? handleBarCode : undefined} allowScanning ={allowScanning}/>
+              <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}/>
             </View>
           }
         >
           <View style={styles.container}>
-            {state.results.status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
-            {state.results.product && <FullResultsComponent product={state.results.product}/>}
+            {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
+            {product && <FullResultsComponent product={product}/>}
           </View>
         </BottomSheet>
       </View>
@@ -157,6 +162,7 @@ export function HomeScreen() {
 }
 
 /*
+<BarcodeScannerComponent onBarCodeScanned ={allowScanning? handleBarCode : undefined} allowScanning ={allowScanning}/>
 
 
       <BottomSheet
