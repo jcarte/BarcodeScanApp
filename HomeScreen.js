@@ -26,7 +26,7 @@ export function HomeScreen() {
   //     },
   //   })
 
-  const ph = new ProductHandler()
+  //const ph = new ProductHandler()
 
   
     //For bottom sheet
@@ -74,7 +74,7 @@ export function HomeScreen() {
     else
     {
       console.log("Home: barcode fetch:",bc)
-      const p = await ph.FetchProduct(bc)
+      const p = await ProductHandler(bc)
       //setResults(p)
       // setState({
       //   results: p,

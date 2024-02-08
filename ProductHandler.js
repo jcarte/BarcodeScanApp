@@ -1,16 +1,10 @@
 
 
-export class ProductHandler {
+export async function ProductHandler(barcode) {
+    console.log("PH: Starting")
     ingList = []
-    constructor()
-    {
-        console.log("PH: constructor running")
-
-        this.ingList = require('./FodmapIngredientList.json')
-
-        console.log("PH: constructor run")
-    }
-
+    this.ingList = require('./FodmapIngredientList.json')
+    
 
     /*
         Map an individual ingredient to the format we need and lookup its fodmap status.
@@ -45,7 +39,7 @@ export class ProductHandler {
             "fodmapStatus": "low"
         }
     */
-    GetIngredient(o) {
+    GetIngredient = (o) => {
         if(o.ingredients)
         {
             return o.ingredients.flatMap(i => this.GetIngredient(i))
@@ -63,7 +57,7 @@ export class ProductHandler {
         Applies a threshold for % to be "high" status, downgrades
         any high ings to med if below % threshold
     */
-    GetIngredients(o) {
+    GetIngredients = (o) => {
         const ingr = this.GetIngredient(o)
 
         var result = [];
@@ -100,68 +94,69 @@ export class ProductHandler {
     /*
         status: error | notFound | incomplete | ok
     */
-    async FetchProduct( barcode ) {
-        console.log("PH: fetch barcode:", barcode)
+    //FetchProduct = async (barcode) => {
 
-        const url = `https://world.openfoodfacts.org/api/v2/product/${barcode}`
-        var response, json
+    console.log("PH: fetch barcode:", barcode)
 
-        try {
-            response = await fetch(url)
-            json = await response.json();    
-        } catch (error) {
-            return {
-                status: "error",
-                product: null,
-            }
-        }
-        
-        ////FOR TESTING
-        //const json = require('./example_product.json')
+    const url = `https://world.openfoodfacts.org/api/v2/product/${barcode}`
+    var response, json
 
-        if(!response.ok){
-            return {
-                status: "notFound",
-                product: null,
-            }
-        }
-            
-        if(typeof json.product.ingredients === 'undefined' || json.product.ingredients.length === 0)
-        {
-            return {
-                status: "incomplete",
-                product: null,
-            }
-        }
-
-
-        let prod = {
-            barcode: barcode,
-            name: json.product.product_name,
-            brand: json.product.brands,
-            imgUrl: json.product.image_url,
-            ingredients: this.GetIngredients(json.product)
-        }
-
-        //Determine overall product status based on ingredients
-        if (prod.ingredients.some((i) => i.fodmapStatus === 'high')){
-            prod.fodmapStatus = "high"
-        }
-        else if (prod.ingredients.some((i) => i.fodmapStatus === 'medium')){
-            prod.fodmapStatus = "medium"
-        }
-        else if (prod.ingredients.some((i) => i.fodmapStatus === 'low')){
-            prod.fodmapStatus = "low"
-        }
-        else {
-            prod.fodmapStatus = "unknown"
-        }
-
-
-        //form up into searchresults object
+    try {
+        response = await fetch(url)
+        json = await response.json();    
+    } catch (error) {
         return {
-            status: "ok",
-            product: prod,
+            status: "error",
+            product: null,
         }
     }
+    
+    ////FOR TESTING
+    //const json = require('./example_product.json')
+
+    if(!response.ok){
+        return {
+            status: "notFound",
+            product: null,
+        }
+    }
+        
+    if(typeof json.product.ingredients === 'undefined' || json.product.ingredients.length === 0)
+    {
+        return {
+            status: "incomplete",
+            product: null,
+        }
+    }
+
+
+    let prod = {
+        barcode: barcode,
+        name: json.product.product_name,
+        brand: json.product.brands,
+        imgUrl: json.product.image_url,
+        ingredients: this.GetIngredients(json.product)
+    }
+
+    //Determine overall product status based on ingredients
+    if (prod.ingredients.some((i) => i.fodmapStatus === 'high')){
+        prod.fodmapStatus = "high"
+    }
+    else if (prod.ingredients.some((i) => i.fodmapStatus === 'medium')){
+        prod.fodmapStatus = "medium"
+    }
+    else if (prod.ingredients.some((i) => i.fodmapStatus === 'low')){
+        prod.fodmapStatus = "low"
+    }
+    else {
+        prod.fodmapStatus = "unknown"
+    }
+
+
+    //form up into searchresults object
+    return {
+        status: "ok",
+        product: prod,
+    }
+    
 }
