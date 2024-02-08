@@ -2,16 +2,10 @@
   "expo": {
     "name": "Belly Buddy",
     "slug": "BarcodeScanApp",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "plugins": [
       [
         "expo-camera",
-        {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
-        }
-      ],
-      [
-        "expo-barcode-scanner",
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
         }

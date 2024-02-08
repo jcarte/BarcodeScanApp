@@ -30,7 +30,7 @@ export function HomeScreen() {
 
   
     //For bottom sheet
-  const sheetRef = useRef(null);
+  const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => [240,"90%"], []);
 
 
@@ -46,7 +46,8 @@ export function HomeScreen() {
 
   //const [allowScanning, setAllowScanning] = useState(true);
 
-  handleBarCode = async (bc) => {
+  const handleBarCode = async (bc) : Promise<void> =>
+  {
     console.log('Home: Handle barcode:', bc)
 
     //console.log('Home: handleBarCode: allow scanning?:', allowScanning)
@@ -75,6 +76,7 @@ export function HomeScreen() {
     {
       console.log("Home: barcode fetch:",bc)
       const p = await ProductHandler(bc)
+
       //setResults(p)
       // setState({
       //   results: p,
@@ -92,7 +94,7 @@ export function HomeScreen() {
     // }); }, 3000)
   }
 
-  getMessageText = () =>
+  const getMessageText = () : string =>
   {
     switch (status) {
       case "init":
@@ -112,7 +114,7 @@ export function HomeScreen() {
 
 
   // callbacks
-  handleSheetChanges = (index) => {
+  const handleSheetChanges = (index: number): void => {
     console.log('Home: handleSheetChanges', index)
 
     //if maximising results stop scanning
