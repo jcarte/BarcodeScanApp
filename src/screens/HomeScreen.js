@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef  } from 'react';
 import { Text, View, Button, StyleSheet, Image, Dimensions} from 'react-native';
-import { ProductHandler } from './ProductHandler.js'
+import { ProductHandler } from '../api/ProductHandler.js'
 
-import { FullResultsComponent } from './FullResultsComponent.js';
-import { BarcodeScannerComponent } from './BarcodeScannerComponent.js';
-import { MessageComponent } from './MessageComponent.js';
+import { FullResultsComponent } from '../components/FullResultsComponent.js';
+import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent.js';
+import { MessageComponent } from '../components/MessageComponent.js';
 
 import BottomSheet from '@gorhom/bottom-sheet';
 

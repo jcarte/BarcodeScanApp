@@ -3,7 +3,7 @@
 export async function ProductHandler(barcode) {
     console.log("PH: Starting")
     ingList = []
-    this.ingList = require('./FodmapIngredientList.json')
+    this.ingList = require('../../assets/data/FodmapIngredientList.json')
     
 
     /*
@@ -112,7 +112,7 @@ export async function ProductHandler(barcode) {
     }
     
     ////FOR TESTING
-    //const json = require('./example_product.json')
+    //const json = require('../../assets/data/example_product.json')
 
     if(!response.ok){
         return {

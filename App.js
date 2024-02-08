@@ -1,12 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeScreen } from './HomeScreen';
-import { FullResultsScreen } from './FullResultsComponent';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-export const Stack = createNativeStackNavigator();
+import { HomeScreen } from './src/screens/HomeScreen';
 
+export const Stack = createNativeStackNavigator();
 
 export default function App() {
 
