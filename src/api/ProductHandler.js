@@ -1,10 +1,16 @@
-
+import React, { useState} from 'react';
 
 export async function ProductHandler(barcode) {
     console.log("PH: Starting")
-    ingList = []
+
+    this.ingList = []
     this.ingList = require('../../assets/data/FodmapIngredientList.json')
     
+    //DOESNT WORK
+    // //retrieve ing list only once
+    // const[ingList, setIngList] = React.useState([])
+    // if(ingList == [])
+    //     setIngList(require('../../assets/data/FodmapIngredientList.json'))
 
     /*
         Map an individual ingredient to the format we need and lookup its fodmap status.
