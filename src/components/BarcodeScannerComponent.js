@@ -14,7 +14,7 @@ export function BarcodeScannerComponent(props) {
       console.log("BCS: requesting permissions")
       requestPermissions();
     }
-  }, []); 
+  }, [hasPermission]); 
 
   handleBarCodeScanned = ({ type, data }) => {
     // console.log("BCS props", props)
