@@ -88,17 +88,18 @@ export function HomeScreen() {
   
     return (
       <View style={StyleSheet.absoluteFillObject}>
+        
+        <View style={StyleSheet.absoluteFillObject}>
+          <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}/>
+        </View>
+
         <BottomSheet
           ref={sheetRef}
           index={0}
           onChange={handleSheetChanges}
           snapPoints={snapPoints}
           handleIndicatorStyle={!product && {opacity: 0, height: 0}}//only show resize handle if can resize
-          backdropComponent={()=>
-            <View style={StyleSheet.absoluteFillObject}>
-              <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}/>
-            </View>
-          }
+          
         >
           <View style={StyleSheet.absoluteFillObject}>
             {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
@@ -106,9 +107,16 @@ export function HomeScreen() {
           </View>
         </BottomSheet>
       </View>
+      
     )
 }
 
 
 const styles = StyleSheet.create({
 });
+
+// backdropComponent={()=>
+//   <View style={StyleSheet.absoluteFillObject}>
+//     <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}/>
+//   </View>
+// }
