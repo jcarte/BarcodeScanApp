@@ -2,7 +2,7 @@
   "expo": {
     "name": "Belly Buddy",
     "slug": "BarcodeScanApp",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "plugins": [
       [
         "expo-camera",
