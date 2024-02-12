@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View,TouchableOpacity, Button, FlatList, StyleSheet, Image, Dimensions} from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { ResultsSummaryComponent } from './ResultsSummaryComponent.js';
-import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 
 export function FullResultsComponent({  product }) {
     //console.log("Full results route:",route)

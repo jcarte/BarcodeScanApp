@@ -1,10 +1,35 @@
 import React, { useState} from 'react';
 
-export async function ProductHandler(barcode) {
+type ProductResults = {
+    status: string,
+    product: Product
+}
+
+type Product = {
+    barcode: string,
+    name: string,
+    brand: string,
+    imgUrl: string,
+    fodmapStatus: string,
+    ingredients: Ingredient[]
+}
+
+type Ingredient = {
+    name: string, 
+    fodmapStatus: string,
+    percent: number
+}
+
+type FodmapLookup = {
+    name: string, 
+    score: string
+}
+
+export const FetchProduct = async (barcode): Promise<ProductResults> => {
     console.log("PH: Starting")
 
-    this.ingList = []
-    this.ingList = require('../../assets/data/FodmapIngredientList.json')
+    var ingList: FodmapLookup[] = []
+    ingList = require('../../assets/data/FodmapIngredientList.json')
     
     //DOESNT WORK
     // //retrieve ing list only once
@@ -45,16 +70,17 @@ export async function ProductHandler(barcode) {
             "fodmapStatus": "low"
         }
     */
-    GetIngredient = (o) => {
+    function GetIngredient (o: any) : Ingredient[] 
+    {
         if(o.ingredients)
         {
-            return o.ingredients.flatMap(i => this.GetIngredient(i))
+            return o.ingredients.flatMap(i => GetIngredient(i))
         }
-        return {
+        return [{
             name: o.id.split(":")[1],
             percent: o.percent_estimate,
-            fodmapStatus: this.ingList.find(i => i.name == o.id.split(":")[1])?.score
-        }
+            fodmapStatus: ingList.find(i => i.name == o.id.split(":")[1])?.score
+        }]
     }
 
     /*
@@ -63,37 +89,34 @@ export async function ProductHandler(barcode) {
         Applies a threshold for % to be "high" status, downgrades
         any high ings to med if below % threshold
     */
-    GetIngredients = (o) => {
-        const ingr = this.GetIngredient(o)
+    function GetIngredients(o: any): Ingredient[] 
+    {
+        const ingr = GetIngredient(o);
 
         var result = [];
-        ingr.reduce(function(res, value) 
-        {
-            if (!res[value.name]) 
-            {
-                res[value.name] = 
-                { 
-                    name: value.name, 
+        ingr.reduce(function (res, value) {
+            if (!res[value.name]) {
+                res[value.name] =
+                {
+                    name: value.name,
                     fodmapStatus: (value.fodmapStatus === undefined) ? 'unknown' : value.fodmapStatus, //just take first fodmap if can't find
-                    percent: 0 
+                    percent: 0
                 };
-                result.push(res[value.name])
+                result.push(res[value.name]);
             }
             res[value.name].percent += value.percent;
             return res;
         }, {});
 
         //downgrade from high to med if only a small amount
-        result = result.map((i)=>
-        {
-            if(i.fodmapStatus === "high" && i.percent < 5)
-            {
-                i.fodmapStatus = "medium"
+        result = result.map((i) => {
+            if (i.fodmapStatus === "high" && i.percent < 5) {
+                i.fodmapStatus = "medium";
             }
-            return i
-        })
+            return i;
+        });
 
-        return result
+        return result;
     }
 
 
@@ -136,12 +159,13 @@ export async function ProductHandler(barcode) {
     }
 
 
-    let prod = {
+    let prod: Product = {
         barcode: barcode,
         name: json.product.product_name,
         brand: json.product.brands,
         imgUrl: json.product.image_url,
-        ingredients: this.GetIngredients(json.product)
+        fodmapStatus: "",
+        ingredients: GetIngredients(json.product)
     }
 
     //Determine overall product status based on ingredients

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef  } from 'react';
-import { Text, View, Button, StyleSheet, Image, Dimensions} from 'react-native';
-import { ProductHandler } from '../api/ProductHandler.js'
+import { Text, View, StyleSheet } from 'react-native';
+import { FetchProduct } from '../api/ProductHandler'
 
 import { FullResultsComponent } from '../components/FullResultsComponent.js';
 import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent.js';
@@ -42,7 +42,7 @@ export function HomeScreen() {
     else
     {
       console.log("Home: barcode fetch:",bc)
-      const p = await ProductHandler(bc)
+      const p = await FetchProduct(bc)
 
       setStatus(p.status)
       setProduct(p.product)
@@ -51,6 +51,7 @@ export function HomeScreen() {
 
   const getMessageText = () : string =>
   {
+    if (!status) return "";
     switch (status) {
       case "init":
         return "Scan a product barcode to start..."
@@ -69,7 +70,7 @@ export function HomeScreen() {
 
 
   // callbacks
-  const handleSheetChanges = useCallback( index => {
+  const handleSheetChanges = useCallback( (index:number) => {
     console.log('Home: handleSheetChanges', index)
 
     //if maximising results stop scanning
@@ -99,7 +100,7 @@ export function HomeScreen() {
             </View>
           }
         >
-          <View style={styles.container}>
+          <View style={StyleSheet.absoluteFillObject}>
             {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
             {product && <FullResultsComponent product={product}/>}
           </View>
@@ -110,9 +111,4 @@ export function HomeScreen() {
 
 
 const styles = StyleSheet.create({
-
-  container: {
-    flex: 1,
-  },
-  
 });
