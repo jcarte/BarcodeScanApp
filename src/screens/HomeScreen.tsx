@@ -99,7 +99,7 @@ export function HomeScreen() {
           onChange={handleSheetChanges}
           snapPoints={snapPoints}
           handleIndicatorStyle={!product && {opacity: 0, height: 0}}//only show resize handle if can resize
-          
+          animateOnMount={false}
         >
           <View style={StyleSheet.absoluteFillObject}>
             {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
