@@ -6,7 +6,7 @@ import { FullResultsComponent } from '../components/FullResultsComponent.js';
 import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent.js';
 import { MessageComponent } from '../components/MessageComponent.js';
 
-import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 
 export function HomeScreen() {
 
@@ -84,21 +84,22 @@ export function HomeScreen() {
   return (
     <BottomSheetModalProvider>
       <View style={styles.container}>
-        <View style={StyleSheet.absoluteFillObject}>
-          <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}/>
-        </View>
+        <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}/>
+            
         <BottomSheetModal
           ref={sheetRef}
           index={0}
-          onChange={handleSheetChanges}
           snapPoints={snapPoints}
+          onChange={handleSheetChanges}
           animateOnMount={false}
           enablePanDownToClose={false}
         >
-          <View style={styles.contentContainer}>
-            {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
-            {product && <FullResultsComponent product={product}/>}
-          </View>
+          <BottomSheetView style={StyleSheet.absoluteFillObject}>
+            <View style={styles.contentContainer}>
+              {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
+              {product && <FullResultsComponent product={product}/>}
+            </View>
+          </BottomSheetView>
         </BottomSheetModal>
       </View>
     </BottomSheetModalProvider>

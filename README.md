@@ -11,7 +11,7 @@ r
 npx expo start --web
 
 #Start Expo version
-npm expo start --go
+npx expo start --go
 
 #Start dev client
 npx expo start --dev-client

@@ -38,9 +38,6 @@
       ],
       "package": "com.jcarte.BarcodeScanApp"
     },
-    "web": {
-      "favicon": "./assets/images/favicon.png"
-    },
     "extra": {
       "eas": {
         "projectId": "3058bbde-49a6-4b1b-9e31-f58e69ae1d1a"
