@@ -2,7 +2,7 @@
   "expo": {
     "name": "Belly Buddy",
     "slug": "BarcodeScanApp",
-    "version": "0.0.3",
+    "version": "0.0.5",
     "plugins": [
       [
         "expo-camera",
@@ -29,6 +29,7 @@
       }
     },
     "android": {
+      "versionCode": "3",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -36,7 +37,7 @@
       "permissions": [
         "android.permission.CAMERA"
       ],
-      "package": "com.jcarte.BarcodeScanApp"
+      "package": "com.bellybuddy.BarcodeScanApp"
     },
     "extra": {
       "eas": {
