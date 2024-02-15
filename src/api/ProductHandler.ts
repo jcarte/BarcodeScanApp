@@ -128,7 +128,7 @@ export const FetchProduct = async (barcode): Promise<ProductResults> => {
     console.log("PH: fetch barcode:", barcode)
 
     //Staging = .net, Prod = .org
-    const url = `https://world.openfoodfacts.net/api/v2/product/${barcode}`
+    const url = `https://world.openfoodfacts.org/api/v2/product/${barcode}`
     var response, json
 
     try {

@@ -6,6 +6,9 @@ import { FullResultsComponent } from '../components/FullResultsComponent.js';
 import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent.js';
 import { MessageComponent } from '../components/MessageComponent.js';
 
+import { BottomSheetComponent } from '../components/BottomSheetComponent';
+
+
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
 
 export function HomeScreen() {
@@ -17,8 +20,8 @@ export function HomeScreen() {
   const[product, setProduct] = useState(null)
 
   //For bottom sheet
-  const sheetRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => [240,"90%"], []);
+  // const sheetRef = useRef<BottomSheetModal>(null);
+  // const snapPoints = useMemo(() => [240,"90%"], []);
 
   const handleBarCode = async (bc) : Promise<void> =>
   {
@@ -26,7 +29,7 @@ export function HomeScreen() {
     console.log('Home: handleBarCode: is results expanded?:', isResultsExpanded)
 
     //show modal
-    sheetRef.current?.present();
+    //sheetRef.current?.present();
 
     if(isResultsExpanded)//if results are up then abandon
     {
@@ -40,6 +43,8 @@ export function HomeScreen() {
     {
       console.log("Home: barcode fetch:",bc)
       const p = await FetchProduct(bc)
+
+      console.log("Home: Fetched Product:",p)
 
       setStatus(p.status)
       setProduct(p.product)
@@ -81,37 +86,62 @@ export function HomeScreen() {
 
 
   
-  return (
-    <BottomSheetModalProvider>
-      <View style={styles.container}>
-        <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}/>
+//   return (
+//     <BottomSheetModalProvider>
+//       <View style={styles.container}>
+//         <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}/>
             
-        <BottomSheetModal
-          ref={sheetRef}
-          index={0}
-          snapPoints={snapPoints}
-          onChange={handleSheetChanges}
-          animateOnMount={false}
-          enablePanDownToClose={false}
-        >
-          <BottomSheetView style={StyleSheet.absoluteFillObject}>
-            <View style={styles.contentContainer}>
-              {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
-              {product && <FullResultsComponent product={product}/>}
-            </View>
-          </BottomSheetView>
-        </BottomSheetModal>
+//         <BottomSheetModal
+//           ref={sheetRef}
+//           index={0}
+//           snapPoints={snapPoints}
+//           onChange={handleSheetChanges}
+//           animateOnMount={false}
+//           enablePanDownToClose={false}
+//         >
+//           <BottomSheetView style={StyleSheet.absoluteFillObject}>
+//             <View style={styles.contentContainer}>
+//               {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
+//               {product && <FullResultsComponent product={product}/>}
+//             </View>
+//           </BottomSheetView>
+//         </BottomSheetModal>
+//       </View>
+//     </BottomSheetModalProvider>
+//   )
+// }
+
+   return (
+    <View style={styles.container}>
+      <View style={StyleSheet.absoluteFillObject}>
+        <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}  />
       </View>
-    </BottomSheetModalProvider>
-  )
+      
+      <BottomSheetComponent
+        collapsedHeight={240}
+        expandedHeight={"90%"}
+        index={0}
+        onChange={handleSheetChanges}
+      >
+        {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
+        {product && <FullResultsComponent product={product}/>}
+      </BottomSheetComponent>
+      
+    </View>
+   )
 }
 
+/*
+
+*/
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    
   },
+
+
   contentContainer: {
     flex: 1,
   },

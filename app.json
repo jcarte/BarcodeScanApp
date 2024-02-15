@@ -37,7 +37,7 @@
       "permissions": [
         "android.permission.CAMERA"
       ],
-      "package": "com.bellybuddy.BarcodeScanApp"
+      "package": "com.jcarte.BarcodeScanApp"
     },
     "extra": {
       "eas": {

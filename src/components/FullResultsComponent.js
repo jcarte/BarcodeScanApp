@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, FlatList } from 'react-native';
 import { ResultsSummaryComponent } from './ResultsSummaryComponent.js';
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 
@@ -56,7 +56,7 @@ export function FullResultsComponent({  product }) {
     //console.log(ings)
 
     return (
-      <BottomSheetFlatList 
+      <FlatList 
           data={ings}
           keyExtractor={(i) => i.name}
           renderItem={({item}) =>
@@ -71,7 +71,7 @@ export function FullResultsComponent({  product }) {
           }
           ListHeaderComponent={()=>
               <View style={styles.header_container}>
-                  <View elevation={2} style={styles.header_top_container}>
+                  <View elevation={1} style={styles.header_top_container}>
                       <ResultsSummaryComponent 
                           product={product}/>
                   </View>
@@ -79,6 +79,9 @@ export function FullResultsComponent({  product }) {
                       <Text style={styles.header_text}>Ingredients</Text>
                   </View>
               </View>
+          }
+          ListFooterComponent={()=>
+            <View style={styles.footer_container}></View>
           }
       />
     );
@@ -95,6 +98,9 @@ const styles = StyleSheet.create({
         //borderBottomWidth: 1,
         //marginTop: 35,
     },
+    footer_container: {
+      height:50, // empty padding
+  },
     header_top_container:{
         flex: 1,
         height: 220,
