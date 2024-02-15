@@ -1,13 +1,29 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef  } from 'react';
+import React, { useState, useImperativeHandle, forwardRef  } from 'react';
 import { Text, View, StyleSheet, Button, ScrollView, TouchableOpacity } from 'react-native';
 
-export function BottomSheetComponent(props) {
+const BottomSheetComponent = (props, ref) => {
 
   const[index, setIndex] = useState(props.index)
 
   // console.log(props)
 
-    function getHeight ():any
+  useImperativeHandle(ref, () => ({
+    //link ref methods to these internal methods
+    open: () => { open() },
+    close: () => { close() }
+  }))
+
+  function open():void 
+  {
+    console.log("BS: Open")
+  }
+
+  function close():void 
+  {
+    console.log("BS: Close")
+  }
+
+  function getHeight ():any
   {
     return index === 0 ?  props.collapsedHeight : props.expandedHeight
   }
@@ -36,8 +52,9 @@ export function BottomSheetComponent(props) {
           </View>
       </View>
   )
-
 }
+export default forwardRef(BottomSheetComponent)
+
 
 const styles = StyleSheet.create({
   

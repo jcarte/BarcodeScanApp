@@ -6,7 +6,7 @@ import { FullResultsComponent } from '../components/FullResultsComponent.js';
 import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent.js';
 import { MessageComponent } from '../components/MessageComponent.js';
 
-import { BottomSheetComponent } from '../components/BottomSheetComponent';
+import BottomSheetComponent from '../components/BottomSheetComponent';
 
 
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
@@ -19,7 +19,10 @@ export function HomeScreen() {
   const[status, setStatus] = useState("init")
   const[product, setProduct] = useState(null)
 
-  //For bottom sheet
+  const sheetRef = useRef(null);
+
+
+  //For Gorhom bottom sheet
   // const sheetRef = useRef<BottomSheetModal>(null);
   // const snapPoints = useMemo(() => [240,"90%"], []);
 
@@ -30,6 +33,9 @@ export function HomeScreen() {
 
     //show modal
     //sheetRef.current?.present();
+
+    //show modal
+    sheetRef.current?.open();
 
     if(isResultsExpanded)//if results are up then abandon
     {
@@ -44,7 +50,7 @@ export function HomeScreen() {
       console.log("Home: barcode fetch:",bc)
       const p = await FetchProduct(bc)
 
-      console.log("Home: Fetched Product:",p)
+      //console.log("Home: Fetched Product:",p)
 
       setStatus(p.status)
       setProduct(p.product)
@@ -122,6 +128,7 @@ export function HomeScreen() {
         expandedHeight={"90%"}
         index={0}
         onChange={handleSheetChanges}
+        ref={sheetRef}
       >
         {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
         {product && <FullResultsComponent product={product}/>}
