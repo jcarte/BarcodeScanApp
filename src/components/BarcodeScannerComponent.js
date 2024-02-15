@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Camera } from 'expo-camera'
+import { BarCodeScanner } from 'expo-barcode-scanner'
 
 export function BarcodeScannerComponent(props) {
   const [lastScan, setLastScan] = useState(new Date('0001-01-01T00:00:00Z'))//start at min time
@@ -17,14 +18,18 @@ export function BarcodeScannerComponent(props) {
   }, [hasPermission]); 
 
   handleBarCodeScanned = ({ type, data }) => {
-    // console.log("BCS props", props)
-    // console.log("BCS data", data)
-    //console.log("BCS: handle barcode")
-    //console.log("BCS: last scan", lastScan,",    time diff:", new Date() - lastScan,",    interval:",props.scanInterval)
 
     if((new Date() - lastScan) > props.scanInterval)//only scan at least every interval (specified in props)
     {
+      //check is only numbers
+      if(data.match(/^[0-9]+$/) == null)
+      {
+        console.log("BCS: barcode found in wrong format: ",data)
+        return
+      }
+
       console.log("BCS: Notify parent")
+
       //Tell parent, found a barcode
       props.onBarCodeScanned(data)
   
@@ -33,7 +38,10 @@ export function BarcodeScannerComponent(props) {
 
   };
   
-
+  /*
+    Barcode Types List
+    https://docs.expo.dev/versions/latest/sdk/bar-code-scanner/#supported-formats
+  */
 
   return (
     <View style={styles.container}> 
@@ -43,7 +51,14 @@ export function BarcodeScannerComponent(props) {
       
       <Camera
         barcodeSettings={{
-          interval: 2000, // scan every 2 secs
+          barCodeTypes: [
+            BarCodeScanner.Constants.BarCodeType.ean13,
+            BarCodeScanner.Constants.BarCodeType.ean8,
+            BarCodeScanner.Constants.BarCodeType.upc_a,
+            BarCodeScanner.Constants.BarCodeType.upc_e,
+            BarCodeScanner.Constants.BarCodeType.upc_ean,
+            
+          ],
         }}
         onBarCodeScanned={handleBarCodeScanned}
         onMountError={(e) => console.log(e)}
@@ -53,22 +68,10 @@ export function BarcodeScannerComponent(props) {
     </View>
   );
 }
-//onBarCodeScanned={props.allowScanning ? handleBarCodeScanned : undefined}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#ff0',
-    // alignItems: 'center',
-    // justifyContent: 'center',
     
-  },
-  exit: {
-    position: 'absolute',
-    margin: '7%',
-    width: '5%',
-    height: '5%',
-    right: 0,
-    top: 0,
   }
 });
