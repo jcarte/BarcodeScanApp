@@ -4,24 +4,23 @@ import { Text, View, StyleSheet, Button, ScrollView, TouchableOpacity } from 're
 const BottomSheetComponent = (props, ref) => {
 
   const[index, setIndex] = useState(props.index)
+  const[isOpen, setIsOpen] = useState(props.startsOpen)
 
   // console.log(props)
 
   useImperativeHandle(ref, () => ({
     //link ref methods to these internal methods
-    open: () => { open() },
-    close: () => { close() }
+    open: () => 
+    { 
+      console.log("BS: Open")
+      setIsOpen(true) 
+    },
+    close: () => 
+    { 
+      console.log("BS: Close")
+      setIsOpen(false) 
+    }
   }))
-
-  function open():void 
-  {
-    console.log("BS: Open")
-  }
-
-  function close():void 
-  {
-    console.log("BS: Close")
-  }
 
   function getHeight ():any
   {
@@ -38,7 +37,9 @@ const BottomSheetComponent = (props, ref) => {
     props.onChange(newIndex)
   }
 
-  return (
+  if(isOpen)
+  {
+    return (
       <View style={styles.bottom_sheet_container}>
           <View style={[styles.bottom_sheet, {height: getHeight()}]}>
               <View style={styles.bottom_sheet_handle}>
@@ -51,7 +52,9 @@ const BottomSheetComponent = (props, ref) => {
               </View>
           </View>
       </View>
-  )
+    )
+  }
+  else return null;
 }
 export default forwardRef(BottomSheetComponent)
 

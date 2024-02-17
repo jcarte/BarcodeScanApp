@@ -129,6 +129,7 @@ export function HomeScreen() {
         index={0}
         onChange={handleSheetChanges}
         ref={sheetRef}
+        startsOpen={false}
       >
         {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
         {product && <FullResultsComponent product={product}/>}
