@@ -3,8 +3,8 @@ import { Text, View, StyleSheet, Button, ScrollView, TouchableOpacity } from 're
 
 const BottomSheetComponent = (props, ref) => {
 
-  const[index, setIndex] = useState(props.index)
-  const[isOpen, setIsOpen] = useState(props.startsOpen)
+  const[index, setIndex] = useState(props.index || 0)
+  const[isOpen, setIsOpen] = useState((props.startsOpen === undefined) ? true : props.startsOpen)
 
   // console.log(props)
 

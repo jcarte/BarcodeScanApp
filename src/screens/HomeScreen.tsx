@@ -126,9 +126,9 @@ export function HomeScreen() {
       <BottomSheetComponent
         collapsedHeight={240}
         expandedHeight={"90%"}
-        index={0}
         onChange={handleSheetChanges}
         ref={sheetRef}
+        index={0}
         startsOpen={false}
       >
         {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
