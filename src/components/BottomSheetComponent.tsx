@@ -36,7 +36,7 @@ const BottomSheetComponent = (props, ref) => {
   .onEnd((event)=> {
     console.log("BS:EndDrag:",event)
 
-    const speedThreshold = 1000 //speed beyond which to snap
+    const speedThreshold = 1200 //speed beyond which to snap
 
     if(event.velocityY < -speedThreshold)//is moving up fast?
     {
@@ -58,7 +58,12 @@ const BottomSheetComponent = (props, ref) => {
 
   const containerStyle = useAnimatedStyle(() => {
     return {
-      height: height.value
+      height: withSpring(height.value, //https://docs.swmansion.com/react-native-reanimated/docs/2.x/api/animations/withSpring
+        {
+          damping: 10, //How hard the animation decelerates.
+          stiffness: 100, //How bouncy the animation is.
+          overshootClamping: true //Whether the animation can bounce over the specified value.
+        })
     };
   });
 
