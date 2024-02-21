@@ -1,12 +1,14 @@
 import React, { useState, useImperativeHandle, forwardRef  } from 'react';
 import { Text, View, StyleSheet, Button, ScrollView, TouchableOpacity } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+
 
 const BottomSheetComponent = (props, ref) => {
 
   const[index, setIndex] = useState(props.index)
   const[isOpen, setIsOpen] = useState(props.startsOpen)
 
-  // console.log(props)
 
   useImperativeHandle(ref, () => ({
     //link ref methods to these internal methods
@@ -22,36 +24,42 @@ const BottomSheetComponent = (props, ref) => {
     }
   }))
 
-  function getHeight ():any
-  {
-    return index === 0 ?  props.collapsedHeight : props.expandedHeight
-  }
 
-  function onTouchHandle ():void
-  {
-    console.log("PRESS")
-    // console.log(getHeight())
-    let newIndex: number
-    index === 0 ? newIndex=1 : newIndex=0
-    setIndex(newIndex)
-    props.onChange(newIndex)
-  }
+  const height = useSharedValue(props.collapsedHeight);//
+
+  const drag = Gesture.Pan()
+  .onChange((event) => {
+    if((height.value-event.changeY) < props.expandedHeight && (height.value-event.changeY) > props.collapsedHeight)
+      height.value += -event.changeY;
+  });
+
+  const containerStyle = useAnimatedStyle(() => {
+    return {
+      height: height.value
+    };
+  });
+  // console.log(props)
+
+  
+  //{height: getHeight()}
 
   if(isOpen)
   {
     return (
-      <View style={styles.bottom_sheet_container}>
-          <View style={[styles.bottom_sheet, {height: getHeight()}]}>
-              <View style={styles.bottom_sheet_handle}>
-                <TouchableOpacity onPress={()=>onTouchHandle()} style={{width:"100%", alignItems: "center"}}>
-                  <Text>{index===0 ? "Show More" : "Show Less"}</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.bottom_sheet_content}>
-                  {props.children}
-              </View>
-          </View>
-      </View>
+      
+        <View style={styles.bottom_sheet_container}>
+            <Animated.View style={[styles.bottom_sheet, containerStyle]}>
+                <GestureDetector gesture={drag}>
+                    <View style={styles.bottom_sheet_handle}>
+                        <Text style={styles.bottom_sheet_handle_text}>{"—"}</Text>
+                    </View>
+                </GestureDetector>
+                <View style={styles.bottom_sheet_content}>
+                    {props.children}
+                </View>
+            </Animated.View>
+        </View>
+      
     )
   }
   else return null;
@@ -79,9 +87,13 @@ const styles = StyleSheet.create({
     },
   
     bottom_sheet_handle: {
-      //borderWidth: 1,
+      borderWidth: 1,
       alignItems: "center",
-      marginTop: 5,
+    },
+
+    bottom_sheet_handle_text: {
+      fontSize: 30,
+      marginTop: 0,
     },
   
     bottom_sheet_content: {

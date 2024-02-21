@@ -125,7 +125,7 @@ export function HomeScreen() {
       
       <BottomSheetComponent
         collapsedHeight={240}
-        expandedHeight={"90%"}
+        expandedHeight={750}
         index={0}
         onChange={handleSheetChanges}
         ref={sheetRef}
