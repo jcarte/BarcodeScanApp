@@ -2,7 +2,7 @@ import React, { useState, useImperativeHandle, forwardRef  } from 'react';
 import { Text, View, StyleSheet, Button, ScrollView, TouchableOpacity } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-
+import { Feather } from '@expo/vector-icons';
 
 const BottomSheetComponent = (props, ref) => {
 
@@ -76,7 +76,7 @@ const BottomSheetComponent = (props, ref) => {
             <Animated.View style={[styles.bottom_sheet, containerStyle]}>
                 <GestureDetector gesture={drag}>
                     <View style={styles.bottom_sheet_handle}>
-                        <Text style={styles.bottom_sheet_handle_text}>{"—"}</Text>
+                      <Feather name="minus" size={35} color="#969696" />
                     </View>
                 </GestureDetector>
                 <View style={styles.bottom_sheet_content}>
@@ -114,11 +114,6 @@ const styles = StyleSheet.create({
     bottom_sheet_handle: {
       borderWidth: 1,
       alignItems: "center",
-    },
-
-    bottom_sheet_handle_text: {
-      fontSize: 30,
-      marginTop: 0,
     },
   
     bottom_sheet_content: {
