@@ -25,23 +25,43 @@ const BottomSheetComponent = (props, ref) => {
   }))
 
 
-  const height = useSharedValue(props.collapsedHeight);//
+  const height = useSharedValue(props.collapsedHeight);
+
 
   const drag = Gesture.Pan()
-  .onChange((event) => {
+  .onChange((event) => {//move BS in line with where the finger is
     if((height.value-event.changeY) < props.expandedHeight && (height.value-event.changeY) > props.collapsedHeight)
       height.value += -event.changeY;
-  });
+  })
+  .onEnd((event)=> {
+    console.log("BS:EndDrag:",event)
+
+    const speedThreshold = 1000 //speed beyond which to snap
+
+    if(event.velocityY < -speedThreshold)//is moving up fast?
+    {
+      height.value = props.expandedHeight  
+    }
+    else if(event.velocityY > speedThreshold)//is moving down fast?
+    {
+      height.value = props.collapsedHeight  
+    }
+    else if(height.value > ((props.expandedHeight - props.collapsedHeight)*0.5 + props.collapsedHeight)) 
+    {//is below speed but has ended on top half
+      height.value = props.expandedHeight
+    }
+    else 
+    {//must be moving slow and finished in bottom half
+      height.value = props.collapsedHeight 
+    }
+  })
 
   const containerStyle = useAnimatedStyle(() => {
     return {
       height: height.value
     };
   });
-  // console.log(props)
 
-  
-  //{height: getHeight()}
 
   if(isOpen)
   {
