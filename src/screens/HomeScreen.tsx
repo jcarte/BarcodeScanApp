@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { FetchProduct } from '../api/ProductHandler'
 
 import { IngredientListComponent } from '../components/IngredientListComponent.js';
-import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent.js';
+import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent';
 import { MessageComponent } from '../components/MessageComponent.js';
 
 import BottomSheetComponent from '../components/BottomSheetComponent';
