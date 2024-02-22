@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList } from 'react-native';
-import { ProductHeaderComponent } from './ProductHeaderComponent.js';
-import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import { FontAwesome } from '@expo/vector-icons';
 
 export function IngredientListComponent({  product }) {
 
@@ -10,14 +9,14 @@ export function IngredientListComponent({  product }) {
     {
         switch (fodmapStatus) {
             case 'high':
-                return 'Avoid 🔴'
+              return (<Text>Avoid <FontAwesome name="circle" size={16} color="red" /></Text>)
             case 'medium':
-                return 'Caution 🟡'
+              return (<Text>Caution <FontAwesome name="circle" size={16} color="orange" /></Text>)
             case 'low':
-                return 'Ok 🟢'
+              return (<Text>OK <FontAwesome name="circle" size={16} color="green" /></Text>)
             case 'unknown':
             default:
-                return 'Unknown ⚪'
+              return (<Text>Unknown <FontAwesome name="circle" size={16} color="lightgrey" /></Text>)
         }
     }
 

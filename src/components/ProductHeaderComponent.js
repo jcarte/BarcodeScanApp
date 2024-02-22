@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, StyleSheet, Image, Dimensions} from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 export function ProductHeaderComponent({product}) {
-    
-    //console.log("product from res sum:", product)
-
-    // const prodImageWidth = Dimensions.get('window').width*.3
-    // const prodImageHeight = Dimensions.get('window').width*.4
    
     const GetStatusWording = () =>
     {
         switch (product.fodmapStatus) {
             case 'high':
-                return '🔴 Avoid'
+                return (<Text><FontAwesome name="circle" size={16} color="red" /> Avoid</Text>)
             case 'medium':
-                return '🟡 Caution'
+                return (<Text><FontAwesome name="circle" size={16} color="orange" /> Caution</Text>)
             case 'low':
-                return '🟢 Ok'
+                return (<Text><FontAwesome name="circle" size={16} color="green" /> OK</Text>)
             case 'unknown':
             default:
-                return '⚪ Unknown'
+                return (<Text><FontAwesome name="circle" size={16} color="lightgrey" /> Unknown</Text>)
         }
     }
 
