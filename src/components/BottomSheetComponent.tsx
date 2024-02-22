@@ -34,7 +34,7 @@ const BottomSheetComponent = (props, ref) => {
       height.value += -event.changeY;
   })
   .onEnd((event)=> {
-    console.log("BS:EndDrag:",event)
+    //console.log("BS:EndDrag:",event)
 
     const speedThreshold = 1200 //speed beyond which to snap
 
@@ -75,9 +75,14 @@ const BottomSheetComponent = (props, ref) => {
         <View style={styles.bottom_sheet_container}>
             <Animated.View style={[styles.bottom_sheet, containerStyle]}>
                 <GestureDetector gesture={drag}>
-                    <View style={styles.bottom_sheet_handle}>
+                  <View>
+                    <View style={[styles.bottom_sheet_handle]}>
                       <Feather name="minus" size={35} color="#969696" />
                     </View>
+                    <View style={{height: props.collapsedHeight - 25}}>
+                      {props.headerComponent()}
+                    </View>
+                  </View>
                 </GestureDetector>
                 <View style={styles.bottom_sheet_content}>
                     {props.children}
@@ -112,8 +117,9 @@ const styles = StyleSheet.create({
     },
   
     bottom_sheet_handle: {
-      borderWidth: 1,
+      //borderWidth: 1,
       alignItems: "center",
+      height: 25,
     },
   
     bottom_sheet_content: {

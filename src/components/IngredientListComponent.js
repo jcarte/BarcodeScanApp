@@ -1,16 +1,10 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList } from 'react-native';
-import { ResultsSummaryComponent } from './ResultsSummaryComponent.js';
+import { ProductHeaderComponent } from './ProductHeaderComponent.js';
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 
-export function FullResultsComponent({  product }) {
-    //console.log("Full results route:",route)
-    
-    //const {product} = route.params
-    // const prodImageWidth = Dimensions.get('window').width*.3
-    // const prodImageHeight = Dimensions.get('window').width*.4
-   
-    //const ings = product
+export function IngredientListComponent({  product }) {
+
 
     const GetStatusWording = (fodmapStatus) =>
     {
@@ -53,7 +47,6 @@ export function FullResultsComponent({  product }) {
     })
     
     ings.sort((a,b) => a.sortOrder - b.sortOrder)
-    //console.log(ings)
 
     return (
       <FlatList 
@@ -71,10 +64,7 @@ export function FullResultsComponent({  product }) {
           }
           ListHeaderComponent={()=>
               <View style={styles.header_container}>
-                  <View elevation={1} style={styles.header_top_container}>
-                      <ResultsSummaryComponent 
-                          product={product}/>
-                  </View>
+                  
                   <View style={styles.header_bottom_container}>
                       <Text style={styles.header_text}>Ingredients</Text>
                   </View>
@@ -87,7 +77,6 @@ export function FullResultsComponent({  product }) {
     );
 }
 
-// 
 
 const styles = StyleSheet.create({
 
@@ -100,15 +89,8 @@ const styles = StyleSheet.create({
     },
     footer_container: {
       height:50, // empty padding
-  },
-    header_top_container:{
-        flex: 1,
-        height: 220,
-        borderColor: '#f5f5f5',
-        borderBottomWidth: 1,
-        borderTopWidth: 0,
-        
     },
+
     header_bottom_container:{
         flex: 1,
         marginLeft: 25,
@@ -124,6 +106,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
 
     },
+
+
+
+
 
     //ITEMS
     item_container:{

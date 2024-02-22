@@ -2,14 +2,14 @@ import React, { useState, useEffect, useCallback, useMemo, useRef  } from 'react
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { FetchProduct } from '../api/ProductHandler'
 
-import { FullResultsComponent } from '../components/FullResultsComponent.js';
+import { IngredientListComponent } from '../components/IngredientListComponent.js';
 import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent.js';
 import { MessageComponent } from '../components/MessageComponent.js';
 
 import BottomSheetComponent from '../components/BottomSheetComponent';
 
 
-import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
+import { ProductHeaderComponent } from '../components/ProductHeaderComponent';
 
 export function HomeScreen() {
 
@@ -22,17 +22,11 @@ export function HomeScreen() {
   const sheetRef = useRef(null);
 
 
-  //For Gorhom bottom sheet
-  // const sheetRef = useRef<BottomSheetModal>(null);
-  // const snapPoints = useMemo(() => [240,"90%"], []);
-
   const handleBarCode = async (bc) : Promise<void> =>
   {
     console.log('Home: Handle barcode:', bc)
     console.log('Home: handleBarCode: is results expanded?:', isResultsExpanded)
 
-    //show modal
-    //sheetRef.current?.present();
 
     //show modal
     sheetRef.current?.open();
@@ -90,33 +84,6 @@ export function HomeScreen() {
       
   }, [])
 
-
-  
-//   return (
-//     <BottomSheetModalProvider>
-//       <View style={styles.container}>
-//         <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}/>
-            
-//         <BottomSheetModal
-//           ref={sheetRef}
-//           index={0}
-//           snapPoints={snapPoints}
-//           onChange={handleSheetChanges}
-//           animateOnMount={false}
-//           enablePanDownToClose={false}
-//         >
-//           <BottomSheetView style={StyleSheet.absoluteFillObject}>
-//             <View style={styles.contentContainer}>
-//               {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
-//               {product && <FullResultsComponent product={product}/>}
-//             </View>
-//           </BottomSheetView>
-//         </BottomSheetModal>
-//       </View>
-//     </BottomSheetModalProvider>
-//   )
-// }
-
    return (
     <View style={styles.container}>
       <View style={StyleSheet.absoluteFillObject}>
@@ -130,28 +97,26 @@ export function HomeScreen() {
         onChange={handleSheetChanges}
         ref={sheetRef}
         startsOpen={false}
+        headerComponent={()=>
+          <View style={{flex:1}}>
+              <ProductHeaderComponent 
+                  product={product}/>
+          </View>
+        }
       >
         {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
-        {product && <FullResultsComponent product={product}/>}
+        {product && <IngredientListComponent product={product}/>}
       </BottomSheetComponent>
       
     </View>
    )
 }
 
-/*
-
-*/
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
   },
 
-
-  contentContainer: {
-    flex: 1,
-  },
 });
 
