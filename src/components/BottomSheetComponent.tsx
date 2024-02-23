@@ -78,7 +78,7 @@ const BottomSheetComponent = (props, ref) => {
     return {
       height: withSpring(height.value, //https://docs.swmansion.com/react-native-reanimated/docs/2.x/api/animations/withSpring
         {
-          damping: 10, //How hard the animation decelerates.
+          damping: 5, //How hard the animation decelerates.
           stiffness: 100, //How bouncy the animation is.
           overshootClamping: true //Whether the animation can bounce over the specified value.
         })
