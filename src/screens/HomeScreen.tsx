@@ -92,19 +92,17 @@ export function HomeScreen() {
       
       <BottomSheetComponent
         collapsedHeight={240}
-        expandedHeight={750}
-        index={0}
+        expandedHeight={"95%"}
         onChange={handleSheetChanges}
         ref={sheetRef}
         startsOpen={false}
         headerComponent={()=>
           <View style={{flex:1}}>
-              <ProductHeaderComponent 
-                  product={product}/>
+              {status === "ok" && <ProductHeaderComponent product={product}/>}
+              {status !== "ok" && <MessageComponent messageText={getMessageText()}/>}
           </View>
         }
       >
-        {status !== 'ok' && <MessageComponent messageText={getMessageText()}/>}
         {product && <IngredientListComponent product={product}/>}
       </BottomSheetComponent>
       
