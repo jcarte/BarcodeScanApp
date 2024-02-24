@@ -48,6 +48,10 @@ export function HomeScreen() {
 
       setStatus(p.status)
       setProduct(p.product)
+
+      //if error then reduce size of BS to display message
+      if(p.status !== "ok")
+        sheetRef.current?.collapse()
     }
   }
 
@@ -96,6 +100,7 @@ export function HomeScreen() {
         onChange={handleSheetChanges}
         ref={sheetRef}
         startsOpen={false}
+        isDragEnabled={status === "ok"}
         headerComponent={()=>
           <View style={{flex:1}}>
               {status === "ok" && <ProductHeaderComponent product={product}/>}

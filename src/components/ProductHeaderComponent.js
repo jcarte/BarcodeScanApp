@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         //borderWidth: 1,
     },
     image_container: {
-        margin: 25,
+        margin: 20,
         alignSelf: "stretch",
     },
     prod_image: {
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         //borderWidth: 2,
     },
     text_container: {
-        paddingTop: 25,
+        paddingTop: 15,
         paddingRight: 25,
         paddingBottom: 25,
         alignSelf: "stretch",
