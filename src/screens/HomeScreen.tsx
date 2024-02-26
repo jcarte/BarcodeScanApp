@@ -99,7 +99,6 @@ export function HomeScreen() {
         expandedHeight={"95%"}
         onChange={handleSheetChanges}
         ref={sheetRef}
-        index={0}
         startsOpen={false}
         isDragEnabled={status === "ok"}
         headerComponent={()=>
