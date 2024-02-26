@@ -4,6 +4,8 @@ import { FontAwesome } from '@expo/vector-icons';
 
 export function ProductHeaderComponent({product}) {
    
+    console.log("PHC: Start")
+    
     const GetStatusWording = () =>
     {
         switch (product.fodmapStatus) {

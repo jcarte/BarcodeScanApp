@@ -1,71 +1,78 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { BarCodeScanningResult, Camera } from 'expo-camera'
 import { BarCodeScanner } from 'expo-barcode-scanner'
 
 export function BarcodeScannerComponent(props) {
-  const [lastScan, setLastScan] = useState(new Date('0001-01-01T00:00:00Z'))//start at min time
+  const lastAttemptScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time the BCS found a BC and we assessed it
+  const lastSuccessScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time found a BC and raised the barcode scanned event
   const [hasPermission, requestPermissions] = Camera.useCameraPermissions();
 
-  const [bb, setBB] = useState(null)
+  // const [bb, setBB] = useState(null) //for testing where 4 corners of BC are
+
+  console.log("BCS: Start")
 
   useEffect(() => {
-    // console.log("BCS: use effect")
-    // console.log("BCS has permission:", hasPermission)
+    //console.log("BCS: useeffect")
     if (!hasPermission?.granted) {
-      //console.log("BCS: requesting permissions")
+      //console.log(`BCS: hasPermission: ${hasPermission}`)
       requestPermissions();
     }
   }, [hasPermission]);
 
-  const screenWidth =  Dimensions.get('window').width
-  const screenHeight =  Dimensions.get('window').height
+  const screenWidth = useMemo(()=>Dimensions.get('window').width,[])
+  const screenHeight = useMemo(()=>Dimensions.get('window').height,[])
 
   const sizePercentThreshold = 0.20
   const deadzonePercent = 0.2
 
   const handleBarCodeScanned = (result : any): void => {
 
-    if ((new Date().getTime() - lastScan.getTime()) > props.scanInterval)//only scan at least every interval (specified in props)
-    {
-      //console.log(result)
+    //Check if it's time to check barcode again - timeout after each attempt
+    if ((new Date().getTime() - lastAttemptScan.current.getTime()) < props.refreshIntervalMS)
+      return
 
-      const minX = Math.min(result.cornerPoints[0].x,result.cornerPoints[1].x,result.cornerPoints[2].x,result.cornerPoints[3].x)
-      const maxX = Math.max(result.cornerPoints[0].x,result.cornerPoints[1].x,result.cornerPoints[2].x,result.cornerPoints[3].x)
-      const minY = Math.min(result.cornerPoints[0].y,result.cornerPoints[1].y,result.cornerPoints[2].y,result.cornerPoints[3].y)
-      const maxY = Math.max(result.cornerPoints[0].y,result.cornerPoints[1].y,result.cornerPoints[2].y,result.cornerPoints[3].y)
+    lastAttemptScan.current = (new Date())//update last attempt time (as this is now an attempt)
 
-      const width = maxX - minX
-      const height = maxY - minY
+    //check if it's been long enough after the last successful barcode detected
+    if ((new Date().getTime() - lastSuccessScan.current.getTime()) < props.timeoutAfterScanMS)
+      return
 
-      setBB({origin:{x: minX, y:minY}, size:{height: height, width:width}})
+    const minX = Math.min(result.cornerPoints[0].x,result.cornerPoints[1].x,result.cornerPoints[2].x,result.cornerPoints[3].x)
+    const maxX = Math.max(result.cornerPoints[0].x,result.cornerPoints[1].x,result.cornerPoints[2].x,result.cornerPoints[3].x)
+    const minY = Math.min(result.cornerPoints[0].y,result.cornerPoints[1].y,result.cornerPoints[2].y,result.cornerPoints[3].y)
+    const maxY = Math.max(result.cornerPoints[0].y,result.cornerPoints[1].y,result.cornerPoints[2].y,result.cornerPoints[3].y)
 
-      //Check barcode is big enough, small if both the height% and width% are below the thresold
-      if((width / screenWidth) < sizePercentThreshold && (height / screenHeight) < sizePercentThreshold) {
-        console.log(`BCS: barcode is too small: width%=${width / screenWidth}, height%=${height / screenHeight}`)
-        return
-      }
+    const width = maxX - minX
+    const height = maxY - minY
 
-      //Check if too close to the bottom or top, if highest Y is in top threshold or lowest Y is in bottom threshold 
-      if(minY < (deadzonePercent*screenHeight) || maxY > ((1-deadzonePercent)*screenHeight)) {
-        console.log(`BCS: barcode is in the deadzone`)
-        return
-      }
+    // setBB({origin:{x: minX, y:minY}, size:{height: height, width:width}})
 
-
-      //check is only numbers
-      if (result.data.match(/^[0-9]+$/) == null) {
-        console.log("BCS: barcode found in wrong format: ", result.data)
-        return
-      }
-
-      //console.log("BCS: Notify parent")
-
-      //Tell parent, found a barcode
-      props.onBarCodeScanned(result.data)
-
-      setLastScan(new Date())
+    //Check barcode is big enough, small if both the height% and width% are below the thresold
+    if((width / screenWidth) < sizePercentThreshold && (height / screenHeight) < sizePercentThreshold) {
+      console.log(`BCS: barcode is too small: width%=${width / screenWidth}, height%=${height / screenHeight}`)
+      return
     }
+
+    //Check if too close to the bottom or top, if highest Y is in top threshold or lowest Y is in bottom threshold 
+    if(minY < (deadzonePercent*screenHeight) || maxY > ((1-deadzonePercent)*screenHeight)) {
+      console.log(`BCS: barcode is in the deadzone`)
+      return
+    }
+
+
+    //check is only numbers
+    if (result.data.match(/^[0-9]+$/) == null) {
+      console.log("BCS: barcode found in wrong format: ", result.data)
+      return
+    }
+
+    //console.log("BCS: Notify parent")
+
+    //Tell parent, found a barcode
+    props.onBarCodeScanned(result.data)
+
+    lastSuccessScan.current = new Date()
 
   };
 
@@ -91,7 +98,7 @@ export function BarcodeScannerComponent(props) {
             BarCodeScanner.Constants.BarCodeType.upc_e,
             BarCodeScanner.Constants.BarCodeType.upc_ean,
           ],
-          interval: 30000
+          interval: 500//don't think this works
         }}
         onBarCodeScanned={(e)=> handleBarCodeScanned(e)}
         style={StyleSheet.absoluteFillObject}
@@ -114,12 +121,6 @@ export function BarcodeScannerComponent(props) {
         </View>
         <View style={{ flex: 3, borderWidth: 0, }}></View>
       </View>
-
-
-      {/* <View style={styles.grid_container}>
-        <View style={{ width:bb?.size.width, height:bb?.size.height, borderWidth: 1, borderColor: "red", left: bb?.origin.x, top: bb?.origin.y}}/>
-      </View> */}
-
     </View>
   );
 }

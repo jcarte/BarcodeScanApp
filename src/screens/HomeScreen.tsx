@@ -15,7 +15,7 @@ export function HomeScreen() {
 
   console.log("Home: Start")
 
-  const[isResultsExpanded, setIsResultsExpanded] = useState(false)
+  const isResultsExpanded = useRef(false)
   const[status, setStatus] = useState("init")
   const[product, setProduct] = useState(null)
 
@@ -25,15 +25,11 @@ export function HomeScreen() {
   const handleBarCode = async (bc) : Promise<void> =>
   {
     console.log('Home: Handle barcode:', bc)
-    console.log('Home: handleBarCode: is results expanded?:', isResultsExpanded)
+    //console.log('Home: handleBarCode: is results expanded?:', isResultsExpanded.current)
 
-
-    //show modal
-    sheetRef.current?.open();
-
-    if(isResultsExpanded)//if results are up then abandon
+    if(isResultsExpanded.current)//if results are up then abandon
     {
-      console.log('Home: handleBarCode: abandoning as results are up?')
+      console.log('Home: handleBarCode: abandoning as results are up')
     }
     else if(bc === product?.barcode)
     {
@@ -41,6 +37,9 @@ export function HomeScreen() {
     }
     else
     {
+      //show modal
+      sheetRef.current?.open();
+
       console.log("Home: barcode fetch:",bc)
       const p = await FetchProduct(bc)
 
@@ -79,11 +78,11 @@ export function HomeScreen() {
     //if maximising results stop scanning
     if(index === 1)
     {
-      setIsResultsExpanded(true)
+      isResultsExpanded.current = true
     }
     else
     {
-      setIsResultsExpanded(false)
+      isResultsExpanded.current = false
     }
       
   }, [])
@@ -91,7 +90,11 @@ export function HomeScreen() {
    return (
     <View style={styles.container}>
       <View style={StyleSheet.absoluteFillObject}>
-        <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}  />
+        <BarcodeScannerComponent 
+          onBarCodeScanned ={handleBarCode} 
+          refreshIntervalMS = {750}  
+          timeoutAfterScanMS = {3000}  
+          />
       </View>
       
       <BottomSheetComponent

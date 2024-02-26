@@ -4,76 +4,77 @@ import { FontAwesome } from '@expo/vector-icons';
 
 export function IngredientListComponent({  product }) {
 
+  console.log("ILC: Start")
 
-    const GetStatusWording = (fodmapStatus) =>
-    {
-        switch (fodmapStatus) {
-            case 'high':
-              return (<Text>Avoid <FontAwesome name="circle" size={16} color="red" /></Text>)
-            case 'medium':
-              return (<Text>Caution <FontAwesome name="circle" size={16} color="orange" /></Text>)
-            case 'low':
-              return (<Text>OK <FontAwesome name="circle" size={16} color="green" /></Text>)
-            case 'unknown':
-            default:
-              return (<Text>Unknown <FontAwesome name="circle" size={16} color="lightgrey" /></Text>)
+  const GetStatusWording = (fodmapStatus) =>
+  {
+      switch (fodmapStatus) {
+          case 'high':
+            return (<Text>Avoid <FontAwesome name="circle" size={16} color="red" /></Text>)
+          case 'medium':
+            return (<Text>Caution <FontAwesome name="circle" size={16} color="orange" /></Text>)
+          case 'low':
+            return (<Text>OK <FontAwesome name="circle" size={16} color="green" /></Text>)
+          case 'unknown':
+          default:
+            return (<Text>Unknown <FontAwesome name="circle" size={16} color="lightgrey" /></Text>)
+      }
+  }
+
+  const GetStatusSortOrder = (fodmapStatus) =>
+  {
+      switch (fodmapStatus) {
+          case 'high':
+              return 1
+          case 'medium':
+              return 2
+          case 'low':
+              return 3
+          case 'unknown':
+          default:
+              return 4
+      }
+  }
+
+  ings = product.ingredients.map(function (i) {
+      return {
+          key: i.name,
+          name: i.name.replaceAll('-',' '), 
+          fodmapStatusText: GetStatusWording(i.fodmapStatus),
+          sortOrder: GetStatusSortOrder(i.fodmapStatus)
+          
+      }
+  })
+  
+  ings.sort((a,b) => a.sortOrder - b.sortOrder)
+
+  return (
+    <FlatList 
+        data={ings}
+        keyExtractor={(i) => i.name}
+        renderItem={({item}) =>
+            <View style={styles.item_container}>
+                <View style={styles.item_name}>
+                    <Text style={styles.text_name}>{item.name}</Text>
+                </View>
+                <View style={styles.item_status}>
+                    <Text style={styles.text_status}>{item.fodmapStatusText}</Text>
+                </View>
+            </View>
         }
-    }
-
-    const GetStatusSortOrder = (fodmapStatus) =>
-    {
-        switch (fodmapStatus) {
-            case 'high':
-                return 1
-            case 'medium':
-                return 2
-            case 'low':
-                return 3
-            case 'unknown':
-            default:
-                return 4
+        ListHeaderComponent={()=>
+            <View style={styles.header_container}>
+                
+                <View style={styles.header_bottom_container}>
+                    <Text style={styles.header_text}>Ingredients</Text>
+                </View>
+            </View>
         }
-    }
-
-    ings = product.ingredients.map(function (i) {
-        return {
-            key: i.name,
-            name: i.name.replaceAll('-',' '), 
-            fodmapStatusText: GetStatusWording(i.fodmapStatus),
-            sortOrder: GetStatusSortOrder(i.fodmapStatus)
-            
+        ListFooterComponent={()=>
+          <View style={styles.footer_container}></View>
         }
-    })
-    
-    ings.sort((a,b) => a.sortOrder - b.sortOrder)
-
-    return (
-      <FlatList 
-          data={ings}
-          keyExtractor={(i) => i.name}
-          renderItem={({item}) =>
-              <View style={styles.item_container}>
-                  <View style={styles.item_name}>
-                      <Text style={styles.text_name}>{item.name}</Text>
-                  </View>
-                  <View style={styles.item_status}>
-                      <Text style={styles.text_status}>{item.fodmapStatusText}</Text>
-                  </View>
-              </View>
-          }
-          ListHeaderComponent={()=>
-              <View style={styles.header_container}>
-                  
-                  <View style={styles.header_bottom_container}>
-                      <Text style={styles.header_text}>Ingredients</Text>
-                  </View>
-              </View>
-          }
-          ListFooterComponent={()=>
-            <View style={styles.footer_container}></View>
-          }
-      />
-    );
+    />
+  );
 }
 
 
