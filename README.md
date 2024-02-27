@@ -1,24 +1,32 @@
-#Deploy web version to github pages
-npm run deploy
+#Run Locally
 
-#start for normal expo/android debug
-npx expo start
-
-#Refresh device
-r
-
-#Start web version locally
-npx expo start --web
-
-#Start Expo version
+##Start Expo version (run JS)
 npx expo start --go
 
-#Start dev client
+##Run dev client locally (some debugging) (dev mode vs production: https://docs.expo.dev/workflow/development-mode/)
 npx expo start --dev-client
 
-#Export APK (builds on and avalable from https://expo.dev/accounts/jcarte)
+##Run production build locally
+npx expo start --no-dev --minify
+
+
+
+
+#Build
+
+##Export APK (builds on and avalable from https://expo.dev/accounts/jcarte)
 eas build -p android --profile preview-apk
 
-#Dev Builds
+##Dev Builds
 eas build -p android --profile development
 
+
+
+
+#Defunct Web Version
+
+##Deploy web version to github pages
+npm run deploy
+
+##Start web version locally
+npx expo start --web
