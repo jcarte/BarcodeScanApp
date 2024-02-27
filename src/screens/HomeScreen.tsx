@@ -5,11 +5,9 @@ import { FetchProduct } from '../api/ProductHandler'
 import { IngredientListComponent } from '../components/IngredientListComponent.js';
 import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent';
 import { MessageComponent } from '../components/MessageComponent.js';
-
 import BottomSheetComponent from '../components/BottomSheetComponent';
-
-
 import { ProductHeaderComponent } from '../components/ProductHeaderComponent';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export function HomeScreen() {
 
@@ -87,9 +85,9 @@ export function HomeScreen() {
       
   }, [])
 
-   return (
-    <View style={styles.container}>
-      <View style={StyleSheet.absoluteFillObject}>
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <BarcodeScannerComponent 
           onBarCodeScanned ={handleBarCode} 
           refreshIntervalMS = {750}  
@@ -97,25 +95,24 @@ export function HomeScreen() {
           />
       </View>
       
-      <BottomSheetComponent
-        collapsedHeight={240}
-        expandedHeight={"95%"}
-        onChange={handleSheetChanges}
-        ref={sheetRef}
-        startsOpen={false}
-        isDragEnabled={status === "ok"}
-        headerComponent={()=>
-          <View style={{flex:1}}>
-              {status === "ok" && <ProductHeaderComponent product={product}/>}
-              {status !== "ok" && <MessageComponent messageText={getMessageText()}/>}
-          </View>
-        }
-      >
-        {product && <IngredientListComponent product={product}/>}
-      </BottomSheetComponent>
-      
-    </View>
-   )
+        <BottomSheetComponent
+          collapsedHeight={240}
+          expandedHeight={"95%"}
+          onChange={handleSheetChanges}
+          ref={sheetRef}
+          startsOpen={false}
+          isDragEnabled={status === "ok"}
+          headerComponent={()=>
+            <View style={{flex:1}}>
+                {status === "ok" && <ProductHeaderComponent product={product}/>}
+                {status !== "ok" && <MessageComponent messageText={getMessageText()}/>}
+            </View>
+          }
+        >
+          {product && <IngredientListComponent product={product}/>}
+        </BottomSheetComponent>
+    </SafeAreaView>
+  )
 }
 
 

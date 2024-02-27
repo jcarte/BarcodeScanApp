@@ -151,12 +151,11 @@ const styles = StyleSheet.create({
       height: "100%",
       position: "absolute",
       justifyContent: "flex-end",
-      borderWidth: 0,
+      bottom:0
     },
   
     bottom_sheet: {
       width: "100%",
-      // height: "25%",
       backgroundColor: "white",
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
