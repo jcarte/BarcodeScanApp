@@ -10,11 +10,11 @@ export function ProductHeaderComponent({product}) {
     {
         switch (product.fodmapStatus) {
             case 'high':
-                return (<Text><FontAwesome name="circle" size={16} color="red" /> Avoid</Text>)
+                return (<Text><FontAwesome name="circle" size={16} color="#EF5350" /> Avoid</Text>)
             case 'medium':
                 return (<Text><FontAwesome name="circle" size={16} color="orange" /> Caution</Text>)
             case 'low':
-                return (<Text><FontAwesome name="circle" size={16} color="green" /> OK</Text>)
+                return (<Text><FontAwesome name="circle" size={16} color="#26BD65" /> OK</Text>)
             case 'unknown':
             default:
                 return (<Text><FontAwesome name="circle" size={16} color="lightgrey" /> Unknown</Text>)

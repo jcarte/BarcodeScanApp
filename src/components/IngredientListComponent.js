@@ -10,11 +10,11 @@ export function IngredientListComponent({  product }) {
   {
       switch (fodmapStatus) {
           case 'high':
-            return (<Text>Avoid <FontAwesome name="circle" size={16} color="red" /></Text>)
+            return (<Text>Avoid <FontAwesome name="circle" size={16} color="#EF5350" /></Text>)
           case 'medium':
             return (<Text>Caution <FontAwesome name="circle" size={16} color="orange" /></Text>)
           case 'low':
-            return (<Text>OK <FontAwesome name="circle" size={16} color="green" /></Text>)
+            return (<Text>OK <FontAwesome name="circle" size={16} color="#26BD65" /></Text>)
           case 'unknown':
           default:
             return (<Text>Unknown <FontAwesome name="circle" size={16} color="lightgrey" /></Text>)
