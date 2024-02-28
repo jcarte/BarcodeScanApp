@@ -183,6 +183,8 @@ export const FetchProduct = async (barcode): Promise<ProductResults> => {
         prod.fodmapStatus = "unknown"
     }
 
+    //Exclude ingredients with an unknown status
+    prod.ingredients = prod.ingredients.filter(i => i.fodmapStatus !== "unknown")
 
     //form up into searchresults object
     return {
