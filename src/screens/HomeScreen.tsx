@@ -5,17 +5,15 @@ import { FetchProduct } from '../api/ProductHandler'
 import { IngredientListComponent } from '../components/IngredientListComponent.js';
 import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent';
 import { MessageComponent } from '../components/MessageComponent.js';
-
 import BottomSheetComponent from '../components/BottomSheetComponent';
-
-
 import { ProductHeaderComponent } from '../components/ProductHeaderComponent';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export function HomeScreen() {
 
   console.log("Home: Start")
 
-  const[isResultsExpanded, setIsResultsExpanded] = useState(false)
+  const isResultsExpanded = useRef(false)
   const[status, setStatus] = useState("init")
   const[product, setProduct] = useState(null)
   const[errorMessage, setErrorMessage] = useState("")
@@ -26,15 +24,11 @@ export function HomeScreen() {
   const handleBarCode = async (bc) : Promise<void> =>
   {
     console.log('Home: Handle barcode:', bc)
-    console.log('Home: handleBarCode: is results expanded?:', isResultsExpanded)
+    //console.log('Home: handleBarCode: is results expanded?:', isResultsExpanded.current)
 
-
-    //show modal
-    sheetRef.current?.open();
-
-    if(isResultsExpanded)//if results are up then abandon
+    if(isResultsExpanded.current)//if results are up then abandon
     {
-      console.log('Home: handleBarCode: abandoning as results are up?')
+      console.log('Home: handleBarCode: abandoning as results are up')
     }
     else if(bc === product?.barcode)
     {
@@ -42,6 +36,9 @@ export function HomeScreen() {
     }
     else
     {
+      //show modal
+      sheetRef.current?.open();
+
       console.log("Home: barcode fetch:",bc)
       const p = await FetchProduct(bc)
       setStatus(p.status)
@@ -80,40 +77,43 @@ export function HomeScreen() {
     //if maximising results stop scanning
     if(index === 1)
     {
-      setIsResultsExpanded(true)
+      isResultsExpanded.current = true
     }
     else
     {
-      setIsResultsExpanded(false)
+      isResultsExpanded.current = false
     }
       
   }, [])
 
-   return (
-    <View style={styles.container}>
-      <View style={StyleSheet.absoluteFillObject}>
-        <BarcodeScannerComponent onBarCodeScanned ={handleBarCode} scanInterval = {3000}  />
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <BarcodeScannerComponent 
+          onBarCodeScanned ={handleBarCode} 
+          refreshIntervalMS = {750}  
+          timeoutAfterScanMS = {3000}  
+          />
       </View>
       
-      <BottomSheetComponent
-        collapsedHeight={240}
-        expandedHeight={"95%"}
-        onChange={handleSheetChanges}
-        ref={sheetRef}
-        startsOpen={false}
-        isDragEnabled={status === "ok"}
-        headerComponent={()=>
-          <View style={{flex:1}}>
-              {status === "ok" && <ProductHeaderComponent product={product}/>}
-              {status !== "ok" && <MessageComponent messageText={getMessageText()}/>}
-          </View>
-        }
-      >
-        {product && <IngredientListComponent product={product}/>}
-      </BottomSheetComponent>
-      
-    </View>
-   )
+        <BottomSheetComponent
+          collapsedHeight={240}
+          expandedHeight={"95%"}
+          onChange={handleSheetChanges}
+          ref={sheetRef}
+          startsOpen={false}
+          isDragEnabled={status === "ok"}
+          headerComponent={()=>
+            <View style={{flex:1}}>
+                {status === "ok" && <ProductHeaderComponent product={product}/>}
+                {status !== "ok" && <MessageComponent messageText={getMessageText()}/>}
+            </View>
+          }
+        >
+          {product && <IngredientListComponent product={product}/>}
+        </BottomSheetComponent>
+    </SafeAreaView>
+  )
 }
 
 

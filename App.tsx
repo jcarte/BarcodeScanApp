@@ -4,19 +4,22 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { HomeScreen } from './src/screens/HomeScreen';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export const Stack = createNativeStackNavigator();
 
 export default function App() {
 
   return (
+      <SafeAreaProvider>
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Home" component={HomeScreen} initialParams={{}}/>
-        </Stack.Navigator>
-      </NavigationContainer>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
+            <Stack.Screen name="Home" component={HomeScreen} initialParams={{}}/>
+          </Stack.Navigator>
+        </NavigationContainer>
     </GestureHandlerRootView>
+      </SafeAreaProvider>
   );
 
 }

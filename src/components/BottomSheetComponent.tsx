@@ -6,6 +6,7 @@ import { Feather } from '@expo/vector-icons';
 
 const BottomSheetComponent = (props, ref) => {
 
+  console.log("BS: Start")
   const[isOpen, setIsOpen] = useState(props.startsOpen)
 
   const getHeight = (index: number):number  => 
@@ -107,7 +108,7 @@ const BottomSheetComponent = (props, ref) => {
           mass: 1, //The weight of the spring. Reducing this value makes the animation faster.
           damping: 5, //How hard the animation decelerates.
           stiffness: 100, //How bouncy the animation is.
-          overshootClamping: true //Whether the animation can bounce over the specified value.
+          overshootClamping: true, //Whether the animation can bounce over the specified value.
         })
     };
   });
@@ -150,12 +151,11 @@ const styles = StyleSheet.create({
       height: "100%",
       position: "absolute",
       justifyContent: "flex-end",
-      borderWidth: 0,
+      bottom:0
     },
   
     bottom_sheet: {
       width: "100%",
-      // height: "25%",
       backgroundColor: "white",
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
