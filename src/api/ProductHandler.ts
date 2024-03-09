@@ -2,7 +2,8 @@ import React, { useState} from 'react';
 
 type ProductResults = {
     status: string,
-    product: Product
+    product: Product,
+    errorMessage: string,
 }
 
 type Product = {
@@ -30,12 +31,6 @@ export const FetchProduct = async (barcode): Promise<ProductResults> => {
 
     var ingList: FodmapLookup[] = []
     ingList = require('../../assets/data/FodmapIngredientList.json')
-    
-    //DOESNT WORK
-    // //retrieve ing list only once
-    // const[ingList, setIngList] = React.useState([])
-    // if(ingList == [])
-    //     setIngList(require('../../assets/data/FodmapIngredientList.json'))
 
     /*
         Map an individual ingredient to the format we need and lookup its fodmap status.
@@ -138,6 +133,7 @@ export const FetchProduct = async (barcode): Promise<ProductResults> => {
         return {
             status: "error",
             product: null,
+            errorMessage: error.message
         }
     }
     
@@ -148,6 +144,7 @@ export const FetchProduct = async (barcode): Promise<ProductResults> => {
         return {
             status: "notFound",
             product: null,
+            errorMessage: "",
         }
     }
         
@@ -156,6 +153,7 @@ export const FetchProduct = async (barcode): Promise<ProductResults> => {
         return {
             status: "incomplete",
             product: null,
+            errorMessage: "",
         }
     }
 
@@ -188,6 +186,7 @@ export const FetchProduct = async (barcode): Promise<ProductResults> => {
     return {
         status: "ok",
         product: prod,
+        errorMessage: "",
     }
     
 }
