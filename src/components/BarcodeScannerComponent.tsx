@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, Dimensions, Button } from 'react-native';
 import { BarCodeScanningResult, Camera } from 'expo-camera'
 import { BarCodeScanner } from 'expo-barcode-scanner'
 
@@ -12,13 +12,15 @@ export function BarcodeScannerComponent(props) {
 
   console.log("BCS: Start")
 
-  useEffect(() => {
-    //console.log("BCS: useeffect")
-    if (!hasPermission?.granted) {
-      //console.log(`BCS: hasPermission: ${hasPermission}`)
-      requestPermissions();
-    }
-  }, [hasPermission]);
+  // useEffect(() => {
+  //   //console.log("BCS: useeffect")
+  //   if (!hasPermission?.granted) {
+  //     //console.log(`BCS: hasPermission: ${hasPermission}`)
+  //     requestPermissions();
+  //   }
+  // }, [hasPermission]);
+
+
 
   const screenWidth = useMemo(()=>Dimensions.get('window').width,[])
   const screenHeight = useMemo(()=>Dimensions.get('window').height,[])
@@ -82,7 +84,21 @@ export function BarcodeScannerComponent(props) {
   */
 
 
+  if (!hasPermission) {
+    // Camera permissions are still loading
+    return <View />;
+  }
 
+  if (!hasPermission.granted) {
+    // Camera permissions are not granted yet
+    // return (
+    //   <View style={styles.container}>
+    //     <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+    //     <Button onPress={requestPermissions} title="grant permission" />
+    //   </View>
+    // );
+    requestPermissions()
+  }
   return (
     <View style={styles.container}>
 
