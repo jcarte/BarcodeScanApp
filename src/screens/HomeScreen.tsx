@@ -16,6 +16,7 @@ export function HomeScreen() {
   const isResultsExpanded = useRef(false)
   const[status, setStatus] = useState("init")
   const[product, setProduct] = useState(null)
+  const[errorMessage, setErrorMessage] = useState("")
 
   const sheetRef = useRef(null);
 
@@ -40,11 +41,11 @@ export function HomeScreen() {
 
       console.log("Home: barcode fetch:",bc)
       const p = await FetchProduct(bc)
-
-      //console.log("Home: Fetched Product:",p)
-
       setStatus(p.status)
       setProduct(p.product)
+      setErrorMessage(p.errorMessage)
+
+      //console.log("Home: Fetched Product:",p)
 
       //if error then reduce size of BS to display message
       if(p.status !== "ok")
@@ -59,7 +60,7 @@ export function HomeScreen() {
       case "init":
         return "Scan a product barcode to start..."
       case "error":
-        return "There was a problem looking up this product, try again"
+        return "There was a problem looking up this product, try again: " + errorMessage
       case "notFound":
         return "Product not found"
       case "incomplete":
