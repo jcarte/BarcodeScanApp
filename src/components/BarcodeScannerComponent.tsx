@@ -1,34 +1,23 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, Dimensions, Button } from 'react-native';
-import { BarCodeScanningResult, Camera } from 'expo-camera'
-import { BarCodeScanner } from 'expo-barcode-scanner'
+import { CameraView, useCameraPermissions } from 'expo-camera/next'
 
 export function BarcodeScannerComponent(props) {
   const lastAttemptScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time the BCS found a BC and we assessed it
   const lastSuccessScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time found a BC and raised the barcode scanned event
-  const [hasPermission, requestPermissions] = Camera.useCameraPermissions();
+  const [hasPermission, requestPermissions] = useCameraPermissions();
 
   // const [bb, setBB] = useState(null) //for testing where 4 corners of BC are
 
   console.log("BCS: Start")
 
-  // useEffect(() => {
-  //   //console.log("BCS: useeffect")
-  //   if (!hasPermission?.granted) {
-  //     //console.log(`BCS: hasPermission: ${hasPermission}`)
-  //     requestPermissions();
-  //   }
-  // }, [hasPermission]);
-
-
-
-  const screenWidth = useMemo(()=>Dimensions.get('window').width,[])
-  const screenHeight = useMemo(()=>Dimensions.get('window').height,[])
+  const screenWidth = useMemo(() => Dimensions.get('window').width, [])
+  const screenHeight = useMemo(() => Dimensions.get('window').height, [])
 
   const sizePercentThreshold = 0.20
   const deadzonePercent = 0.2
 
-  const handleBarCodeScanned = (result : any): void => {
+  const handleBarCodeScanned = (result: any): void => {
 
     //Check if it's time to check barcode again - timeout after each attempt
     if ((new Date().getTime() - lastAttemptScan.current.getTime()) < props.refreshIntervalMS)
@@ -40,10 +29,10 @@ export function BarcodeScannerComponent(props) {
     if ((new Date().getTime() - lastSuccessScan.current.getTime()) < props.timeoutAfterScanMS)
       return
 
-    const minX = Math.min(result.cornerPoints[0].x,result.cornerPoints[1].x,result.cornerPoints[2].x,result.cornerPoints[3].x)
-    const maxX = Math.max(result.cornerPoints[0].x,result.cornerPoints[1].x,result.cornerPoints[2].x,result.cornerPoints[3].x)
-    const minY = Math.min(result.cornerPoints[0].y,result.cornerPoints[1].y,result.cornerPoints[2].y,result.cornerPoints[3].y)
-    const maxY = Math.max(result.cornerPoints[0].y,result.cornerPoints[1].y,result.cornerPoints[2].y,result.cornerPoints[3].y)
+    const minX = Math.min(result.cornerPoints[0].x, result.cornerPoints[1].x, result.cornerPoints[2].x, result.cornerPoints[3].x)
+    const maxX = Math.max(result.cornerPoints[0].x, result.cornerPoints[1].x, result.cornerPoints[2].x, result.cornerPoints[3].x)
+    const minY = Math.min(result.cornerPoints[0].y, result.cornerPoints[1].y, result.cornerPoints[2].y, result.cornerPoints[3].y)
+    const maxY = Math.max(result.cornerPoints[0].y, result.cornerPoints[1].y, result.cornerPoints[2].y, result.cornerPoints[3].y)
 
     const width = maxX - minX
     const height = maxY - minY
@@ -51,13 +40,13 @@ export function BarcodeScannerComponent(props) {
     // setBB({origin:{x: minX, y:minY}, size:{height: height, width:width}})
 
     //Check barcode is big enough, small if both the height% and width% are below the thresold
-    if((width / screenWidth) < sizePercentThreshold && (height / screenHeight) < sizePercentThreshold) {
+    if ((width / screenWidth) < sizePercentThreshold && (height / screenHeight) < sizePercentThreshold) {
       console.log(`BCS: barcode is too small: width%=${width / screenWidth}, height%=${height / screenHeight}`)
       return
     }
 
     //Check if too close to the bottom or top, if highest Y is in top threshold or lowest Y is in bottom threshold 
-    if(minY < (deadzonePercent*screenHeight) || maxY > ((1-deadzonePercent)*screenHeight)) {
+    if (minY < (deadzonePercent * screenHeight) || maxY > ((1 - deadzonePercent) * screenHeight)) {
       console.log(`BCS: barcode is in the deadzone`)
       return
     }
@@ -83,20 +72,13 @@ export function BarcodeScannerComponent(props) {
     https://docs.expo.dev/versions/latest/sdk/bar-code-scanner/#supported-formats
   */
 
-
+  //console.log("BCS: Has Permission: ",hasPermission)
   if (!hasPermission) {
     // Camera permissions are still loading
     return <View />;
   }
 
   if (!hasPermission.granted) {
-    // Camera permissions are not granted yet
-    // return (
-    //   <View style={styles.container}>
-    //     <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
-    //     <Button onPress={requestPermissions} title="grant permission" />
-    //   </View>
-    // );
     requestPermissions()
   }
   return (
@@ -105,18 +87,16 @@ export function BarcodeScannerComponent(props) {
       {!hasPermission ? <Text>Requesting for camera permission</Text> : undefined}
       {!hasPermission?.granted ? <Text>No access to camera</Text> : undefined}
 
-      <Camera
-        barCodeScannerSettings={{
-          barCodeTypes: [
-            BarCodeScanner.Constants.BarCodeType.ean13,
-            BarCodeScanner.Constants.BarCodeType.ean8,
-            BarCodeScanner.Constants.BarCodeType.upc_a,
-            BarCodeScanner.Constants.BarCodeType.upc_e,
-            BarCodeScanner.Constants.BarCodeType.upc_ean,
+      <CameraView
+        barcodeScannerSettings={{
+          barcodeTypes: [
+            "ean13",
+            "ean8",
+            "upc_a",
+            "upc_e",
           ],
-          interval: 500//don't think this works
         }}
-        onBarCodeScanned={(e)=> handleBarCodeScanned(e)}
+        onBarcodeScanned={(e) => handleBarCodeScanned(e)}
         style={StyleSheet.absoluteFillObject}
       />
       <View style={styles.grid_container}>
@@ -159,38 +139,38 @@ const styles = StyleSheet.create({
   },
 
   grid_tl: {
-    height: outlineSize, 
-    width: outlineSize, 
-    borderColor: outlineColor, 
-    borderTopWidth: outlineThickness, 
-    borderLeftWidth: outlineThickness, 
+    height: outlineSize,
+    width: outlineSize,
+    borderColor: outlineColor,
+    borderTopWidth: outlineThickness,
+    borderLeftWidth: outlineThickness,
     borderTopLeftRadius: outlineBorderRadius
   },
 
   grid_bl: {
-    height: outlineSize, 
-    width: outlineSize, 
-    borderColor: outlineColor, 
-    borderBottomWidth: outlineThickness, 
-    borderLeftWidth: outlineThickness, 
+    height: outlineSize,
+    width: outlineSize,
+    borderColor: outlineColor,
+    borderBottomWidth: outlineThickness,
+    borderLeftWidth: outlineThickness,
     borderBottomLeftRadius: outlineBorderRadius
   },
 
   grid_tr: {
-    height: outlineSize, 
-    width: outlineSize, 
-    borderColor: outlineColor, 
-    borderTopWidth: outlineThickness, 
-    borderRightWidth: outlineThickness, 
+    height: outlineSize,
+    width: outlineSize,
+    borderColor: outlineColor,
+    borderTopWidth: outlineThickness,
+    borderRightWidth: outlineThickness,
     borderTopRightRadius: outlineBorderRadius
   },
 
   grid_br: {
-    height: outlineSize, 
-    width: outlineSize, 
-    borderColor: outlineColor, 
-    borderBottomWidth: outlineThickness, 
-    borderRightWidth: outlineThickness, 
+    height: outlineSize,
+    width: outlineSize,
+    borderColor: outlineColor,
+    borderBottomWidth: outlineThickness,
+    borderRightWidth: outlineThickness,
     borderBottomRightRadius: outlineBorderRadius
   },
 
