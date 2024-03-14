@@ -9,6 +9,13 @@
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
         }
+      ],
+      [
+        "@sentry/react-native/expo",
+        {
+          "organization": "belly-buddy",
+          "project": "belly-buddy-app-rn"
+        }
       ]
     ],
     "orientation": "portrait",
