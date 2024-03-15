@@ -1,23 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, StyleSheet, Image, Dimensions} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { Product, Ingredient, FodmapStatus}  from '../api/ProductHandler'
 
 export function ProductHeaderComponent({product}) {
    
     console.log("PHC: Start")
     
+    
+
     const GetStatusWording = () =>
     {
+        const firstIng:Ingredient = product.ingredients.sort(function (a, b) {
+            return b.fodmapStatus - a.fodmapStatus || b.percent - a.percent;
+          })[0]
+
+        const roundPercent = firstIng.percent > 1 ? 
+            Math.round(firstIng.percent) : 
+            parseFloat(firstIng.percent.toPrecision(1))
+
         switch (product.fodmapStatus) {
-            case 'high':
-                return (<Text><FontAwesome name="circle" size={16} color="#EF5350" /> Avoid</Text>)
-            case 'medium':
-                return (<Text><FontAwesome name="circle" size={16} color="orange" /> Caution</Text>)
-            case 'low':
-                return (<Text><FontAwesome name="circle" size={16} color="#26BD65" /> OK</Text>)
-            case 'unknown':
+            case FodmapStatus.High:
+                return (<Text><FontAwesome name="exclamation-circle" size={16} color="#EF5350" /> This has {roundPercent}% {firstIng.name} - please try to find an alternative</Text>)
+            case FodmapStatus.Medium:
+                if(firstIng.percent >= 5)
+                    return (<Text><FontAwesome name="exclamation-triangle" size={16} color="orange" /> This contains more than 5% {firstIng.name} - consume at your own risk</Text>)
+                return (<Text><FontAwesome name="exclamation-triangle" size={16} color="orange" /> This has below 5% of any significant ingredients - consume at your own risk</Text>)
+            case FodmapStatus.Low:
+                return (<Text><FontAwesome name="check-circle" size={16} color="#26BD65" /> This has no significant ingredients</Text>)
+            case FodmapStatus.Unknown:
             default:
-                return (<Text><FontAwesome name="circle" size={16} color="lightgrey" /> Unknown</Text>)
+                return (<Text><FontAwesome name="question-circle" size={16} color="lightgrey" /> Sorry, we don't have any info about this product</Text>)
         }
     }
 

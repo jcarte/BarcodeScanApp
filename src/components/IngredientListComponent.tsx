@@ -1,64 +1,47 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { Product, Ingredient, FodmapStatus}  from '../api/ProductHandler'
 
-export function IngredientListComponent({  product }) {
+export function IngredientListComponent({  product  }) {
 
   console.log("ILC: Start")
 
-  const GetStatusWording = (fodmapStatus) =>
+  const GetStatusWording = (ingredient: Ingredient) =>
   {
-      switch (fodmapStatus) {
-          case 'high':
-            return (<Text>Avoid <FontAwesome name="circle" size={16} color="#EF5350" /></Text>)
-          case 'medium':
-            return (<Text>Caution <FontAwesome name="circle" size={16} color="orange" /></Text>)
-          case 'low':
-            return (<Text>OK <FontAwesome name="circle" size={16} color="#26BD65" /></Text>)
-          case 'unknown':
-          default:
-            return (<Text>Unknown <FontAwesome name="circle" size={16} color="lightgrey" /></Text>)
+    //console.log(ingredient.name, " - ", ingredient.percent)
+    const roundPercent = ingredient.percent > 1 ? 
+      Math.round(ingredient.percent) : "<1"
+      //parseFloat(ingredient.percent.toPrecision(1))
+
+    switch (ingredient.fodmapStatus) {
+        case FodmapStatus.High:
+            return (<Text>{roundPercent}% <FontAwesome name="exclamation-circle" size={16} color="#EF5350" /></Text>)
+        case FodmapStatus.Medium:
+            return (<Text>{roundPercent}% <FontAwesome name="exclamation-triangle" size={16} color="orange" /></Text>)
+        case FodmapStatus.Low:
+            return (<Text>{roundPercent}% <FontAwesome name="check-circle" size={16} color="#26BD65" /></Text>)
+        case FodmapStatus.Unknown:
+        default:
+            return (<Text>{roundPercent}% <FontAwesome name="question-circle" size={16} color="lightgrey" /></Text>)
       }
   }
 
-  const GetStatusSortOrder = (fodmapStatus) =>
-  {
-      switch (fodmapStatus) {
-          case 'high':
-              return 1
-          case 'medium':
-              return 2
-          case 'low':
-              return 3
-          case 'unknown':
-          default:
-              return 4
-      }
-  }
-
-  ings = product.ingredients.map(function (i) {
-      return {
-          key: i.name,
-          name: i.name.replaceAll('-',' '), 
-          fodmapStatusText: GetStatusWording(i.fodmapStatus),
-          sortOrder: GetStatusSortOrder(i.fodmapStatus)
-          
-      }
+  product.ingredients.sort(function (a, b) {
+    return b.fodmapStatus - a.fodmapStatus || b.percent - a.percent;
   })
   
-  ings.sort((a,b) => a.sortOrder - b.sortOrder)
-
   return (
     <FlatList 
-        data={ings}
-        keyExtractor={(i) => i.name}
+        data={product.ingredients}
+        keyExtractor={(i) => i.id}
         renderItem={({item}) =>
             <View style={styles.item_container}>
                 <View style={styles.item_name}>
                     <Text style={styles.text_name}>{item.name}</Text>
                 </View>
                 <View style={styles.item_status}>
-                    <Text style={styles.text_status}>{item.fodmapStatusText}</Text>
+                    <Text style={styles.text_status}>{GetStatusWording(item)}</Text>
                 </View>
             </View>
         }

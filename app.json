@@ -1,8 +1,19 @@
 {
   "expo": {
-    "name": "Belly Buddy",
+    "name": "pom",
     "slug": "BarcodeScanApp",
-    "version": "0.0.7",
+    "version": "0.0.8",
+    "android": {
+      "versionCode": 8,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "package": "com.jcarte.BarcodeScanApp"
+    },
     "plugins": [
       [
         "expo-camera",
@@ -34,17 +45,6 @@
       "infoPlist": {
         "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access camera."
       }
-    },
-    "android": {
-      "versionCode": 5,
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "permissions": [
-        "android.permission.CAMERA"
-      ],
-      "package": "com.jcarte.BarcodeScanApp"
     },
     "extra": {
       "eas": {

@@ -1,30 +1,38 @@
 import React, { useState} from 'react';
 
-type ProductResults = {
+export type ProductResults = {
     status: string,
     product: Product,
     errorMessage: string,
 }
 
-type Product = {
+export type Product = {
     barcode: string,
     name: string,
     brand: string,
     imgUrl: string,
-    fodmapStatus: string,
+    fodmapStatus: FodmapStatus,
     ingredients: Ingredient[]
 }
 
-type Ingredient = {
+export type Ingredient = {
+    id: string,
     name: string, 
-    fodmapStatus: string,
+    fodmapStatus: FodmapStatus,
     percent: number
 }
 
-type FodmapLookup = {
+export type FodmapLookup = {
     name: string, 
     score: string
 }
+
+export enum FodmapStatus {
+    Unknown = 0,
+    Low = 1,
+    Medium = 2,
+    High = 3
+  }
 
 export const FetchProduct = async (barcode): Promise<ProductResults> => {
     console.log("PH: Starting")
@@ -71,10 +79,30 @@ export const FetchProduct = async (barcode): Promise<ProductResults> => {
         {
             return o.ingredients.flatMap(i => GetIngredient(i))
         }
+
+        const perc = (o.percent_min+o.percent_max)/2
+        const fodStatusText = ingList.find(i => i.name == o.id.split(":")[1])?.score
+        let fodStatus = FodmapStatus.Unknown
+
+        switch (fodStatusText) {
+            case "low":
+                fodStatus = FodmapStatus.Low
+                break;
+            case "medium":
+                fodStatus = FodmapStatus.Medium
+                break;
+            case "high":
+                fodStatus = FodmapStatus.High
+                break;
+            default:
+                break;
+        }
+
         return [{
-            name: o.id.split(":")[1],
-            percent: o.percent_estimate,
-            fodmapStatus: ingList.find(i => i.name == o.id.split(":")[1])?.score
+            id: o.id.split(":")[1],//e.g. "cow-milk"
+            name: o.id.split(":")[1].replaceAll('-',' '), //e.g. "cow milk"
+            percent: perc,
+            fodmapStatus: fodStatus
         }]
     }
 
@@ -90,26 +118,38 @@ export const FetchProduct = async (barcode): Promise<ProductResults> => {
 
         var result = [];
         ingr.reduce(function (res, value) {
-            if (!res[value.name]) {
-                res[value.name] =
+            if (!res[value.id]) {
+                res[value.id] =
                 {
+                    id: value.id,
                     name: value.name,
-                    fodmapStatus: (value.fodmapStatus === undefined) ? 'unknown' : value.fodmapStatus, //just take first fodmap if can't find
-                    percent: 0
+                    fodmapStatus: value.fodmapStatus,
+                    percent: 0//set to zero as adding percent on at next step
                 };
-                result.push(res[value.name]);
+                result.push(res[value.id]);
             }
-            res[value.name].percent += value.percent;
+            res[value.id].percent += value.percent;
             return res;
         }, {});
 
         //downgrade from high to med if only a small amount
-        result = result.map((i) => {
-            if (i.fodmapStatus === "high" && i.percent < 5) {
-                i.fodmapStatus = "medium";
+        result = result.map((i:Ingredient) => {
+            //console.log(i.name," - ",i.fodmapStatus, " - ", i.percent)
+            if (i.fodmapStatus === FodmapStatus.High && i.percent < 5) {
+                i.fodmapStatus = FodmapStatus.Medium;
             }
             return i;
         });
+
+        //rebase percent as they're only an estimate and usually don't add up to 100%
+        const sumOfPercent = result.reduce((partialSum, a) => partialSum + a.percent, 0);
+        console.log("PH: sum of percent before: ",sumOfPercent)
+        result = result.map((i:Ingredient) => {
+            i.percent = (i.percent / sumOfPercent) * 100
+            return i;
+        });
+
+        console.log("PH: check on new sum of percent", result.reduce((partialSum, a) => partialSum + a.percent, 0))
 
         return result;
     }
@@ -163,26 +203,16 @@ export const FetchProduct = async (barcode): Promise<ProductResults> => {
         name: json.product.product_name,
         brand: json.product.brands,
         imgUrl: json.product.image_url,
-        fodmapStatus: "",
+        fodmapStatus: FodmapStatus.Unknown,
         ingredients: GetIngredients(json.product)
     }
 
-    //Determine overall product status based on ingredients
-    if (prod.ingredients.some((i) => i.fodmapStatus === 'high')){
-        prod.fodmapStatus = "high"
-    }
-    else if (prod.ingredients.some((i) => i.fodmapStatus === 'medium')){
-        prod.fodmapStatus = "medium"
-    }
-    else if (prod.ingredients.some((i) => i.fodmapStatus === 'low')){
-        prod.fodmapStatus = "low"
-    }
-    else {
-        prod.fodmapStatus = "unknown"
-    }
+    prod.fodmapStatus = Math.max.apply(Math, prod.ingredients.map((i)=>i.fodmapStatus))
+    
+
 
     //Exclude ingredients with an unknown status
-    prod.ingredients = prod.ingredients.filter(i => i.fodmapStatus !== "unknown")
+    //prod.ingredients = prod.ingredients.filter(i => i.fodmapStatus !== FodmapStatus.Unknown)
 
     //form up into searchresults object
     return {

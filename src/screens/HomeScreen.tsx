@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef  } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
-import { FetchProduct } from '../api/ProductHandler'
+import { FetchProduct}  from '../api/ProductHandler'
 
-import { IngredientListComponent } from '../components/IngredientListComponent.js';
+import { IngredientListComponent } from '../components/IngredientListComponent';
 import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent';
 import { MessageComponent } from '../components/MessageComponent.js';
 import BottomSheetComponent from '../components/BottomSheetComponent';
