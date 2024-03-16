@@ -29,6 +29,14 @@
 `npx expo start --web`
 
 
+
+# Other
+
+#### Expo upgrade dependencies
+`npx expo install --fix`
+
+
+
 # TODO
 #### IOS
 - Register FB app: https://firebase.google.com/docs/ios/setup
