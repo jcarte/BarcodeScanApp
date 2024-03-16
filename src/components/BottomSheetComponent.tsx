@@ -121,18 +121,18 @@ const BottomSheetComponent = (props, ref) => {
         <View style={styles.bottom_sheet_container}>
             <Animated.View style={[styles.bottom_sheet, containerStyle]}>
                 <GestureDetector gesture={props.isDragEnabled ? drag : noDrag}>
-                  <View>
+                  <View style={{flex:1}}>
                     <View style={[styles.bottom_sheet_handle]}>
                     {props.isDragEnabled &&<Feather name="minus" size={35} color="#969696"/>}
                     </View>
                     <View style={{height: collapsedHeight - 25}}>
                       {props.headerComponent()}
                     </View>
+                    <View style={styles.bottom_sheet_content}>
+                        {props.children}
+                    </View>
                   </View>
                 </GestureDetector>
-                <View style={styles.bottom_sheet_content}>
-                    {props.children}
-                </View>
             </Animated.View>
         </View>
       
@@ -151,7 +151,9 @@ const styles = StyleSheet.create({
       height: "100%",
       position: "absolute",
       justifyContent: "flex-end",
-      bottom:0
+      bottom:0,
+      // borderWidth: 3, 
+      // borderColor: 'green',
     },
   
     bottom_sheet: {
@@ -159,6 +161,8 @@ const styles = StyleSheet.create({
       backgroundColor: "white",
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
+      // borderWidth: 3, 
+      // borderColor: 'blue',
     },
   
     bottom_sheet_handle: {
@@ -168,9 +172,11 @@ const styles = StyleSheet.create({
     },
   
     bottom_sheet_content: {
+      flex:1,
+      flexGrow:1,
+      // borderColor: 'pink',
       //borderWidth: 1,
       width: "100%",
-      height: "100%",
     },
   
   });

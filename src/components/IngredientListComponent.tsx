@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 import { FontAwesome } from '@expo/vector-icons';
-import { Product, Ingredient, FodmapStatus}  from '../api/ProductHandler'
+import { Ingredient, FodmapStatus}  from '../api/ProductHandler'
 
 export function IngredientListComponent({  product  }) {
 
