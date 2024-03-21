@@ -34,7 +34,11 @@
 
 #### Expo upgrade dependencies
 `npx expo install --fix`
+or
+`npx expo install --check`
 
+#### Expo Check Health
+`npx expo-doctor`
 
 
 # TODO

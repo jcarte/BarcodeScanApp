@@ -60,11 +60,11 @@ export function HomeScreen() {
       case "init":
         return "Scan a product barcode to start..."
       case "error":
-        return "There was a problem looking up this product, try again: " + errorMessage
+        return "There was a problem looking up this product, please try again"
       case "notFound":
-        return "Product not found"
+        return "Sorry, we don't have any info about this product"
       case "incomplete":
-        return "We couldn't find enough information about this product"
+        return "Sorry, we don't have enough info about this product"
       default:
         return "";
     }

@@ -11,6 +11,14 @@ export function ProductHeaderComponent({product}) {
 
     const GetStatusWording = () =>
     {
+        const unknownIngsSum = product.ingredients.filter(function(ing:Ingredient){
+            return ing.fodmapStatus == FodmapStatus.Unknown
+        }).reduce((partialSum, a) => partialSum + a.percent, 0);
+
+        //High level of unknown check
+        if(unknownIngsSum >= 5 && product.fodmapStatus < FodmapStatus.Medium)
+            return (<Text><FontAwesome name="exclamation-triangle" size={16} color="orange" /> More than 5% of the ingredients in this are unknown</Text>)
+
         const firstIng:Ingredient = product.ingredients.sort(function (a, b) {
             return b.fodmapStatus - a.fodmapStatus || b.percent - a.percent;
           })[0]
