@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "71068673139",
+    "project_id": "barcodescanapp-9746e",
+    "storage_bucket": "barcodescanapp-9746e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71068673139:android:011b48a3ebcdd9689d7606",
+        "android_client_info": {
+          "package_name": "com.jcarte.BarcodeScanApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXknFvAtmvHbGc7ZmmqfbL3lUqGCRYcbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

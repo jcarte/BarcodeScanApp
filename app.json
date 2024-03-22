@@ -2,9 +2,9 @@
   "expo": {
     "name": "pom",
     "slug": "BarcodeScanApp",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "android": {
-      "versionCode": 8,
+      "versionCode": 9,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -12,9 +12,12 @@
       "permissions": [
         "android.permission.CAMERA"
       ],
+      "googleServicesFile": "./google-services.json",
       "package": "com.jcarte.BarcodeScanApp"
     },
     "plugins": [
+      "@react-native-firebase/app",
+      "@react-native-firebase/crashlytics",
       [
         "expo-camera",
         {
