@@ -9,7 +9,7 @@ import BottomSheetComponent from '../components/BottomSheetComponent';
 import { ProductHeaderComponent } from '../components/ProductHeaderComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import analytics from '@react-native-firebase/analytics';
+// import analytics from '@react-native-firebase/analytics';
 
 export function HomeScreen() {
 
@@ -47,17 +47,17 @@ export function HomeScreen() {
       setProduct(p.product)
       setErrorMessage(p.errorMessage)
 
-      await analytics().logEvent('bsa_scan_barcode', {
-        barcode: bc,
-        status: p.status,
-        product: p.product
-      })
+      // await analytics().logEvent('bsa_scan_barcode', {
+      //   barcode: bc,
+      //   status: p.status,
+      //   product: p.product
+      // })
 
-      await analytics().logEvent('bsa_scan_status_'+p.status)
+      // await analytics().logEvent('bsa_scan_status_'+p.status)
       //console.log("Home: Fetched Product:",p)
 
-      if(p.product != null)
-        await analytics().logEvent('bsa_scan_result_rag_'+p.product.fodmapStatus)
+      // if(p.product != null)
+      //   await analytics().logEvent('bsa_scan_result_rag_'+p.product.fodmapStatus)
 
       //if error then reduce size of BS to display message
       if(p.status !== "ok")
@@ -90,12 +90,12 @@ export function HomeScreen() {
     if(index === 1)
     {
       isResultsExpanded.current = true
-      analytics().logEvent('bsa_bottom_sheet_maximise')
+      // analytics().logEvent('bsa_bottom_sheet_maximise')
     }
     else
     {
       isResultsExpanded.current = false
-      analytics().logEvent('bsa_bottom_sheet_minimise')
+      // analytics().logEvent('bsa_bottom_sheet_minimise')
     }
       
   }, [])

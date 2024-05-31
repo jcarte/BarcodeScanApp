@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, Dimensions, Button } from 'react-native';
-import { CameraView, useCameraPermissions } from 'expo-camera/next'
+import { Text, View, StyleSheet, TouchableOpacity, Image, Dimensions, Button, Platform } from 'react-native';
+import { BarcodeScanningResult, CameraView, useCameraPermissions } from 'expo-camera'
 
 export function BarcodeScannerComponent(props) {
   const lastAttemptScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time the BCS found a BC and we assessed it
@@ -17,7 +17,9 @@ export function BarcodeScannerComponent(props) {
   const sizePercentThreshold = 0.20
   const deadzonePercent = 0.2
 
-  const handleBarCodeScanned = (result: any): void => {
+  const handleBarCodeScanned = (result: BarcodeScanningResult): void => {
+
+
 
     //Check if it's time to check barcode again - timeout after each attempt
     if ((new Date().getTime() - lastAttemptScan.current.getTime()) < props.refreshIntervalMS)
@@ -29,27 +31,35 @@ export function BarcodeScannerComponent(props) {
     if ((new Date().getTime() - lastSuccessScan.current.getTime()) < props.timeoutAfterScanMS)
       return
 
-    const minX = Math.min(result.cornerPoints[0].x, result.cornerPoints[1].x, result.cornerPoints[2].x, result.cornerPoints[3].x)
-    const maxX = Math.max(result.cornerPoints[0].x, result.cornerPoints[1].x, result.cornerPoints[2].x, result.cornerPoints[3].x)
-    const minY = Math.min(result.cornerPoints[0].y, result.cornerPoints[1].y, result.cornerPoints[2].y, result.cornerPoints[3].y)
-    const maxY = Math.max(result.cornerPoints[0].y, result.cornerPoints[1].y, result.cornerPoints[2].y, result.cornerPoints[3].y)
 
-    const width = maxX - minX
-    const height = maxY - minY
+    console.log(result)
 
-    // setBB({origin:{x: minX, y:minY}, size:{height: height, width:width}})
+    //Run barcode size checks, only works on android as ios returns rubbish (width: 0.002)
+    if (Platform.OS == "android") {
+      const minX = Math.min(result.cornerPoints[0].x, result.cornerPoints[1].x, result.cornerPoints[2].x, result.cornerPoints[3].x)
+      const maxX = Math.max(result.cornerPoints[0].x, result.cornerPoints[1].x, result.cornerPoints[2].x, result.cornerPoints[3].x)
+      const minY = Math.min(result.cornerPoints[0].y, result.cornerPoints[1].y, result.cornerPoints[2].y, result.cornerPoints[3].y)
+      const maxY = Math.max(result.cornerPoints[0].y, result.cornerPoints[1].y, result.cornerPoints[2].y, result.cornerPoints[3].y)
 
-    //Check barcode is big enough, small if both the height% and width% are below the thresold
-    if ((width / screenWidth) < sizePercentThreshold && (height / screenHeight) < sizePercentThreshold) {
-      console.log(`BCS: barcode is too small: width%=${width / screenWidth}, height%=${height / screenHeight}`)
-      return
+      const width = maxX - minX
+      const height = maxY - minY
+
+      // setBB({origin:{x: minX, y:minY}, size:{height: height, width:width}})
+
+      //Check barcode is big enough, small if both the height% and width% are below the thresold
+      if ((width / screenWidth) < sizePercentThreshold && (height / screenHeight) < sizePercentThreshold) {
+        console.log(`BCS: barcode is too small: width%=${width / screenWidth}, height%=${height / screenHeight}, width=${width}, screenWidth=${screenWidth}, height=${height}, screenHeight=${screenHeight}`)
+        return
+      }
+
+      //Check if too close to the bottom or top, if highest Y is in top threshold or lowest Y is in bottom threshold 
+      if (minY < (deadzonePercent * screenHeight) || maxY > ((1 - deadzonePercent) * screenHeight)) {
+        console.log(`BCS: barcode is in the deadzone: width%=${width / screenWidth}, height%=${height / screenHeight}, width=${width}, screenWidth=${screenWidth}, height=${height}, screenHeight=${screenHeight}`)
+        return
+      }
     }
 
-    //Check if too close to the bottom or top, if highest Y is in top threshold or lowest Y is in bottom threshold 
-    if (minY < (deadzonePercent * screenHeight) || maxY > ((1 - deadzonePercent) * screenHeight)) {
-      console.log(`BCS: barcode is in the deadzone`)
-      return
-    }
+
 
 
     //check is only numbers

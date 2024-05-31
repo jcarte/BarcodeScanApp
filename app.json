@@ -2,9 +2,9 @@
   "expo": {
     "name": "pom",
     "slug": "BarcodeScanApp",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "android": {
-      "versionCode": 9,
+      "versionCode": 10,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -12,12 +12,16 @@
       "permissions": [
         "android.permission.CAMERA"
       ],
-      "googleServicesFile": "./google-services.json",
       "package": "com.jcarte.BarcodeScanApp"
     },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access camera."
+      },
+      "bundleIdentifier": "com.jcarte.BarcodeScanApp"
+    },
     "plugins": [
-      "@react-native-firebase/app",
-      "@react-native-firebase/crashlytics",
       [
         "expo-camera",
         {
@@ -43,12 +47,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access camera."
-      }
-    },
     "extra": {
       "eas": {
         "projectId": "3058bbde-49a6-4b1b-9e31-f58e69ae1d1a"

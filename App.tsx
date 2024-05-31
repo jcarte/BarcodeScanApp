@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import analytics from '@react-native-firebase/analytics';
+// import analytics from '@react-native-firebase/analytics';
 import * as Sentry from '@sentry/react-native';
 
 export const Stack = createNativeStackNavigator();
@@ -16,7 +16,7 @@ Sentry.init({
   debug: false, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
 });
 
-analytics().setAnalyticsCollectionEnabled(!__DEV__)
+// analytics().setAnalyticsCollectionEnabled(!__DEV__)
 
 
 

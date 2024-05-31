@@ -39,9 +39,3 @@ or
 
 #### Expo Check Health
 `npx expo-doctor`
-
-
-# TODO
-#### IOS
-- Register FB app: https://firebase.google.com/docs/ios/setup
-- Setup RN FB ios app https://rnfirebase.io/#configure-react-native-firebase-modules
