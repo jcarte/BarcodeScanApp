@@ -18,13 +18,6 @@ Sentry.init({
 });
 
 
-/*
-used eas build --profile preview --platform ios
-but __dev__ = true
-not sure if ios will build for prod?
-otherwise just enable analytics for one offs
-*/
-
 function App() {
 
   const isAnalyticsActive = !__DEV__;//only enable on prod not dev

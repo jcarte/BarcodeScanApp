@@ -24,6 +24,8 @@ export function HomeScreen() {
   const[product, setProduct] = useState(null)
   const[errorMessage, setErrorMessage] = useState("")
 
+  const[lastBarcode, setLastBarcode] = useState(null)
+
   const sheetRef = useRef(null);
 
   const handleBarCode = async (bc) : Promise<void> =>
@@ -36,12 +38,15 @@ export function HomeScreen() {
     {
       console.log('Home: handleBarCode: abandoning as results are up')
     }
-    else if(bc === product?.barcode)
+    else if(bc === lastBarcode)
     {
       console.log("Home: same barcode detected, skipping fetch")
     }
     else
     {
+
+      setLastBarcode(bc)
+
       //show modal
       sheetRef.current?.open();
 
@@ -78,9 +83,9 @@ export function HomeScreen() {
       case "error":
         return "There was a problem looking up this product, please try again"
       case "notFound":
-        return "Sorry, we don't have any info about this product"
+        return `Sorry, we don't have any info about this product (${lastBarcode})`
       case "incomplete":
-        return "Sorry, we don't have enough info about this product"
+        return `Sorry, we don't have enough info about this product (${lastBarcode})`
       default:
         return "";
     }

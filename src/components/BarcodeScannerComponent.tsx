@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, Dimensions, Button, Platform } from 'react-native';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { Text, View, StyleSheet, Dimensions, Platform } from 'react-native';
 import { BarcodeScanningResult, CameraView, useCameraPermissions } from 'expo-camera'
 
 export function BarcodeScannerComponent(props) {
@@ -7,9 +7,11 @@ export function BarcodeScannerComponent(props) {
   const lastSuccessScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time found a BC and raised the barcode scanned event
   const [hasPermission, requestPermissions] = useCameraPermissions();
 
-  // const [bb, setBB] = useState(null) //for testing where 4 corners of BC are
-
   console.log("BCS: Start")
+
+
+
+
 
   const screenWidth = useMemo(() => Dimensions.get('window').width, [])
   const screenHeight = useMemo(() => Dimensions.get('window').height, [])
@@ -17,9 +19,11 @@ export function BarcodeScannerComponent(props) {
   const sizePercentThreshold = 0.20
   const deadzonePercent = 0.2
 
+
+
+
+
   const handleBarCodeScanned = (result: BarcodeScanningResult): void => {
-
-
 
     //Check if it's time to check barcode again - timeout after each attempt
     if ((new Date().getTime() - lastAttemptScan.current.getTime()) < props.refreshIntervalMS)
@@ -30,7 +34,6 @@ export function BarcodeScannerComponent(props) {
     //check if it's been long enough after the last successful barcode detected
     if ((new Date().getTime() - lastSuccessScan.current.getTime()) < props.timeoutAfterScanMS)
       return
-
 
     console.log(result)
 
@@ -59,9 +62,6 @@ export function BarcodeScannerComponent(props) {
       }
     }
 
-
-
-
     //check is only numbers
     if (result.data.match(/^[0-9]+$/) == null) {
       console.log("BCS: barcode found in wrong format: ", result.data)
@@ -77,20 +77,29 @@ export function BarcodeScannerComponent(props) {
 
   };
 
+
+
   /*
     Barcode Types List
     https://docs.expo.dev/versions/latest/sdk/bar-code-scanner/#supported-formats
   */
 
-  //console.log("BCS: Has Permission: ",hasPermission)
+
+  //Permission
+  console.log("BCS: Has Permission: ", hasPermission)
+  //useEffect(() => { requestPermissions(); }, []);
+
   if (!hasPermission) {
-    // Camera permissions are still loading
+    // Camera permissions are still loading.
     return <View />;
   }
 
   if (!hasPermission.granted) {
+    // Camera permissions are not granted yet.
     requestPermissions()
   }
+
+
   return (
     <View style={styles.container}>
 
