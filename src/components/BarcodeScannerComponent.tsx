@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Text, View, StyleSheet, Dimensions, Platform } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, Platform, Button } from 'react-native';
 import { BarcodeScanningResult, CameraView, useCameraPermissions } from 'expo-camera'
 
 export function BarcodeScannerComponent(props) {
   const lastAttemptScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time the BCS found a BC and we assessed it
   const lastSuccessScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time found a BC and raised the barcode scanned event
-  const [hasPermission, requestPermissions] = useCameraPermissions();
+  const [permission, requestPermission] = useCameraPermissions();
 
   console.log("BCS: Start")
 
@@ -13,11 +13,11 @@ export function BarcodeScannerComponent(props) {
 
 
 
-  const screenWidth = useMemo(() => Dimensions.get('window').width, [])
-  const screenHeight = useMemo(() => Dimensions.get('window').height, [])
+  // const screenWidth = useMemo(() => Dimensions.get('window').width, [])
+  // const screenHeight = useMemo(() => Dimensions.get('window').height, [])
 
-  const sizePercentThreshold = 0.20
-  const deadzonePercent = 0.2
+  // const sizePercentThreshold = 0.20
+  // const deadzonePercent = 0.2
 
 
 
@@ -37,30 +37,30 @@ export function BarcodeScannerComponent(props) {
 
     console.log(result)
 
-    //Run barcode size checks, only works on android as ios returns rubbish (width: 0.002)
-    if (Platform.OS == "android") {
-      const minX = Math.min(result.cornerPoints[0].x, result.cornerPoints[1].x, result.cornerPoints[2].x, result.cornerPoints[3].x)
-      const maxX = Math.max(result.cornerPoints[0].x, result.cornerPoints[1].x, result.cornerPoints[2].x, result.cornerPoints[3].x)
-      const minY = Math.min(result.cornerPoints[0].y, result.cornerPoints[1].y, result.cornerPoints[2].y, result.cornerPoints[3].y)
-      const maxY = Math.max(result.cornerPoints[0].y, result.cornerPoints[1].y, result.cornerPoints[2].y, result.cornerPoints[3].y)
+    // //Run barcode size checks, only works on android as ios returns rubbish (width: 0.002)
+    // if (Platform.OS == "android") {
+    //   const minX = Math.min(result.cornerPoints[0].x, result.cornerPoints[1].x, result.cornerPoints[2].x, result.cornerPoints[3].x)
+    //   const maxX = Math.max(result.cornerPoints[0].x, result.cornerPoints[1].x, result.cornerPoints[2].x, result.cornerPoints[3].x)
+    //   const minY = Math.min(result.cornerPoints[0].y, result.cornerPoints[1].y, result.cornerPoints[2].y, result.cornerPoints[3].y)
+    //   const maxY = Math.max(result.cornerPoints[0].y, result.cornerPoints[1].y, result.cornerPoints[2].y, result.cornerPoints[3].y)
 
-      const width = maxX - minX
-      const height = maxY - minY
+    //   const width = maxX - minX
+    //   const height = maxY - minY
 
-      // setBB({origin:{x: minX, y:minY}, size:{height: height, width:width}})
+    //   // setBB({origin:{x: minX, y:minY}, size:{height: height, width:width}})
 
-      //Check barcode is big enough, small if both the height% and width% are below the thresold
-      if ((width / screenWidth) < sizePercentThreshold && (height / screenHeight) < sizePercentThreshold) {
-        console.log(`BCS: barcode is too small: width%=${width / screenWidth}, height%=${height / screenHeight}, width=${width}, screenWidth=${screenWidth}, height=${height}, screenHeight=${screenHeight}`)
-        return
-      }
+    //   //Check barcode is big enough, small if both the height% and width% are below the thresold
+    //   if ((width / screenWidth) < sizePercentThreshold && (height / screenHeight) < sizePercentThreshold) {
+    //     console.log(`BCS: barcode is too small: width%=${width / screenWidth}, height%=${height / screenHeight}, width=${width}, screenWidth=${screenWidth}, height=${height}, screenHeight=${screenHeight}`)
+    //     return
+    //   }
 
-      //Check if too close to the bottom or top, if highest Y is in top threshold or lowest Y is in bottom threshold 
-      if (minY < (deadzonePercent * screenHeight) || maxY > ((1 - deadzonePercent) * screenHeight)) {
-        console.log(`BCS: barcode is in the deadzone: width%=${width / screenWidth}, height%=${height / screenHeight}, width=${width}, screenWidth=${screenWidth}, height=${height}, screenHeight=${screenHeight}`)
-        return
-      }
-    }
+    //   //Check if too close to the bottom or top, if highest Y is in top threshold or lowest Y is in bottom threshold 
+    //   if (minY < (deadzonePercent * screenHeight) || maxY > ((1 - deadzonePercent) * screenHeight)) {
+    //     console.log(`BCS: barcode is in the deadzone: width%=${width / screenWidth}, height%=${height / screenHeight}, width=${width}, screenWidth=${screenWidth}, height=${height}, screenHeight=${screenHeight}`)
+    //     return
+    //   }
+    // }
 
     //check is only numbers
     if (result.data.match(/^[0-9]+$/) == null) {
@@ -86,25 +86,27 @@ export function BarcodeScannerComponent(props) {
 
 
   //Permission
-  console.log("BCS: Has Permission: ", hasPermission)
-  //useEffect(() => { requestPermissions(); }, []);
+  console.log("BCS: Has Permission: ", permission)
 
-  if (!hasPermission) {
+  if (!permission) {
     // Camera permissions are still loading.
     return <View />;
   }
 
-  if (!hasPermission.granted) {
-    // Camera permissions are not granted yet.
-    requestPermissions()
-  }
-
+  if (!permission.granted) {
+  return (
+    <View style={styles.container}>
+      <View style={{ flex: 1, borderWidth: 0, justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ textAlign: 'center'}}>Please give permission to access the camera</Text>
+        <View style={{height:15}}></View>
+        <Button onPress={requestPermission} title="Grant Permission" color="blue" />
+      </View>
+    </View>
+  )
+}
 
   return (
     <View style={styles.container}>
-
-      {!hasPermission ? <Text>Requesting for camera permission</Text> : undefined}
-      {!hasPermission?.granted ? <Text>No access to camera</Text> : undefined}
 
       <CameraView
         barcodeScannerSettings={{
@@ -118,6 +120,7 @@ export function BarcodeScannerComponent(props) {
         onBarcodeScanned={(e) => handleBarCodeScanned(e)}
         style={StyleSheet.absoluteFillObject}
       />
+
       <View style={styles.grid_container}>
         <View style={{ flex: 3, borderWidth: 0, }}></View>
         <View style={{ flex: 2, borderWidth: 0, flexDirection: 'row' }}>
