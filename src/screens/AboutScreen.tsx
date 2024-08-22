@@ -7,7 +7,7 @@ export function AboutScreen({navigation}) {
         <Text>About Screen!</Text>
         <Button
         title="Go to Onboarding"
-        onPress={() => navigation.navigate('OnboardingNav')}
+        onPress={() => navigation.navigate('Onboarding')}
       />
       </View>
     );

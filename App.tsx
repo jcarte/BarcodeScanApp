@@ -6,8 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { HomeScreen } from './src/screens/HomeScreen';
 import { AboutScreen } from './src/screens/AboutScreen';
-import { OnboardingOneScreen } from './src/screens/OnboardingOneScreen';
-import { OnboardingTwoScreen } from './src/screens/OnboardingTwoScreen';
+import { OnboardingScreen } from './src/screens/OnboardingScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import * as Sentry from '@sentry/react-native';
@@ -15,33 +14,16 @@ import * as Sentry from '@sentry/react-native';
 import { PostHogProvider } from 'posthog-react-native'
 import { HistoryScreen } from './src/screens/HistoryScreen';
 
-
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 
+Sentry.init({
+  dsn: __DEV__ ? undefined : 'https://120475c6ff30d996e1167a7e38c5ec91@o4506823877984256.ingest.us.sentry.io/4506823900200960',
+  debug: false, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
+});
 
 const NavStack = createNativeStackNavigator();
-export default function App() {
-  return(
-    <NavigationContainer>
-      <NavStack.Navigator screenOptions={{ headerShown: false }} initialRouteName='OnboardingNav'>
-        <NavStack.Screen name="OnboardingNav" component={OnboardingNav} />
-        <NavStack.Screen name="HomeNav" component={HomeNav} />
-      </NavStack.Navigator>
-    </NavigationContainer>
-  )
-}
-
-const OnboardStack = createNativeStackNavigator();
-function OnboardingNav() {
-  return(
-    <OnboardStack.Navigator screenOptions={{ headerShown: false }}>
-      <OnboardStack.Screen name="OnboardingOne" component={OnboardingOneScreen} />
-      <OnboardStack.Screen name="OnboardingTwo" component={OnboardingTwoScreen} />
-    </OnboardStack.Navigator>
-  )
-}
 
 const HomeTabs = createBottomTabNavigator();
 function HomeNav() {
@@ -74,36 +56,23 @@ function HomeNav() {
   )
 }
 
+function App() {
 
-// Sentry.init({
-//   dsn: __DEV__ ? undefined : 'https://120475c6ff30d996e1167a7e38c5ec91@o4506823877984256.ingest.us.sentry.io/4506823900200960',
-//   debug: false, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
-// });
+  const isAnalyticsActive = !__DEV__;//only enable on prod not dev
 
-// export const Stack = createNativeStackNavigator();
-// export const Tab = createBottomTabNavigator();
-
-// function App() {
-  
-//   const isAnalyticsActive = !__DEV__;//only enable on prod not dev
-
-//   return (
-//     // <SafeAreaProvider>
-//     //   <GestureHandlerRootView style={{ flex: 1 }}>
-//     //     <PostHogProvider apiKey="phc_Yvgu0ct7RmzgmZ6WLhhRGiQhOnM7XZq6KFb43QFn0Ve" options={{ host: "https://eu.i.posthog.com", disabled: !isAnalyticsActive }}>
-//           // <NavigationContainer>
-//           //   <Tab.Navigator>
-//           //     <Tab.Screen name="Home" component={HomeScreen} />
-//           //     <Tab.Screen name="About" component={AboutScreen} />
-//           //   </Tab.Navigator>
-//           //   <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-//           //     <Stack.Screen name="Home" component={HomeScreen} initialParams={{}} />
-//           //   </Stack.Navigator>
-//           // </NavigationContainer>
-//     //     </PostHogProvider>
-//     //   </GestureHandlerRootView>
-//     // </SafeAreaProvider>
-//   );
-
-// }
-// export default Sentry.wrap(App);
+  return(
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <NavigationContainer>
+          <PostHogProvider apiKey="phc_Yvgu0ct7RmzgmZ6WLhhRGiQhOnM7XZq6KFb43QFn0Ve" options={{ host: "https://eu.i.posthog.com", disabled: !isAnalyticsActive }}>
+            <NavStack.Navigator screenOptions={{ headerShown: false }} initialRouteName='OnboardingNav'>
+              <NavStack.Screen name="OnboardingNav" component={OnboardingScreen} />
+              <NavStack.Screen name="HomeNav" component={HomeNav} />
+            </NavStack.Navigator>
+          </PostHogProvider>
+        </NavigationContainer>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
+  )
+}
+export default Sentry.wrap(App);

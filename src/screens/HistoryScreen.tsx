@@ -7,7 +7,7 @@ export function HistoryScreen({ navigation }) {
       <Text>History Screen!</Text>
       <Button
         title="Go to onboarding"
-        onPress={() => navigation.navigate('OnboardingNav')}
+        onPress={() => navigation.navigate('Onboarding')}
       />
     </View>
   );

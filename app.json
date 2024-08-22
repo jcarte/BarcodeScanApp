@@ -35,7 +35,8 @@
           "project": "belly-buddy-app-rn"
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      "expo-asset"
     ],
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
