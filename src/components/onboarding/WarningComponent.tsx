@@ -1,5 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
+import GlobalStyles from '../../lib/GlobalStyles';
+import CustomText from '../core/CustomText';
+import CustomButton from '../core/CustomButton';
 
 export interface OnboardWarningComponentProps {
     onButtonClick(): void
@@ -9,34 +12,19 @@ export function OnboardWarningComponent({onButtonClick} : OnboardWarningComponen
 
     return (
         <View>
-            <Text style={styles.boldPara}>pom is not a medical device!</Text>
+            <CustomText variant="paragraph" weight='bold'>pom is not a medical device!</CustomText>
 
-            <Text style={styles.para}>pom lets you see what ingredients are in food that you’ve scanned, and match that with what you’ve told us about your health. </Text>
+            <CustomText variant="paragraph">pom lets you see what ingredients are in food that you’ve scanned, and match that with what you’ve told us about your health. </CustomText>
 
-            <Text style={styles.para}>No-one knows your body like you do, so it’s up to you how you use this information.</Text>
+            <CustomText variant="paragraph">No-one knows your body like you do, so it’s up to you how you use this information.</CustomText>
 
-            <Text style={styles.para}>Ingredients are held on a publicly-available database, and while we strive to ensure that our results are as accurate as possible, pom is not responsible for the quality of results.</Text>
+            <CustomText variant="paragraph">Ingredients are held on a publicly-available database, and while we strive to ensure that our results are as accurate as possible, pom is not responsible for the quality of results.</CustomText>
 
-            <Text style={styles.para}>pom is not liable for your health as a result of using this app.</Text>
+            <CustomText variant="paragraph">pom is not liable for your health as a result of using this app.</CustomText>
 
-            <Text style={styles.boldPara}>If in doubt, always consult your GP, dietician or other clinical practitioner.</Text>
+            <CustomText variant="paragraph" weight='bold'>If in doubt, always consult your GP, dietician or other clinical practitioner.</CustomText>
 
-            <Button title='Swipe to continue' color="red" onPress={() => onButtonClick?.()}/>
+            <CustomButton style={{marginTop: 20}} title='Swipe to continue >>>' onPress={() => onButtonClick?.()}/>
         </View>
     )
 }
-
-const PARAGRAPH_PADDING = 15
-
-const styles = StyleSheet.create({
-    
-    para: {
-        marginBottom: PARAGRAPH_PADDING
-    },
-    boldPara: {
-        marginBottom: PARAGRAPH_PADDING,
-        fontWeight: "bold"
-    },
-    
-
-})

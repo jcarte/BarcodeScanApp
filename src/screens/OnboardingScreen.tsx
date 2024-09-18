@@ -5,161 +5,115 @@ import { StyleSheet, Text, View, Dimensions, Button } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Image } from 'expo-image';
 
-import Carousel, { ICarouselInstance } from "react-native-reanimated-carousel";
-import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
-
-import { OnboardWarningComponent } from "../components/onboarding/WarningComponent";
 import assets from "../../assets/AssetManager";
+import { OnboardWarningComponent } from "../components/onboarding/WarningComponent";
+import CustomText from "../components/core/CustomText";
+import { WelcomeComponent } from "../components/onboarding/WelcomeComponent";
+import { AboutYouComponent } from "../components/onboarding/AboutYouComponent";
+import { PermissionsComponent } from "../components/onboarding/PermissionsComponent";
+import { TriggerSelectComponent } from "../components/onboarding/TriggerSelectComponent";
+import { TriggerAutoMessageComponent } from "../components/onboarding/TriggerAutoMessageComponent";
+import CarouselComponent, { PageData } from "../components/core/CarouselComponent";
+import { TriggerData } from "../types/TriggerData";
+import { setHasCompletedOnboardingAsync, setTriggerIngredientsAsync } from "../lib/LocalStorage";
 
-/*
-https://github.com/dohooo/react-native-reanimated-carousel/tree/main
-https://react-native-reanimated-carousel.vercel.app/
-
-example with pagination (doesn't work):
-https://github.com/dohooo/react-native-reanimated-carousel/blob/main/example/app/src/pages/parallax/index.tsx
-
-Pagination add on:
-https://www.npmjs.com/package/react-native-animated-dots-carousel
-*/
-
-interface PageData {
-  title: string,
-  component: React.JSX.Element
-}
 
 export function OnboardingScreen({ navigation }) {
 
-  const [index, setIndex] = React.useState<number>(0);
+  //used to toggle show between the "I know my triggers" and "I don't know yet" screens
+  const [showSelectTriggers, setShowSelectTriggers] = React.useState<boolean>(true);
 
-  const caroRef = useRef<ICarouselInstance>(null)
+  const caurouselRef = useRef(null);
 
-  const data: PageData[] = [
-    {
-      title: "Welcome to pom",
-      component: <Text>Welcome Screen</Text>
-    },
-    {
-      title: "About you",
-      component: <Text>About you Screen</Text>
-    },
-    {
-      title: "Your triggers",
-      component: <Text>Triggers Screen</Text>
-    },
-    {
-      title: "Warning",
-      component: <OnboardWarningComponent onButtonClick={() => { caroRef.current.next() }} />
-    },
-    {
-      title: "Permissions",
-      component: (
-        <><Text>Permissions Screen</Text><Button title="Start" onPress={()=>navigation.navigate("HomeNav")}/></>
-      )
-    },
-  ]
+  //wrapper around next slide function
+  const next = () => caurouselRef.current.next()
 
-  /*
-  -Fix colours to be brand
-  -Fix button style
-  
-  -Add other screens
-   */
+  const saveTriggers = async (triggers: TriggerData[]) => await setTriggerIngredientsAsync(triggers)
 
-  const carouselCardItem = ({ item, index }) => {
-    const i = item as PageData
+  const setOnboardingDone = async () => await setHasCompletedOnboardingAsync(true)
+
+  // Wraps each page in a header component before feeding to carousel
+  function getSlidePageComponent(title: string, child: React.ReactNode): React.ReactNode {
     return (
       <View style={styles.page}>
 
         {/* Header on every page with logo and title */}
         <View style={styles.pageHeader}>
           <Image style={styles.logoImage} source={assets.images.logo} contentFit="cover" />
-          <Text style={styles.pageHeadingText}>{i.title}</Text>
+          <CustomText
+            style={styles.pageHeadingText}
+            variant="heading">{title}</CustomText>
         </View>
 
         {/* Actual page component below header */}
-        {i.component}
+        {child}
 
       </View>
     )
   }
 
-  const FOOTER_HEIGHT_PERCENT = 0.10 //height of dots in footer
-  const WIDTH = Dimensions.get('window').width
-  const HEIGHT = Dimensions.get('window').height * (1 - FOOTER_HEIGHT_PERCENT)
+  // Descibes every page, feeds into carousel
+  const pages: PageData[] = [
+    {
+      component: getSlidePageComponent("Welcome to pom",
+        <WelcomeComponent onButtonClick={() => { next() }} />),
+      isSwipeEnabled: true,
+    },
+    {
+      component: getSlidePageComponent("About you",
+        <AboutYouComponent
+          onDontKnowButtonClick={() => {
+            setShowSelectTriggers(false)
+            next()
+          }}
+          onKnowButtonClick={() => {
+            setShowSelectTriggers(true)
+            next()
+          }}
+        />),
+      isSwipeEnabled: false,
+    },
+    {
+      component: getSlidePageComponent(showSelectTriggers ? "Your triggers" : "How it works",
+        showSelectTriggers
+          ? <TriggerSelectComponent
+            onButtonClick={async (triggers: TriggerData[]) => {
+              await saveTriggers(triggers)//todo no error capture
+              next()
+            }}
+          />
+          : <TriggerAutoMessageComponent onButtonClick={() => { next() }} />),
+      isSwipeEnabled: false,
+    },
+    {
+      component: getSlidePageComponent("Warning",
+        <OnboardWarningComponent onButtonClick={() => { next() }} />),
+      isSwipeEnabled: true,
+    },
+    {
+      component: getSlidePageComponent("Permissions",
+        <PermissionsComponent onButtonClick={async () => { 
+          await setOnboardingDone()
+          navigation.navigate("HomeNav")
+          
+        }} />),
+      isSwipeEnabled: true,
+    },
+  ]
 
-  const DOT_SIZE = 16
 
   return (
     <SafeAreaView style={styles.container}>
 
-      {/* Carousel Pages */}
-      <View style={{
-        width: WIDTH,
-        height: HEIGHT,
-      }}>
-        <Carousel
-          ref={caroRef}
-          width={WIDTH}
-          height={HEIGHT}
-          loop={false}
-          data={data}
-          enabled={true} //toggles gestures
-          pagingEnabled={true}
-          onProgressChange={(_, absoluteProgress) => {
-            setIndex(Math.round(absoluteProgress));
-            console.log("current index:", absoluteProgress)
-          }}
-          renderItem={carouselCardItem}
-        />
-      </View>
-
-      {/* Dots in footer */}
-      <View style={{
-        flexGrow: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        <View style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: DOT_SIZE,
-        }}>
-          <AnimatedDotsCarousel
-
-            length={data.length}
-            currentIndex={index}
-            maxIndicators={data.length}
-            interpolateOpacityAndColor={true}
-            activeIndicatorConfig={{
-              color: 'green',//TODO MAKE BRAND COLOR
-              margin: 10,
-              opacity: 1,
-              size: DOT_SIZE,
-            }}
-            inactiveIndicatorConfig={{
-              color: 'lightgray',//TODO MAKE BRAND COLOR
-              margin: 10,
-              opacity: 1,
-              size: DOT_SIZE,
-            }}
-            decreasingDots={[
-              //Don't use these but have to have them
-              {
-                config: { color: 'blue', margin: 3, opacity: 0.5, size: DOT_SIZE },
-                quantity: 0,
-              },
-              {
-                config: { color: 'blue', margin: 3, opacity: 0.5, size: DOT_SIZE },
-                quantity: 0,
-              },
-            ]}
-          />
-        </View>
-      </View>
+      <CarouselComponent
+        pages={pages}
+        ref={caurouselRef}
+      />
 
     </SafeAreaView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -177,19 +131,21 @@ const styles = StyleSheet.create({
   pageHeader: {
     flexShrink: 1,
     flexDirection: "row",
+    // alignContent: "center",
     alignItems: "center",
-    borderWidth: 0,
-    marginBottom: 15
+    // borderWidth: 1,
+    marginBottom: 15,
+    marginLeft: -20//compensate for alpha in logo
   },
   pageHeadingText: {
-    marginLeft: 5,
-    fontWeight: "bold",
-    fontSize: 30
+    marginLeft: 0,
+    marginBottom: 0,
+    // borderWidth:1,
   },
   logoImage: {
-    height: 50,
-    width: 50,
-    borderWidth: 0,
+    height: 75,
+    width: 75,
+    // borderWidth: 1,
   }
 
 });

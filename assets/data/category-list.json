@@ -1,0 +1,898 @@
+[
+  {
+    "categoryName": "Additives",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Agave",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Alcohol",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Almond",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Almond Butter",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Almond Flour",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Amaranth Flour",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Apple",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Apricot",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Asparagus",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Avocado",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Avocado Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Bacon",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Baking Powder",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Balsamic Vinegar",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Banana",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Barley Flour",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Basil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Basmati rice",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Beef",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Beer",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Bell Pepper",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Black Pepper",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Black Tea",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Blackberry",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Blue Cheese",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Blueberry",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Broccoli",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Brown Rice",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Brown Sugar",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Buckwheat Flour",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Butter",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Buttermilk",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Butternut Squash",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Canola Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cantaloupe",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Capers",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Capsicum",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cardamom",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Carrot",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cashew",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Cassava",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Cauliflower",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Celeriac",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Celery",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cherry",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Chia Seeds",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Chicken",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Chickpeas",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Chilli",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Chipotle",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Chive",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cinnamon",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Clove",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cocoa",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cocoa powder",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Coconut",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Coconut Cream",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Coconut Flour",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Coconut Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Coconut Sugar",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Coconut Water",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Cod",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Collard greens",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Coriander",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Corn / Sweetcorn",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Corn Starch",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cornflour",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cottonseed",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Courgette",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cow Cheese",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Cow Cream",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Cow Milk",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Cow Yogurt",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Crab",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cranberry",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cucumber",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Cumin",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Currants",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Dark chocolate",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Date",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Dextrose",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Dill",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Durum Wheat",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Edamame",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Egg",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Endive",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Fennel",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Flax seed",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Fructose",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Garlic",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Ginger",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Glucose",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Gluten",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Goat Milk",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Grape",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Grapefruit",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Green Tea",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Hazelnut",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Herbs & Spices",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "High Fructose Corn Syrup",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Honey",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Horseradish",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Inulin",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Isomalt",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Kale",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Lamb",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Leek",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Lemon",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Lemongrass",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Lettuce",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Lime",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Lobster",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Lychee",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Maltitol",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Mandarin",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Mango",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Mannitol",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Maple syrup",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Margarine",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Mayonnaise",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Milk Chocolate",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Millet Flour",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Mint",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Molasses",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Mushroom",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Mustard",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Nut",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Nutmeg",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Oat",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Oatmeal",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Okra",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Olive",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Olive Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Onion",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Onion Powder",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Orange",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Oregano",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Palm Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Papaya",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Paprika",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Parsley",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Parsnip",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Pea",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Peach",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Peanut",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Pear",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Pecan",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Peppermint Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Pine Nut",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Pineapple",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Pinto Bean",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Plum",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Pomegranate",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Popcorn",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Pork",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Potato",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Potato Starch",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Prune",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Pumpkin",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Quinoa",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Radish",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Raisin",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Raspberry",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Rhubarb",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Rice Flour",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Rosemary",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Rum",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Rye",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Salmon",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Salt",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Scallop",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Semolina",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Sesame Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Sesame Seed",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Shallot",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Sheep Milk",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Shrimp",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Sorbitol",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Sorghum",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Soya Bean",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Soya Flour",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Soya Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Soya Sauce",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Spinach",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Spring Onion",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Stevia",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Strawberry",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Sugar",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Sunflower Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Sunflower Seed",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Sweet Potato",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Tahini",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Tamarind",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Tapioca",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Tarragon",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Teff Flour",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Thyme",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Tomato",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Tumeric",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Tuna",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Turkey",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Turmeric",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Turnip",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Vanilla",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Vegetable Oil",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Vinegar",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Vitamins & Minerals",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Vodka",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Walnuts",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Water",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Watercress",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Watermelon",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Wheat",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Whey",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "White Chocolate",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "White Pepper",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "White Rice",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "White sugar",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Wild Rice",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Wine",
+    "highFodmap": false
+  },
+  {
+    "categoryName": "Xylitol",
+    "highFodmap": true
+  },
+  {
+    "categoryName": "Yeast",
+    "highFodmap": false
+  }
+]

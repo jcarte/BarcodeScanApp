@@ -1,0 +1,2910 @@
+[
+    {
+      "ingredientName": "a-milk-derivative",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "acid",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "agave",
+      "categoryName": "Agave"
+    },
+    {
+      "ingredientName": "alcohol",
+      "categoryName": "Alcohol"
+    },
+    {
+      "ingredientName": "alcohol-vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "almond",
+      "categoryName": "Almond"
+    },
+    {
+      "ingredientName": "almond-butter",
+      "categoryName": "Almond Butter"
+    },
+    {
+      "ingredientName": "almond-flour",
+      "categoryName": "Almond Flour"
+    },
+    {
+      "ingredientName": "amaranth-flour",
+      "categoryName": "Amaranth Flour"
+    },
+    {
+      "ingredientName": "and-canola-oil",
+      "categoryName": "Canola Oil"
+    },
+    {
+      "ingredientName": "and-salt",
+      "categoryName": "Salt"
+    },
+    {
+      "ingredientName": "and-sunflower-oil",
+      "categoryName": "Sunflower Oil"
+    },
+    {
+      "ingredientName": "annatto-color",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "anti-caking-agent",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "apple",
+      "categoryName": "Apple"
+    },
+    {
+      "ingredientName": "apple-juice",
+      "categoryName": "Apple"
+    },
+    {
+      "ingredientName": "apple-juice-from-concentrate",
+      "categoryName": "Apple"
+    },
+    {
+      "ingredientName": "apple-puree",
+      "categoryName": "Apple"
+    },
+    {
+      "ingredientName": "apricot",
+      "categoryName": "Apricot"
+    },
+    {
+      "ingredientName": "artificial-and-natural-flavors",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "artificial-flavouring",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "asparagus",
+      "categoryName": "Asparagus"
+    },
+    {
+      "ingredientName": "autolyzed-yeast",
+      "categoryName": "Yeast"
+    },
+    {
+      "ingredientName": "autolyzed-yeast-extract",
+      "categoryName": "Yeast"
+    },
+    {
+      "ingredientName": "avocado",
+      "categoryName": "Avocado"
+    },
+    {
+      "ingredientName": "avocado-oil",
+      "categoryName": "Avocado Oil"
+    },
+    {
+      "ingredientName": "baby-spinach",
+      "categoryName": "Spinach"
+    },
+    {
+      "ingredientName": "bacon",
+      "categoryName": "Bacon"
+    },
+    {
+      "ingredientName": "baking-powder",
+      "categoryName": "Baking Powder"
+    },
+    {
+      "ingredientName": "balsamic-vinegar",
+      "categoryName": "Balsamic Vinegar"
+    },
+    {
+      "ingredientName": "banana",
+      "categoryName": "Banana"
+    },
+    {
+      "ingredientName": "barley",
+      "categoryName": "Barley Flour"
+    },
+    {
+      "ingredientName": "barley-flour",
+      "categoryName": "Barley Flour"
+    },
+    {
+      "ingredientName": "barley-malt-extract",
+      "categoryName": "Barley Flour"
+    },
+    {
+      "ingredientName": "barley-malt-flour",
+      "categoryName": "Barley Flour"
+    },
+    {
+      "ingredientName": "basil",
+      "categoryName": "Basil"
+    },
+    {
+      "ingredientName": "basmati-rice",
+      "categoryName": "Basmati rice"
+    },
+    {
+      "ingredientName": "beef",
+      "categoryName": "Beef"
+    },
+    {
+      "ingredientName": "beef-broth",
+      "categoryName": "Beef"
+    },
+    {
+      "ingredientName": "beef-fat",
+      "categoryName": "Beef"
+    },
+    {
+      "ingredientName": "beef-meat",
+      "categoryName": "Beef"
+    },
+    {
+      "ingredientName": "beer",
+      "categoryName": "Beer"
+    },
+    {
+      "ingredientName": "bell-pepper",
+      "categoryName": "Bell Pepper"
+    },
+    {
+      "ingredientName": "black-pepper",
+      "categoryName": "Black Pepper"
+    },
+    {
+      "ingredientName": "black-tea",
+      "categoryName": "Black Tea"
+    },
+    {
+      "ingredientName": "blackberry",
+      "categoryName": "Blackberry"
+    },
+    {
+      "ingredientName": "blackcurrant",
+      "categoryName": "Blackberry"
+    },
+    {
+      "ingredientName": "blue-cheese",
+      "categoryName": "Blue Cheese"
+    },
+    {
+      "ingredientName": "blueberry",
+      "categoryName": "Blueberry"
+    },
+    {
+      "ingredientName": "broccoli",
+      "categoryName": "Broccoli"
+    },
+    {
+      "ingredientName": "brown-rice",
+      "categoryName": "Brown Rice"
+    },
+    {
+      "ingredientName": "brown-rice-flour",
+      "categoryName": "Rice Flour"
+    },
+    {
+      "ingredientName": "brown-rice-syrup",
+      "categoryName": "Brown Rice"
+    },
+    {
+      "ingredientName": "brown-sugar",
+      "categoryName": "Brown Sugar"
+    },
+    {
+      "ingredientName": "buckwheat",
+      "categoryName": "Buckwheat Flour"
+    },
+    {
+      "ingredientName": "buckwheat-flour",
+      "categoryName": "Buckwheat Flour"
+    },
+    {
+      "ingredientName": "butter",
+      "categoryName": "Butter"
+    },
+    {
+      "ingredientName": "butter-natural-flavouring",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "butterfat",
+      "categoryName": "Cow Cream"
+    },
+    {
+      "ingredientName": "buttermilk",
+      "categoryName": "Buttermilk"
+    },
+    {
+      "ingredientName": "butternut-squash",
+      "categoryName": "Butternut Squash"
+    },
+    {
+      "ingredientName": "calcium",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "cane-sugar",
+      "categoryName": "White sugar"
+    },
+    {
+      "ingredientName": "cane-sugar-syrup",
+      "categoryName": "White sugar"
+    },
+    {
+      "ingredientName": "canola",
+      "categoryName": "Canola Oil"
+    },
+    {
+      "ingredientName": "canola-oil",
+      "categoryName": "Canola Oil"
+    },
+    {
+      "ingredientName": "cantaloupe",
+      "categoryName": "Cantaloupe"
+    },
+    {
+      "ingredientName": "capers",
+      "categoryName": "Capers"
+    },
+    {
+      "ingredientName": "capsicum",
+      "categoryName": "Capsicum"
+    },
+    {
+      "ingredientName": "carbonated-water",
+      "categoryName": "Water"
+    },
+    {
+      "ingredientName": "cardamom",
+      "categoryName": "Cardamom"
+    },
+    {
+      "ingredientName": "carrot",
+      "categoryName": "Carrot"
+    },
+    {
+      "ingredientName": "carrot-juice",
+      "categoryName": "Carrot"
+    },
+    {
+      "ingredientName": "cashew-nuts",
+      "categoryName": "Cashew"
+    },
+    {
+      "ingredientName": "cassava",
+      "categoryName": "Cassava"
+    },
+    {
+      "ingredientName": "cauliflower",
+      "categoryName": "Cauliflower"
+    },
+    {
+      "ingredientName": "celeriac",
+      "categoryName": "Celeriac"
+    },
+    {
+      "ingredientName": "celery",
+      "categoryName": "Celery"
+    },
+    {
+      "ingredientName": "celery-juice",
+      "categoryName": "Celery"
+    },
+    {
+      "ingredientName": "celery-powder",
+      "categoryName": "Celery"
+    },
+    {
+      "ingredientName": "cheese",
+      "categoryName": "Cow Cheese"
+    },
+    {
+      "ingredientName": "cherry",
+      "categoryName": "Cherry"
+    },
+    {
+      "ingredientName": "cherry-juice",
+      "categoryName": "Cherry"
+    },
+    {
+      "ingredientName": "chia-seed",
+      "categoryName": "Chia Seeds"
+    },
+    {
+      "ingredientName": "chicken",
+      "categoryName": "Chicken"
+    },
+    {
+      "ingredientName": "chicken-breast",
+      "categoryName": "Chicken"
+    },
+    {
+      "ingredientName": "chicken-broth",
+      "categoryName": "Chicken"
+    },
+    {
+      "ingredientName": "chicken-fat",
+      "categoryName": "Chicken"
+    },
+    {
+      "ingredientName": "chicken-meat",
+      "categoryName": "Chicken"
+    },
+    {
+      "ingredientName": "chickpea",
+      "categoryName": "Chickpeas"
+    },
+    {
+      "ingredientName": "chili-pepper",
+      "categoryName": "Chilli"
+    },
+    {
+      "ingredientName": "chipotle",
+      "categoryName": "Chipotle"
+    },
+    {
+      "ingredientName": "chives",
+      "categoryName": "Chive"
+    },
+    {
+      "ingredientName": "chocolate",
+      "categoryName": "Milk Chocolate"
+    },
+    {
+      "ingredientName": "cider-vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "cinnamon",
+      "categoryName": "Cinnamon"
+    },
+    {
+      "ingredientName": "clove",
+      "categoryName": "Clove"
+    },
+    {
+      "ingredientName": "cocoa",
+      "categoryName": "Cocoa powder"
+    },
+    {
+      "ingredientName": "cocoa-butter",
+      "categoryName": "Cocoa"
+    },
+    {
+      "ingredientName": "cocoa-paste",
+      "categoryName": "Cocoa"
+    },
+    {
+      "ingredientName": "cocoa-powder",
+      "categoryName": "Cocoa powder"
+    },
+    {
+      "ingredientName": "cocoa-powder-processed-with-alkali",
+      "categoryName": "Cocoa powder"
+    },
+    {
+      "ingredientName": "cocoa-processed-with-alkali",
+      "categoryName": "Cocoa powder"
+    },
+    {
+      "ingredientName": "coconut",
+      "categoryName": "Coconut"
+    },
+    {
+      "ingredientName": "coconut-cream",
+      "categoryName": "Coconut Cream"
+    },
+    {
+      "ingredientName": "coconut-fat",
+      "categoryName": "Coconut"
+    },
+    {
+      "ingredientName": "coconut-flour",
+      "categoryName": "Coconut Flour"
+    },
+    {
+      "ingredientName": "coconut-milk",
+      "categoryName": "Coconut Water"
+    },
+    {
+      "ingredientName": "coconut-oil",
+      "categoryName": "Coconut Oil"
+    },
+    {
+      "ingredientName": "coconut-sugar",
+      "categoryName": "Coconut Sugar"
+    },
+    {
+      "ingredientName": "coconut-water",
+      "categoryName": "Coconut Water"
+    },
+    {
+      "ingredientName": "cod",
+      "categoryName": "Cod"
+    },
+    {
+      "ingredientName": "collard-greens",
+      "categoryName": "Collard greens"
+    },
+    {
+      "ingredientName": "colour",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "colour-retention-agent",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "concentrated-apple-juice",
+      "categoryName": "Apple"
+    },
+    {
+      "ingredientName": "concentrated-grape-juice",
+      "categoryName": "Grape"
+    },
+    {
+      "ingredientName": "concentrated-lemon-juice",
+      "categoryName": "Lemon"
+    },
+    {
+      "ingredientName": "condensed-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "condensed-skimmed-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "confectioner-s-glaze",
+      "categoryName": "White sugar"
+    },
+    {
+      "ingredientName": "confectioners-glaze",
+      "categoryName": "White sugar"
+    },
+    {
+      "ingredientName": "contains-2-and-less-of-salt",
+      "categoryName": "Salt"
+    },
+    {
+      "ingredientName": "contains-less-than-2-of-salt",
+      "categoryName": "Salt"
+    },
+    {
+      "ingredientName": "coriander",
+      "categoryName": "Coriander"
+    },
+    {
+      "ingredientName": "coriander-leaf",
+      "categoryName": "Coriander"
+    },
+    {
+      "ingredientName": "corn",
+      "categoryName": "Corn / Sweetcorn"
+    },
+    {
+      "ingredientName": "corn-flour",
+      "categoryName": "Cornflour"
+    },
+    {
+      "ingredientName": "corn-starch",
+      "categoryName": "Corn Starch"
+    },
+    {
+      "ingredientName": "corn-syrup",
+      "categoryName": "High Fructose Corn Syrup"
+    },
+    {
+      "ingredientName": "corn-syrup-solids",
+      "categoryName": "High Fructose Corn Syrup"
+    },
+    {
+      "ingredientName": "cornmeal",
+      "categoryName": "Corn / Sweetcorn"
+    },
+    {
+      "ingredientName": "cottonseed",
+      "categoryName": "Cottonseed"
+    },
+    {
+      "ingredientName": "cottonseed-oil",
+      "categoryName": "Cottonseed"
+    },
+    {
+      "ingredientName": "courgette",
+      "categoryName": "Courgette"
+    },
+    {
+      "ingredientName": "cow-s-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "crab",
+      "categoryName": "Crab"
+    },
+    {
+      "ingredientName": "cranberry",
+      "categoryName": "Cranberry"
+    },
+    {
+      "ingredientName": "cream",
+      "categoryName": "Cow Cream"
+    },
+    {
+      "ingredientName": "cream-cheese",
+      "categoryName": "Cow Cheese"
+    },
+    {
+      "ingredientName": "crushed-tomato",
+      "categoryName": "Tomato"
+    },
+    {
+      "ingredientName": "cucumber",
+      "categoryName": "Cucumber"
+    },
+    {
+      "ingredientName": "cultured-nonfat-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "cultured-pasteurized-grade-a-nonfat-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "cultured-pasteurized-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "cultured-wheat-flour",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "cultured-wheat-starch",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "cumin",
+      "categoryName": "Cumin"
+    },
+    {
+      "ingredientName": "currants",
+      "categoryName": "Currants"
+    },
+    {
+      "ingredientName": "dairy",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "dark-chocolate",
+      "categoryName": "Dark chocolate"
+    },
+    {
+      "ingredientName": "date",
+      "categoryName": "Date"
+    },
+    {
+      "ingredientName": "dehydrated-onion",
+      "categoryName": "Onion Powder"
+    },
+    {
+      "ingredientName": "dextrose",
+      "categoryName": "Dextrose"
+    },
+    {
+      "ingredientName": "diced-tomatoes-in-tomato-juice",
+      "categoryName": "Tomato"
+    },
+    {
+      "ingredientName": "dill",
+      "categoryName": "Dill"
+    },
+    {
+      "ingredientName": "distilled-vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "dried-apple",
+      "categoryName": "Apple"
+    },
+    {
+      "ingredientName": "dried-garlic",
+      "categoryName": "Garlic"
+    },
+    {
+      "ingredientName": "durum-wheat-semolina",
+      "categoryName": "Durum Wheat"
+    },
+    {
+      "ingredientName": "e100",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e101",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e102",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e110",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1100",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1101",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1103",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1104",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1105",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e120",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1200",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e122",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e123",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e127",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e129",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e131",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e132",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e133",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1400",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e140i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e141",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e141ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1422",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e143",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1442",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e150",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1505",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e150a",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e150d",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1510",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1518",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e1519",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e153",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e160",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e160a",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e160ai",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e160b",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e160c",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e160d",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e160e",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e161b",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e162",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e163",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e164",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e170",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e170i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e171",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e172",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e200",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e202",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e210",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e211",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e212",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e220",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e221",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e222",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e223",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e224",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e234",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e235",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e250",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e251",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e252",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e260",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e261",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e262",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e262i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e262ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e263",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e270",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e280",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e281",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e282",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e290",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e296",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e297",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e300",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e301",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e304",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e304i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e306",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e307",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e310",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e315",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e316",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e319",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e320",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e321",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e322",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e322i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e325",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e326",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e327",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e329",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e330",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e331",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e331iii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e332",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e332ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e333",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e333iii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e334",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e336",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e336i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e338",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e339",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e339i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e339ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e339iii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e340",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e340i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e340ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e340iii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e341",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e341i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e341ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e341iii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e343i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e345",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e355",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e363",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e375",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e385",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e392",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e401",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e405",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e406",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e407",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e407a",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e410",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e412",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e413",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e414",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e415",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e416",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e417",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e418",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e420",
+      "categoryName": "Sorbitol"
+    },
+    {
+      "ingredientName": "e420ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e421",
+      "categoryName": "Mannitol"
+    },
+    {
+      "ingredientName": "e422",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e425",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e425i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e428",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e433",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e435",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e440a",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e442",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e443",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e444",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e445",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e450",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e450i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e450iii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e451",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e451i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e452",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e452i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e452vi",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e460",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e460i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e460ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e461",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e464",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e466",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e470b",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e471",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e472b",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e472c",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e472e",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e473",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e475",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e476",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e477",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e481",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e482",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e490",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e491",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e492",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e500",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e500i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e500ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e501",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e501i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e501ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e503",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e503i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e503ii",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e504i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e508",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e509",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e510",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e511",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e516",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e517",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e518",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e519",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e520",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e521",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e524",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e525",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e526",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e530",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e535",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e541",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e551",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e552",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e553b",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e554",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e570",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e572",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e574",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e575",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e576",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e579",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e585",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e621",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e627",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e631",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e635",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e640i",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e900a",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e901",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e903",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e904",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e905a",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e916",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e917",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e920",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e924",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e927a",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e928",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e930",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e941",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e942",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e950",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e951",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e952",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e953",
+      "categoryName": "Isomalt"
+    },
+    {
+      "ingredientName": "e954",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e955",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e960",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e961",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "e965",
+      "categoryName": "Maltitol"
+    },
+    {
+      "ingredientName": "e965ii",
+      "categoryName": "Maltitol"
+    },
+    {
+      "ingredientName": "e967",
+      "categoryName": "Xylitol"
+    },
+    {
+      "ingredientName": "e968",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "edamame",
+      "categoryName": "Edamame"
+    },
+    {
+      "ingredientName": "egg",
+      "categoryName": "Egg"
+    },
+    {
+      "ingredientName": "egg-white",
+      "categoryName": "Egg"
+    },
+    {
+      "ingredientName": "egg-yolk",
+      "categoryName": "Egg"
+    },
+    {
+      "ingredientName": "emulsifier",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "endive",
+      "categoryName": "Endive"
+    },
+    {
+      "ingredientName": "enzyme",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "evaporated-cane-juice",
+      "categoryName": "Sugar"
+    },
+    {
+      "ingredientName": "evaporated-cane-sugar",
+      "categoryName": "Sugar"
+    },
+    {
+      "ingredientName": "extra-virgin-olive-oil",
+      "categoryName": "Olive Oil"
+    },
+    {
+      "ingredientName": "fat-reduced-cocoa",
+      "categoryName": "Cocoa powder"
+    },
+    {
+      "ingredientName": "fat-reduced-cocoa-powder",
+      "categoryName": "Cocoa powder"
+    },
+    {
+      "ingredientName": "fennel",
+      "categoryName": "Fennel"
+    },
+    {
+      "ingredientName": "filtered-water",
+      "categoryName": "Water"
+    },
+    {
+      "ingredientName": "flavouring",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "flax-seed",
+      "categoryName": "Flax seed"
+    },
+    {
+      "ingredientName": "flour",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "folic-acid",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "fortified-wheat-flour",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "fresh-cream",
+      "categoryName": "Cow Cream"
+    },
+    {
+      "ingredientName": "fructose",
+      "categoryName": "Fructose"
+    },
+    {
+      "ingredientName": "garlic",
+      "categoryName": "Garlic"
+    },
+    {
+      "ingredientName": "garlic-powder",
+      "categoryName": "Garlic"
+    },
+    {
+      "ingredientName": "garlic-puree",
+      "categoryName": "Garlic"
+    },
+    {
+      "ingredientName": "garlic-salt",
+      "categoryName": "Garlic"
+    },
+    {
+      "ingredientName": "ginger",
+      "categoryName": "Ginger"
+    },
+    {
+      "ingredientName": "glucose",
+      "categoryName": "Glucose"
+    },
+    {
+      "ingredientName": "glucose-fructose-syrup",
+      "categoryName": "High Fructose Corn Syrup"
+    },
+    {
+      "ingredientName": "glucose-syrup",
+      "categoryName": "Glucose"
+    },
+    {
+      "ingredientName": "gluten",
+      "categoryName": "Gluten"
+    },
+    {
+      "ingredientName": "goat-milk",
+      "categoryName": "Goat Milk"
+    },
+    {
+      "ingredientName": "grain-vinegar",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "grape",
+      "categoryName": "Grape"
+    },
+    {
+      "ingredientName": "grape-juice",
+      "categoryName": "Grape"
+    },
+    {
+      "ingredientName": "grapefruit",
+      "categoryName": "Grapefruit"
+    },
+    {
+      "ingredientName": "green-bell-pepper",
+      "categoryName": "Bell Pepper"
+    },
+    {
+      "ingredientName": "green-chili-pepper",
+      "categoryName": "Chilli"
+    },
+    {
+      "ingredientName": "green-peas",
+      "categoryName": "Pea"
+    },
+    {
+      "ingredientName": "green-pepper",
+      "categoryName": "Bell Pepper"
+    },
+    {
+      "ingredientName": "green-tea",
+      "categoryName": "Green Tea"
+    },
+    {
+      "ingredientName": "habanero-chili",
+      "categoryName": "Chilli"
+    },
+    {
+      "ingredientName": "ham",
+      "categoryName": "Pork"
+    },
+    {
+      "ingredientName": "hazelnut",
+      "categoryName": "Hazelnut"
+    },
+    {
+      "ingredientName": "hazelnut-paste",
+      "categoryName": "Hazelnut"
+    },
+    {
+      "ingredientName": "herb",
+      "categoryName": "Herbs & Spices"
+    },
+    {
+      "ingredientName": "herbs-and-spices",
+      "categoryName": "Herbs & Spices"
+    },
+    {
+      "ingredientName": "high-fructose-corn-syrup",
+      "categoryName": "High Fructose Corn Syrup"
+    },
+    {
+      "ingredientName": "high-oleic-canola-oil",
+      "categoryName": "Canola Oil"
+    },
+    {
+      "ingredientName": "high-oleic-sunflower-oil",
+      "categoryName": "Sunflower Oil"
+    },
+    {
+      "ingredientName": "honey",
+      "categoryName": "Honey"
+    },
+    {
+      "ingredientName": "horseradish",
+      "categoryName": "Horseradish"
+    },
+    {
+      "ingredientName": "hydrogenated-cottonseed-oil",
+      "categoryName": "Cottonseed"
+    },
+    {
+      "ingredientName": "hydrogenated-palm-kernel-oil",
+      "categoryName": "Palm Oil"
+    },
+    {
+      "ingredientName": "hydrogenated-palm-oil",
+      "categoryName": "Palm Oil"
+    },
+    {
+      "ingredientName": "hydrogenated-soy-oil",
+      "categoryName": "Soya Oil"
+    },
+    {
+      "ingredientName": "hydrolysed-soy-protein",
+      "categoryName": "Soya Bean"
+    },
+    {
+      "ingredientName": "icing-sugar",
+      "categoryName": "White sugar"
+    },
+    {
+      "ingredientName": "inulin",
+      "categoryName": "Inulin"
+    },
+    {
+      "ingredientName": "invert-sugar",
+      "categoryName": "Sugar"
+    },
+    {
+      "ingredientName": "invert-sugar-syrup",
+      "categoryName": "Sugar"
+    },
+    {
+      "ingredientName": "iodised-salt",
+      "categoryName": "Salt"
+    },
+    {
+      "ingredientName": "iron",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "jalapeno-pepper",
+      "categoryName": "Chilli"
+    },
+    {
+      "ingredientName": "kale",
+      "categoryName": "Kale"
+    },
+    {
+      "ingredientName": "lactose",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "lamb",
+      "categoryName": "Lamb"
+    },
+    {
+      "ingredientName": "leek",
+      "categoryName": "Leek"
+    },
+    {
+      "ingredientName": "lemon",
+      "categoryName": "Lemon"
+    },
+    {
+      "ingredientName": "lemon-juice",
+      "categoryName": "Lemon"
+    },
+    {
+      "ingredientName": "lemon-juice-from-concentrate",
+      "categoryName": "Lemon"
+    },
+    {
+      "ingredientName": "lemon-peel",
+      "categoryName": "Lemon"
+    },
+    {
+      "ingredientName": "lemongrass",
+      "categoryName": "Lemongrass"
+    },
+    {
+      "ingredientName": "lettuce",
+      "categoryName": "Lettuce"
+    },
+    {
+      "ingredientName": "lime",
+      "categoryName": "Lime"
+    },
+    {
+      "ingredientName": "lime-juice",
+      "categoryName": "Lime"
+    },
+    {
+      "ingredientName": "lime-juice-concentrate",
+      "categoryName": "Lime"
+    },
+    {
+      "ingredientName": "lobster",
+      "categoryName": "Lobster"
+    },
+    {
+      "ingredientName": "lychee",
+      "categoryName": "Lychee"
+    },
+    {
+      "ingredientName": "malt",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "malt-extract",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "malted-barley",
+      "categoryName": "Barley Flour"
+    },
+    {
+      "ingredientName": "malted-wheat-flour",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "mandarin",
+      "categoryName": "Mandarin"
+    },
+    {
+      "ingredientName": "mango",
+      "categoryName": "Mango"
+    },
+    {
+      "ingredientName": "mango-puree",
+      "categoryName": "Mango"
+    },
+    {
+      "ingredientName": "maple-syrup",
+      "categoryName": "Maple syrup"
+    },
+    {
+      "ingredientName": "margarine",
+      "categoryName": "Margarine"
+    },
+    {
+      "ingredientName": "mayonnaise",
+      "categoryName": "Mayonnaise"
+    },
+    {
+      "ingredientName": "milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "milk-chocolate",
+      "categoryName": "Milk Chocolate"
+    },
+    {
+      "ingredientName": "milk-powder",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "milk-protein-concentrate",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "milk-protein-isolate",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "milk-proteins",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "milk-solids",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "milkfat",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "millet-flour",
+      "categoryName": "Millet Flour"
+    },
+    {
+      "ingredientName": "mint",
+      "categoryName": "Mint"
+    },
+    {
+      "ingredientName": "modified-corn-starch",
+      "categoryName": "Corn Starch"
+    },
+    {
+      "ingredientName": "modified-wheat-starch",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "molasses",
+      "categoryName": "Molasses"
+    },
+    {
+      "ingredientName": "mozzarella",
+      "categoryName": "Cow Cheese"
+    },
+    {
+      "ingredientName": "mushroom",
+      "categoryName": "Mushroom"
+    },
+    {
+      "ingredientName": "mustard",
+      "categoryName": "Mustard"
+    },
+    {
+      "ingredientName": "mustard-seed",
+      "categoryName": "Mustard"
+    },
+    {
+      "ingredientName": "natural-and-artificial-flavouring",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "natural-flavouring",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "natural-lemon-flavouring",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "natural-smoke-flavouring",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "natural-vanilla-flavouring",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "nut",
+      "categoryName": "Nut"
+    },
+    {
+      "ingredientName": "nutmeg",
+      "categoryName": "Nutmeg"
+    },
+    {
+      "ingredientName": "nutritional-yeast",
+      "categoryName": "Yeast"
+    },
+    {
+      "ingredientName": "oat",
+      "categoryName": "Oat"
+    },
+    {
+      "ingredientName": "oat-bran",
+      "categoryName": "Oat"
+    },
+    {
+      "ingredientName": "oat-fiber",
+      "categoryName": "Oat"
+    },
+    {
+      "ingredientName": "oat-fibre",
+      "categoryName": "Oat"
+    },
+    {
+      "ingredientName": "oat-flakes",
+      "categoryName": "Oat"
+    },
+    {
+      "ingredientName": "oat-flour",
+      "categoryName": "Oatmeal"
+    },
+    {
+      "ingredientName": "oatmeal",
+      "categoryName": "Oatmeal"
+    },
+    {
+      "ingredientName": "oil",
+      "categoryName": "Oil"
+    },
+    {
+      "ingredientName": "okra",
+      "categoryName": "Okra"
+    },
+    {
+      "ingredientName": "olive",
+      "categoryName": "Olive"
+    },
+    {
+      "ingredientName": "olive-oil",
+      "categoryName": "Olive Oil"
+    },
+    {
+      "ingredientName": "onion",
+      "categoryName": "Onion"
+    },
+    {
+      "ingredientName": "orange",
+      "categoryName": "Orange"
+    },
+    {
+      "ingredientName": "orange-juice",
+      "categoryName": "Orange"
+    },
+    {
+      "ingredientName": "orange-zest",
+      "categoryName": "Orange"
+    },
+    {
+      "ingredientName": "oregano",
+      "categoryName": "Oregano"
+    },
+    {
+      "ingredientName": "palm-and-palm-kernel-oil",
+      "categoryName": "Palm Oil"
+    },
+    {
+      "ingredientName": "palm-fat",
+      "categoryName": "Palm Oil"
+    },
+    {
+      "ingredientName": "palm-kernel-oil",
+      "categoryName": "Palm Oil"
+    },
+    {
+      "ingredientName": "palm-oil",
+      "categoryName": "Palm Oil"
+    },
+    {
+      "ingredientName": "papaya",
+      "categoryName": "Papaya"
+    },
+    {
+      "ingredientName": "paprika",
+      "categoryName": "Paprika"
+    },
+    {
+      "ingredientName": "parsley",
+      "categoryName": "Parsley"
+    },
+    {
+      "ingredientName": "parsnip",
+      "categoryName": "Parsnip"
+    },
+    {
+      "ingredientName": "pasteurised-cow-s-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "pasteurised-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "pasteurised-whole-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "pasteurized-milk-and-cream",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "pasteurized-semi-skimmed-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "pasteurized-skimmed-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "pea",
+      "categoryName": "Pea"
+    },
+    {
+      "ingredientName": "peach",
+      "categoryName": "Peach"
+    },
+    {
+      "ingredientName": "peanut",
+      "categoryName": "Peanut"
+    },
+    {
+      "ingredientName": "peanut-flour",
+      "categoryName": "Peanut"
+    },
+    {
+      "ingredientName": "peanut-oil",
+      "categoryName": "Peanut"
+    },
+    {
+      "ingredientName": "peanut-paste",
+      "categoryName": "Peanut"
+    },
+    {
+      "ingredientName": "pear",
+      "categoryName": "Pear"
+    },
+    {
+      "ingredientName": "pear-juice",
+      "categoryName": "Pear"
+    },
+    {
+      "ingredientName": "pecan-nut",
+      "categoryName": "Pecan"
+    },
+    {
+      "ingredientName": "pepper",
+      "categoryName": "Black Pepper"
+    },
+    {
+      "ingredientName": "peppermint-oil",
+      "categoryName": "Peppermint Oil"
+    },
+    {
+      "ingredientName": "pine-nuts",
+      "categoryName": "Pine Nut"
+    },
+    {
+      "ingredientName": "pineapple",
+      "categoryName": "Pineapple"
+    },
+    {
+      "ingredientName": "pineapple-juice",
+      "categoryName": "Pineapple"
+    },
+    {
+      "ingredientName": "pinto-beans",
+      "categoryName": "Pinto Bean"
+    },
+    {
+      "ingredientName": "plum",
+      "categoryName": "Plum"
+    },
+    {
+      "ingredientName": "pomegranate",
+      "categoryName": "Pomegranate"
+    },
+    {
+      "ingredientName": "popcorn",
+      "categoryName": "Popcorn"
+    },
+    {
+      "ingredientName": "pork",
+      "categoryName": "Pork"
+    },
+    {
+      "ingredientName": "pork-fat",
+      "categoryName": "Pork"
+    },
+    {
+      "ingredientName": "pork-meat",
+      "categoryName": "Pork"
+    },
+    {
+      "ingredientName": "potato",
+      "categoryName": "Potato"
+    },
+    {
+      "ingredientName": "potato-flakes",
+      "categoryName": "Potato"
+    },
+    {
+      "ingredientName": "potato-starch",
+      "categoryName": "Potato Starch"
+    },
+    {
+      "ingredientName": "powdered-egg-white",
+      "categoryName": "Egg"
+    },
+    {
+      "ingredientName": "preservative",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "prune",
+      "categoryName": "Prune"
+    },
+    {
+      "ingredientName": "pumpkin",
+      "categoryName": "Pumpkin"
+    },
+    {
+      "ingredientName": "quinoa",
+      "categoryName": "Quinoa"
+    },
+    {
+      "ingredientName": "radish",
+      "categoryName": "Radish"
+    },
+    {
+      "ingredientName": "raisin",
+      "categoryName": "Raisin"
+    },
+    {
+      "ingredientName": "rapeseed-oil",
+      "categoryName": "Canola Oil"
+    },
+    {
+      "ingredientName": "raspberry",
+      "categoryName": "Raspberry"
+    },
+    {
+      "ingredientName": "raspberry-juice",
+      "categoryName": "Raspberry"
+    },
+    {
+      "ingredientName": "raspberry-puree",
+      "categoryName": "Raspberry"
+    },
+    {
+      "ingredientName": "red-and-green-bell-peppers",
+      "categoryName": "Bell Pepper"
+    },
+    {
+      "ingredientName": "red-bell-pepper",
+      "categoryName": "Bell Pepper"
+    },
+    {
+      "ingredientName": "red-chili-pepper",
+      "categoryName": "Chilli"
+    },
+    {
+      "ingredientName": "red-onion",
+      "categoryName": "Onion"
+    },
+    {
+      "ingredientName": "red-wine-vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "reduced-iron",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "rhubarb",
+      "categoryName": "Rhubarb"
+    },
+    {
+      "ingredientName": "rice",
+      "categoryName": "White Rice"
+    },
+    {
+      "ingredientName": "rice-bran",
+      "categoryName": "Brown Rice"
+    },
+    {
+      "ingredientName": "rice-flour",
+      "categoryName": "Rice Flour"
+    },
+    {
+      "ingredientName": "rice-starch",
+      "categoryName": "Rice Flour"
+    },
+    {
+      "ingredientName": "rice-syrup",
+      "categoryName": "White Rice"
+    },
+    {
+      "ingredientName": "rice-vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "roasted-peanuts",
+      "categoryName": "Peanut"
+    },
+    {
+      "ingredientName": "rosemary",
+      "categoryName": "Rosemary"
+    },
+    {
+      "ingredientName": "rum",
+      "categoryName": "Rum"
+    },
+    {
+      "ingredientName": "rye",
+      "categoryName": "Rye"
+    },
+    {
+      "ingredientName": "rye-flour",
+      "categoryName": "Rye"
+    },
+    {
+      "ingredientName": "sage",
+      "categoryName": "Herbs & Spices"
+    },
+    {
+      "ingredientName": "salmon",
+      "categoryName": "Salmon"
+    },
+    {
+      "ingredientName": "salt",
+      "categoryName": "Salt"
+    },
+    {
+      "ingredientName": "scallop",
+      "categoryName": "Scallop"
+    },
+    {
+      "ingredientName": "sea-salt",
+      "categoryName": "Salt"
+    },
+    {
+      "ingredientName": "semi-skimmed-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "semolina",
+      "categoryName": "Semolina"
+    },
+    {
+      "ingredientName": "sesame",
+      "categoryName": "Sesame Seed"
+    },
+    {
+      "ingredientName": "sesame-oil",
+      "categoryName": "Sesame Oil"
+    },
+    {
+      "ingredientName": "sesame-seeds",
+      "categoryName": "Sesame Seed"
+    },
+    {
+      "ingredientName": "shallot",
+      "categoryName": "Shallot"
+    },
+    {
+      "ingredientName": "sheeps-milk",
+      "categoryName": "Sheep Milk"
+    },
+    {
+      "ingredientName": "shrimp",
+      "categoryName": "Shrimp"
+    },
+    {
+      "ingredientName": "skimmed-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "skimmed-milk-powder",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "smoke-flavouring",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "sorghum",
+      "categoryName": "Sorghum"
+    },
+    {
+      "ingredientName": "sour-cream",
+      "categoryName": "Cow Cream"
+    },
+    {
+      "ingredientName": "soured-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "soy-protein",
+      "categoryName": "Soya Bean"
+    },
+    {
+      "ingredientName": "soy-protein-isolate",
+      "categoryName": "Soya Bean"
+    },
+    {
+      "ingredientName": "soy-sauce",
+      "categoryName": "Soya Sauce"
+    },
+    {
+      "ingredientName": "soya",
+      "categoryName": "Soya Bean"
+    },
+    {
+      "ingredientName": "soya-bean",
+      "categoryName": "Soya Bean"
+    },
+    {
+      "ingredientName": "soya-flour",
+      "categoryName": "Soya Flour"
+    },
+    {
+      "ingredientName": "soya-oil",
+      "categoryName": "Soya Oil"
+    },
+    {
+      "ingredientName": "spice",
+      "categoryName": "Herbs & Spices"
+    },
+    {
+      "ingredientName": "spice-extract",
+      "categoryName": "Herbs & Spices"
+    },
+    {
+      "ingredientName": "spice-or-bell-pepper",
+      "categoryName": "Bell Pepper"
+    },
+    {
+      "ingredientName": "spinach",
+      "categoryName": "Spinach"
+    },
+    {
+      "ingredientName": "spirit-vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "spring-onion",
+      "categoryName": "Spring Onion"
+    },
+    {
+      "ingredientName": "spring-water",
+      "categoryName": "Water"
+    },
+    {
+      "ingredientName": "stevia",
+      "categoryName": "Stevia"
+    },
+    {
+      "ingredientName": "strawberry",
+      "categoryName": "Strawberry"
+    },
+    {
+      "ingredientName": "strawberry-juice-concentrate",
+      "categoryName": "Strawberry"
+    },
+    {
+      "ingredientName": "strawberry-puree",
+      "categoryName": "Strawberry"
+    },
+    {
+      "ingredientName": "sucrose",
+      "categoryName": "Sugar"
+    },
+    {
+      "ingredientName": "sugar",
+      "categoryName": "Sugar"
+    },
+    {
+      "ingredientName": "sunflower",
+      "categoryName": "Sunflower Oil"
+    },
+    {
+      "ingredientName": "sunflower-oil",
+      "categoryName": "Sunflower Oil"
+    },
+    {
+      "ingredientName": "sunflower-seed",
+      "categoryName": "Sunflower Seed"
+    },
+    {
+      "ingredientName": "sweet-potato",
+      "categoryName": "Sweet Potato"
+    },
+    {
+      "ingredientName": "tahini",
+      "categoryName": "Tahini"
+    },
+    {
+      "ingredientName": "tamarind",
+      "categoryName": "Tamarind"
+    },
+    {
+      "ingredientName": "tapioca",
+      "categoryName": "Tapioca"
+    },
+    {
+      "ingredientName": "tapioca-syrup",
+      "categoryName": "Tapioca"
+    },
+    {
+      "ingredientName": "tarragon",
+      "categoryName": "Tarragon"
+    },
+    {
+      "ingredientName": "teff-flour",
+      "categoryName": "Teff Flour"
+    },
+    {
+      "ingredientName": "thyme",
+      "categoryName": "Thyme"
+    },
+    {
+      "ingredientName": "to-preserve-freshness",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "to-promote-color-retention",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "tomato",
+      "categoryName": "Tomato"
+    },
+    {
+      "ingredientName": "tomato-concentrate",
+      "categoryName": "Tomato"
+    },
+    {
+      "ingredientName": "tomato-juice",
+      "categoryName": "Tomato"
+    },
+    {
+      "ingredientName": "tomato-powder",
+      "categoryName": "Tomato"
+    },
+    {
+      "ingredientName": "tomato-puree",
+      "categoryName": "Tomato"
+    },
+    {
+      "ingredientName": "tomato-sauce",
+      "categoryName": "Tomato"
+    },
+    {
+      "ingredientName": "torula-yeast",
+      "categoryName": "Yeast"
+    },
+    {
+      "ingredientName": "tumeric",
+      "categoryName": "Tumeric"
+    },
+    {
+      "ingredientName": "tuna",
+      "categoryName": "Tuna"
+    },
+    {
+      "ingredientName": "turkey",
+      "categoryName": "Turkey"
+    },
+    {
+      "ingredientName": "turkey-breast",
+      "categoryName": "Turkey"
+    },
+    {
+      "ingredientName": "turmeric",
+      "categoryName": "Turmeric"
+    },
+    {
+      "ingredientName": "turnip",
+      "categoryName": "Turnip"
+    },
+    {
+      "ingredientName": "unrefined-cane-sugar",
+      "categoryName": "White sugar"
+    },
+    {
+      "ingredientName": "vanilla",
+      "categoryName": "Vanilla"
+    },
+    {
+      "ingredientName": "vanilla-extract",
+      "categoryName": "Vanilla"
+    },
+    {
+      "ingredientName": "vanilla-flavouring",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "vanilla-pod",
+      "categoryName": "Vanilla"
+    },
+    {
+      "ingredientName": "vegetable-color",
+      "categoryName": "Additives"
+    },
+    {
+      "ingredientName": "vegetable-oil",
+      "categoryName": "Vegetable Oil"
+    },
+    {
+      "ingredientName": "vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "vital-wheat-gluten",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "vitamin-a",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "vitamin-b12",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "vitamin-b6",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "vitamin-c",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "vitamin-d",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "vitamin-e",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "vitamin-e-acetate",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "vitamins",
+      "categoryName": "Vitamins & Minerals"
+    },
+    {
+      "ingredientName": "vodka",
+      "categoryName": "Vodka"
+    },
+    {
+      "ingredientName": "walnut",
+      "categoryName": "Walnuts"
+    },
+    {
+      "ingredientName": "water",
+      "categoryName": "Water"
+    },
+    {
+      "ingredientName": "watercress",
+      "categoryName": "Watercress"
+    },
+    {
+      "ingredientName": "watermelon",
+      "categoryName": "Watermelon"
+    },
+    {
+      "ingredientName": "wheat",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "wheat-bran",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "wheat-fiber",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "wheat-flour",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "wheat-germ",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "wheat-gluten",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "wheat-protein",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "wheat-starch",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "whey",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "whey-powder",
+      "categoryName": "Whey"
+    },
+    {
+      "ingredientName": "whey-protein",
+      "categoryName": "Whey"
+    },
+    {
+      "ingredientName": "white-chocolate",
+      "categoryName": "White Chocolate"
+    },
+    {
+      "ingredientName": "white-distilled-vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "white-pepper",
+      "categoryName": "White Pepper"
+    },
+    {
+      "ingredientName": "white-rice",
+      "categoryName": "White Rice"
+    },
+    {
+      "ingredientName": "white-rice-flour",
+      "categoryName": "White Rice"
+    },
+    {
+      "ingredientName": "white-sugar",
+      "categoryName": "White sugar"
+    },
+    {
+      "ingredientName": "white-vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "white-wine",
+      "categoryName": "Wine"
+    },
+    {
+      "ingredientName": "white-wine-vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "whole-egg",
+      "categoryName": "Egg"
+    },
+    {
+      "ingredientName": "whole-grain-oat-flakes",
+      "categoryName": "Oat"
+    },
+    {
+      "ingredientName": "whole-milk",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "whole-milk-powder",
+      "categoryName": "Cow Milk"
+    },
+    {
+      "ingredientName": "whole-wheat",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "whole-wheat-flour",
+      "categoryName": "Wheat"
+    },
+    {
+      "ingredientName": "wholemeal-oat",
+      "categoryName": "Oat"
+    },
+    {
+      "ingredientName": "wholemeal-oat-flour",
+      "categoryName": "Oat"
+    },
+    {
+      "ingredientName": "wild-rice",
+      "categoryName": "Wild Rice"
+    },
+    {
+      "ingredientName": "wine",
+      "categoryName": "Wine"
+    },
+    {
+      "ingredientName": "wine-vinegar",
+      "categoryName": "Vinegar"
+    },
+    {
+      "ingredientName": "yeast",
+      "categoryName": "Yeast"
+    },
+    {
+      "ingredientName": "yeast-extract",
+      "categoryName": "Yeast"
+    },
+    {
+      "ingredientName": "yellow-corn-flour",
+      "categoryName": "Cornflour"
+    },
+    {
+      "ingredientName": "yellow-onion",
+      "categoryName": "Onion"
+    },
+    {
+      "ingredientName": "yogurt",
+      "categoryName": "Cow Yogurt"
+    },
+    {
+      "ingredientName": "zinc-oxide",
+      "categoryName": "Vitamins & Minerals"
+    }
+  ]

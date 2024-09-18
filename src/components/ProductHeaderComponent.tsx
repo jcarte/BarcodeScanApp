@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, StyleSheet, Image, Dimensions} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { Product, Ingredient, FodmapStatus}  from '../api/ProductHandler'
+import { Product, Ingredient, FodmapStatus}  from '../lib/ProductHandler'
 
 export function ProductHeaderComponent({product}) {
    
