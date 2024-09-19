@@ -1,7 +1,6 @@
  # TODO
 
  ### MUST
- - Make local storage real //https://react-native-async-storage.github.io/async-storage/docs/usage
  - Handle auto selecting triggers ("I don't know yet") - save default FODMAPs
  - Finish about us
  - Analytics
