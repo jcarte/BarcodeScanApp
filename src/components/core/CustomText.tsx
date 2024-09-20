@@ -6,6 +6,7 @@ interface CustomTextProps {
     variant?: "default" | "paragraph" | "heading" | "subheading"
     weight?: "regular" | "bold"
     color?: "light" | "dark" | "gray"
+    textAlign?: "left" | "center" | "right"
     style?: TextStyle
     fontSize?: number
     children: React.ReactNode
@@ -13,9 +14,18 @@ interface CustomTextProps {
 
 export default function CustomText(props: CustomTextProps): React.JSX.Element {
 
-    const { variant = "default", weight = "regular", color = "dark", children } = props
-    let style: TextStyle = { ...props.style } ?? {}
+    const { 
+        variant = "default", 
+        weight = "regular", 
+        color = "dark", 
+        textAlign = "left",
+        children 
+    } = props
 
+    let style: TextStyle = { ...props.style } ?? {}
+    
+    style.textAlign = textAlign//always use given or default
+    
     style.color = style.color ??
         (color === "dark" ? GlobalStyles.colours.darkText :
             (color === "gray" ? GlobalStyles.colours.gray : GlobalStyles.colours.lightText))

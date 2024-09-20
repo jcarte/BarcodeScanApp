@@ -4,6 +4,7 @@ import CustomText from '../core/CustomText';
 import CustomButton from '../core/CustomButton';
 import assets from '../../../assets/AssetManager';
 import { Image } from 'expo-image';
+import Entypo from '@expo/vector-icons/Entypo';
 
 export interface WelcomeComponentProps {
     onButtonClick(): void
@@ -21,7 +22,13 @@ export function WelcomeComponent({ onButtonClick }: WelcomeComponentProps) {
 
             <Image style={styles.image} source={assets.images.statusExamples} contentFit="contain" />
 
-            <CustomButton style={{ marginTop: 20 }} title='Swipe to continue >>>' onPress={() => onButtonClick?.()} />
+            <CustomButton
+                style={{ marginTop: 20 }}
+                title='Swipe to continue'
+                endIcon={(<View style={{ flexDirection: "row" }}>
+                    <Entypo name="chevron-right" size={24} color="white" />
+                </View>)}
+                onPress={() => onButtonClick?.()} />
         </View>
     )
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, StyleSheet, Button } from 'react-native';
-import GlobalStyles from '../../lib/GlobalStyles';
 import CustomText from '../core/CustomText';
 import CustomButton from '../core/CustomButton';
+import Entypo from '@expo/vector-icons/Entypo';
 
 export interface OnboardWarningComponentProps {
     onButtonClick(): void
 }
 
-export function OnboardWarningComponent({onButtonClick} : OnboardWarningComponentProps) {
+export function OnboardWarningComponent({ onButtonClick }: OnboardWarningComponentProps) {
 
     return (
         <View>
@@ -24,7 +24,13 @@ export function OnboardWarningComponent({onButtonClick} : OnboardWarningComponen
 
             <CustomText variant="paragraph" weight='bold'>If in doubt, always consult your GP, dietician or other clinical practitioner.</CustomText>
 
-            <CustomButton style={{marginTop: 20}} title='Swipe to continue >>>' onPress={() => onButtonClick?.()}/>
+            <CustomButton
+                style={{ marginTop: 20 }}
+                title='Swipe to continue'
+                endIcon={(<View style={{ flexDirection: "row" }}>
+                    <Entypo name="chevron-right" size={24} color="white" />
+                </View>)}
+                onPress={() => onButtonClick?.()} />
         </View>
     )
 }

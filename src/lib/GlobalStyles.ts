@@ -13,6 +13,8 @@ const GlobalStyles = {
 
         lightGray: "lightgray", //gray
         gray: "gray", //gray
+
+        blue: "#007AFF", //accent colour
     }
 }
 export default GlobalStyles
