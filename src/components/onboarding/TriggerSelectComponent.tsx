@@ -2,45 +2,26 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import CustomText from '../core/CustomText';
 import CustomButton from '../core/CustomButton';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import { SelectTriggerRowComponent } from './SelectTriggerRowComponent';
 import GlobalStyles from '../../lib/GlobalStyles';
 import { TriggerData } from '../../types/TriggerData';
-import { getTriggerIngredientsAsync } from '../../lib/LocalStorage';
 
 export interface TriggerSelectComponentProps {
+    initialTriggers: TriggerData[]
     onButtonClick(triggers: TriggerData[]): void
 }
 
-export function TriggerSelectComponent({ onButtonClick }: TriggerSelectComponentProps) {
+export function TriggerSelectComponent({ initialTriggers, onButtonClick }: TriggerSelectComponentProps) {
 
-    const [triggers, setTriggers] = React.useState<TriggerData[]>([])
-
-    React.useEffect(() => {
-        async function fetchTriggers() {
-            console.log("TSC: Getting triggers")
-            const triggers = await getTriggerIngredientsAsync()
-            triggers.sort((a, b) => a.name.localeCompare(b.name))
-            setTriggers(triggers)
-        }
-        fetchTriggers()
-    }, [])
+    const [triggers, setTriggers] = React.useState<TriggerData[]>(initialTriggers)
 
 
     const checkCol = GlobalStyles.colours.darkGreen
 
     function ToggleValue(name: string) {
-        const row = triggers.find(d => d.name === name)
-
-        if (!row)
-            throw new Error("Couldn't find item: " + name)
-
-        row.selected = !row.selected
-
-        const newData = [...triggers.filter(d => d.name != name), row]
-        newData.sort((a, b) => a.name.localeCompare(b.name))
-
-        setTriggers(newData)
+        const newT = triggers.map(t => (t.name === name ? {...t, selected: !t.selected} : t))
+        setTriggers(newT)
     }
 
     return (

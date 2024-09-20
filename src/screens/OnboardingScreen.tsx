@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Dimensions, Button } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Image } from 'expo-image';
 
-import assets from "../../assets/AssetManager";
+import AssetManager from "../../assets/AssetManager";
 import { OnboardWarningComponent } from "../components/onboarding/WarningComponent";
 import CustomText from "../components/core/CustomText";
 import { WelcomeComponent } from "../components/onboarding/WelcomeComponent";
@@ -29,6 +29,21 @@ export function OnboardingScreen({ navigation }) {
   const next = () => caurouselRef.current.next()
 
   const saveTriggers = async (triggers: TriggerData[]) => await setTriggerIngredientsAsync(triggers)
+  
+  const [triggers, setTriggers] = React.useState<TriggerData[]>([])
+
+  //Get default triggers from file, load into state
+  React.useEffect(() => {
+    const defaultCats: { categoryName: string, highFodmap: boolean }[] = AssetManager.data.categoryList
+
+    const defaultData: TriggerData[] = defaultCats.map(c => {
+        const td: TriggerData = { name: c.categoryName, selected: c.highFodmap }
+        return td
+    })
+
+    setTriggers(defaultData)
+
+  }, [])
 
   const setOnboardingDone = async () => await setHasCompletedOnboardingAsync(true)
 
@@ -39,7 +54,7 @@ export function OnboardingScreen({ navigation }) {
 
         {/* Header on every page with logo and title */}
         <View style={styles.pageHeader}>
-          <Image style={styles.logoImage} source={assets.images.logo} contentFit="cover" />
+          <Image style={styles.logoImage} source={AssetManager.images.logo} contentFit="cover" />
           <CustomText
             style={styles.pageHeadingText}
             variant="heading">{title}</CustomText>
@@ -77,12 +92,17 @@ export function OnboardingScreen({ navigation }) {
       component: getSlidePageComponent(showSelectTriggers ? "Your triggers" : "How it works",
         showSelectTriggers
           ? <TriggerSelectComponent
-            onButtonClick={async (triggers: TriggerData[]) => {
-              await saveTriggers(triggers)//todo no error capture
+            initialTriggers={triggers}
+            onButtonClick={async (tr: TriggerData[]) => {
+              setTriggers(tr)//update local state
+              await saveTriggers(tr)//save triggers to storage
               next()
             }}
           />
-          : <TriggerAutoMessageComponent onButtonClick={() => { next() }} />),
+          : <TriggerAutoMessageComponent onButtonClick={async () => {
+            await saveTriggers(triggers)//save default triggers already loaded (FODMAP)
+            next()
+          }} />),
       isSwipeEnabled: false,
     },
     {
@@ -92,10 +112,10 @@ export function OnboardingScreen({ navigation }) {
     },
     {
       component: getSlidePageComponent("Permissions",
-        <PermissionsComponent onButtonClick={async () => { 
+        <PermissionsComponent onButtonClick={async () => {
           await setOnboardingDone()
           navigation.navigate("HomeNav")
-          
+
         }} />),
       isSwipeEnabled: true,
     },

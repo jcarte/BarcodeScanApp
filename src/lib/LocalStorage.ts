@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import AssetManager from "../../assets/AssetManager"
 import { TriggerData } from "../types/TriggerData"
 
 const ONBOARDING_COMPLETE_KEY = "onboarding-complete"
@@ -8,6 +7,7 @@ const TRIGGER_INGREDIENTS_KEY = "trigger-ingredients"
 export async function setHasCompletedOnboardingAsync(hasCompleted: boolean): Promise<void> {
     try {
         await AsyncStorage.setItem(ONBOARDING_COMPLETE_KEY, String(hasCompleted));
+        console.log("LS: Save onboarding success")
     } catch (e) {
         console.log("LS: Save onboarding failed: ", e)
     }
@@ -15,10 +15,12 @@ export async function setHasCompletedOnboardingAsync(hasCompleted: boolean): Pro
 
 export async function getHasCompletedOnboardingAsync(): Promise<boolean> {
     try {
-        const value = await AsyncStorage.getItem(ONBOARDING_COMPLETE_KEY);
-        if (value != null) {
-            return Boolean(value)
-        }
+        console.log("LS: Get Onboarding")
+
+        // const value = await AsyncStorage.getItem(ONBOARDING_COMPLETE_KEY);
+        // if (value != null) {
+        //     return Boolean(value)
+        // }
 
         return false//default
 
@@ -31,13 +33,14 @@ export async function setTriggerIngredientsAsync(triggers: TriggerData[]): Promi
     try {
         const jsonValue = JSON.stringify(triggers);
         await AsyncStorage.setItem(TRIGGER_INGREDIENTS_KEY, jsonValue);
+        console.log("LS: Save triggers success")
     } catch (e) {
         console.log("LS: Save triggers failed: ", e)
     }
 }
 
 export async function getTriggerIngredientsAsync(): Promise<TriggerData[]> {
-
+    console.log("LS: Get Triggers")
     //try get from storage
     try {
         const jsonValue = await AsyncStorage.getItem(TRIGGER_INGREDIENTS_KEY);
@@ -46,14 +49,5 @@ export async function getTriggerIngredientsAsync(): Promise<TriggerData[]> {
     } catch (e) {
         console.log("LS: Get triggers failed: ", e)
     }
-
-    //if fail, get defaults
-    const defaultCats: { categoryName: string, highFodmap: boolean }[] = AssetManager.data.categoryList
-
-    const defaultData: TriggerData[] = defaultCats.map(c => {
-        const td: TriggerData = { name: c.categoryName, selected: c.highFodmap }
-        return td
-    })
-
-    return defaultData
+    return []
 }

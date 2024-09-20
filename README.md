@@ -1,7 +1,6 @@
  # TODO
 
  ### MUST
- - Handle auto selecting triggers ("I don't know yet") - save default FODMAPs
  - Finish about us
  - Analytics
  - Painted door on history
