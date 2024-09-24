@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { Feather } from '@expo/vector-icons';
-import GlobalStyles from '../lib/GlobalStyles';
+import GlobalStyles from '../../lib/GlobalStyles';
 
 interface BottomSheetComponentProps {
   collapsedHeight: number | string

@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { View } from "react-native";
 import { ResultsListComponent } from "./ResultsListComponent";
 import { ResultsHeaderComponent } from "./ResultsHeaderComponent";
-import BottomSheetComponent from "../BottomSheetComponent";
+import BottomSheetComponent from "../core/BottomSheetComponent";
 import GlobalStyles from "../../lib/GlobalStyles";
 import { ProductResult } from "../../types/ProductIngredientResult";
 import { NotFoundHeaderComponent } from "./NotFoundHeaderComponent";

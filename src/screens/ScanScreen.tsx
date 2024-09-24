@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarcodeScannerComponent } from '../components/BarcodeScannerComponent';
+import { BarcodeScannerComponent } from '../components/scanning/BarcodeScannerComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FindProductByBarcode } from '../lib/ProductLookup';
 import { GetResultsAsync } from '../lib/ResultsHandler';
@@ -8,14 +8,19 @@ import { ProductResult } from '../types/ProductIngredientResult';
 
 export default function ScanScreen({ navigation }): React.JSX.Element {
 
-
-
+    const [lastBarcode, setLastBarcode] = React.useState<string>("")//save last successful barcode
     const [isResultsVisible, setIsResultsVisible] = React.useState<boolean>(false)
     const [resultsType, setResultsType] = React.useState<"NotFound" | "Found">("NotFound")
     const [result, setResult] = React.useState<ProductResult | null>(null)
 
     const handleBarCode = async (bc): Promise<void> => {
-        console.log("SS:", bc)
+        console.log("SS: HandleBarcode: ", bc)
+
+        if(bc === lastBarcode){
+            console.log("SS: HandleBarcode: Same barcode, skipping")
+            return
+        }
+
         const productLookup = await FindProductByBarcode(bc)
 
         setIsResultsVisible(true)//always show regardless of result
@@ -53,6 +58,7 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
             overallResultText: resultText,
             ingredients: ings
         })
+        setLastBarcode(bc)
 
     }
 
