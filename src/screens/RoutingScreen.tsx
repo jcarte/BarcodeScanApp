@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, ActivityIndicator } from "react-native";
 import { getHasCompletedOnboardingAsync } from "../lib/LocalStorage";
-import GlobalStyles from '../lib/GlobalStyles';
+import { LoadingComponent } from '../components/core/LoadingComponent';
 
 /** 
  * Gets flag if onboarding has been done already, if has routes to  
@@ -28,8 +27,6 @@ export function RoutingScreen({ navigation }) {
   }, [])
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', }}>
-      <ActivityIndicator size="large" color={GlobalStyles.colours.darkRed} />
-    </View>
+    <LoadingComponent />
   );
 }

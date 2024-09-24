@@ -9,6 +9,8 @@ interface CustomButtonProps {
     style?: ViewStyle
     startIcon?: React.ReactNode
     endIcon?: React.ReactNode
+    variant?: "Primary" | "Secondary"
+    autoFillWidth? :boolean
 }
 
 export default function CustomButton(props: CustomButtonProps): React.JSX.Element {
@@ -17,16 +19,29 @@ export default function CustomButton(props: CustomButtonProps): React.JSX.Elemen
         title = '',
         style = {},
         startIcon = <></>,
-        endIcon = <></>
+        endIcon = <></>,
+        variant = "Primary",
+        autoFillWidth = false
     } = props;
 
     const mStyle = { ...styles.button, ...style }
 
+    let textColour: "gray" | "light" | "dark" | "blue" = "dark"
+    let buttonColour = ""
+    if (variant === "Primary") {
+        textColour = "light"
+        buttonColour = GlobalStyles.colours.blue
+    }
+    else if (variant === "Secondary") {
+        textColour = "blue"
+        buttonColour = GlobalStyles.colours.lightGray
+    }
+
     return (
-        <Pressable style={mStyle} onPress={onPress}>
+        <Pressable style={[mStyle, {backgroundColor: buttonColour}]} onPress={onPress}>
             <View style={{ flexDirection: "row" }}>
                 {startIcon}
-                <CustomText style={{ flexGrow: 1, alignSelf: "center" }} weight="bold" color="light" textAlign="center">
+                <CustomText style={{ flexGrow: autoFillWidth ? 1 : 0, alignSelf: "center" }} weight="regular" color={textColour} textAlign="center">
                     {title}
                 </CustomText>
                 {endIcon}
@@ -44,7 +59,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 10,
         elevation: 3,
-        backgroundColor: GlobalStyles.colours.blue,
+        
     },
 
 });

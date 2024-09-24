@@ -11,7 +11,7 @@ const GlobalStyles = {
         darkText: "#0B1215", //obsidian
         lightText: "#FFFFFF", //white 
 
-        lightGray: "lightgray", //gray
+        lightGray: "#efeff0",
         gray: "gray", //gray
 
         blue: "#007AFF", //accent colour

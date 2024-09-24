@@ -5,7 +5,7 @@ import GlobalStyles from "../../lib/GlobalStyles";
 interface CustomTextProps {
     variant?: "default" | "paragraph" | "heading" | "subheading"
     weight?: "regular" | "bold"
-    color?: "light" | "dark" | "gray"
+    color?: "light" | "dark" | "gray" | "blue"
     textAlign?: "left" | "center" | "right"
     style?: TextStyle
     fontSize?: number
@@ -14,21 +14,31 @@ interface CustomTextProps {
 
 export default function CustomText(props: CustomTextProps): React.JSX.Element {
 
-    const { 
-        variant = "default", 
-        weight = "regular", 
-        color = "dark", 
+    const {
+        variant = "default",
+        weight = "regular",
+        color = "dark",
         textAlign = "left",
-        children 
+        children
     } = props
 
     let style: TextStyle = { ...props.style } ?? {}
-    
+
     style.textAlign = textAlign//always use given or default
-    
+
     style.color = style.color ??
-        (color === "dark" ? GlobalStyles.colours.darkText :
-            (color === "gray" ? GlobalStyles.colours.gray : GlobalStyles.colours.lightText))
+        (color === "dark"
+            ? GlobalStyles.colours.darkText
+            : (
+                color === "gray"
+                    ? GlobalStyles.colours.gray
+                    : (
+                        color === "blue"
+                            ? GlobalStyles.colours.blue
+                            : GlobalStyles.colours.lightText
+                    )
+            )
+        )
 
     style.marginBottom = style.marginBottom ??
         (variant === "paragraph" || variant === "heading") ? 15 : 0
@@ -36,11 +46,11 @@ export default function CustomText(props: CustomTextProps): React.JSX.Element {
     style.fontWeight = style.fontWeight ??
         (variant === "heading" || variant === "subheading" || weight == "bold") ? "bold" : "normal"
 
-    style.fontSize = (style.fontSize ?? props.fontSize) 
-        ? (style.fontSize ?? props.fontSize) 
-        : ((variant === "heading") 
-            ? 24 
-            : (variant === "subheading" 
+    style.fontSize = (style.fontSize ?? props.fontSize)
+        ? (style.fontSize ?? props.fontSize)
+        : ((variant === "heading")
+            ? 24
+            : (variant === "subheading"
                 ? 19 : 14))
 
     return (

@@ -1,7 +1,6 @@
  # TODO
 
  ### MUST
- - Finish about us
  - Analytics
  - Painted door on history
 

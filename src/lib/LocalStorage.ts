@@ -17,10 +17,10 @@ export async function getHasCompletedOnboardingAsync(): Promise<boolean> {
     try {
         console.log("LS: Get Onboarding")
 
-        // const value = await AsyncStorage.getItem(ONBOARDING_COMPLETE_KEY);
-        // if (value != null) {
-        //     return Boolean(value)
-        // }
+        const value = await AsyncStorage.getItem(ONBOARDING_COMPLETE_KEY);
+        if (value != null) {
+            return Boolean(value)
+        }
 
         return false//default
 
@@ -44,8 +44,12 @@ export async function getTriggerIngredientsAsync(): Promise<TriggerData[]> {
     //try get from storage
     try {
         const jsonValue = await AsyncStorage.getItem(TRIGGER_INGREDIENTS_KEY);
-        if (jsonValue != null)
-            return JSON.parse(jsonValue)
+        console.log("Json Value", jsonValue.substring(0,50))
+        if (jsonValue != null){
+            const trigs:TriggerData[] = JSON.parse(jsonValue)
+            console.log(`LS: Get ${trigs.length} triggers`)
+            return trigs
+        }
     } catch (e) {
         console.log("LS: Get triggers failed: ", e)
     }
