@@ -12,7 +12,7 @@ export interface ResultsDrawerComponentProps {
     resultsType: "NotFound" | "Found"
     isVisible: boolean,
     backgroundComponent: React.ReactNode
-
+    onExpandCollapse?: (isExpanded: boolean) => void
     result: ProductResult | null
 }
 
@@ -20,7 +20,7 @@ export interface ResultsDrawerComponentProps {
 export function ResultsDrawerComponent({
     resultsType = "NotFound",
     isVisible = false,
-
+    onExpandCollapse = ()=>{},
     result = null,
     backgroundComponent }: ResultsDrawerComponentProps): React.JSX.Element {
 
@@ -46,7 +46,7 @@ export function ResultsDrawerComponent({
             <BottomSheetComponent
                 collapsedHeight={collapsedHeight}
                 expandedHeight={expandedHeight}
-                //   onChange={handleSheetChanges}
+                onChange={(index:number)=>onExpandCollapse?.(index === 1)}
                 ref={sheetRef}
                 startsOpen={false}
                 isDragEnabled={isDragEnabled}

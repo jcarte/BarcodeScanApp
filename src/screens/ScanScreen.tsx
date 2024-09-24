@@ -12,6 +12,7 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
     const [isResultsVisible, setIsResultsVisible] = React.useState<boolean>(false)
     const [resultsType, setResultsType] = React.useState<"NotFound" | "Found">("NotFound")
     const [result, setResult] = React.useState<ProductResult | null>(null)
+    const [isResultsExpanded, setIsResultsExpanded] = React.useState<boolean>(false)
 
     const handleBarCode = async (bc): Promise<void> => {
         console.log("SS: HandleBarcode: ", bc)
@@ -21,9 +22,14 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
             return
         }
 
+        if(isResultsExpanded){
+            console.log("SS: HandleBarcode: Results expanded, skipping")
+            return
+        }
+
         const productLookup = await FindProductByBarcode(bc)
 
-        setIsResultsVisible(true)//always show regardless of result
+        setIsResultsVisible(true)//always show regardless of result, starts hidden, shows after first result
 
         if (!productLookup.isSuccess || !productLookup.product) {
             setResultsType("NotFound")
@@ -67,6 +73,7 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
             <ResultsDrawerComponent
                 resultsType={resultsType}
                 isVisible={isResultsVisible}
+                onExpandCollapse={(isResultsExpanded)=> {setIsResultsExpanded(isResultsExpanded)}}
                 backgroundComponent={
                     <BarcodeScannerComponent
                         onBarCodeScanned={handleBarCode}
