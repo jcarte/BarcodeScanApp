@@ -2,16 +2,23 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import { Text, View, StyleSheet, Dimensions, Platform, Button } from 'react-native';
 import { BarcodeScanningResult, CameraView, useCameraPermissions } from 'expo-camera'
 
-export function BarcodeScannerComponent(props) {
+interface BarcodeScannerComponentProps {
+  onBarCodeScanned?: (barcode: string) => void
+  refreshIntervalMS?: number
+  timeoutAfterScanMS?: number
+}
+
+
+export function BarcodeScannerComponent({
+  refreshIntervalMS = 1000,
+  timeoutAfterScanMS = 1000,
+  onBarCodeScanned = () => { } }: BarcodeScannerComponentProps) {
+
   const lastAttemptScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time the BCS found a BC and we assessed it
   const lastSuccessScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time found a BC and raised the barcode scanned event
   const [permission, requestPermission] = useCameraPermissions();
 
   console.log("BCS: Start")
-
-
-
-
 
   // const screenWidth = useMemo(() => Dimensions.get('window').width, [])
   // const screenHeight = useMemo(() => Dimensions.get('window').height, [])
@@ -23,16 +30,16 @@ export function BarcodeScannerComponent(props) {
 
 
 
-  const handleBarCodeScanned = (result: BarcodeScanningResult): void => {
+  const handleBarCodeScanned = async (result: BarcodeScanningResult): Promise<void> => {
 
     //Check if it's time to check barcode again - timeout after each attempt
-    if ((new Date().getTime() - lastAttemptScan.current.getTime()) < props.refreshIntervalMS)
+    if ((new Date().getTime() - lastAttemptScan.current.getTime()) < refreshIntervalMS)
       return
 
     lastAttemptScan.current = (new Date())//update last attempt time (as this is now an attempt)
 
     //check if it's been long enough after the last successful barcode detected
-    if ((new Date().getTime() - lastSuccessScan.current.getTime()) < props.timeoutAfterScanMS)
+    if ((new Date().getTime() - lastSuccessScan.current.getTime()) < timeoutAfterScanMS)
       return
 
     console.log(result)
@@ -70,8 +77,9 @@ export function BarcodeScannerComponent(props) {
 
     //console.log("BCS: Notify parent")
 
+
     //Tell parent, found a barcode
-    props.onBarCodeScanned(result.data)
+    onBarCodeScanned?.(result.data)
 
     lastSuccessScan.current = new Date()
 
@@ -94,16 +102,16 @@ export function BarcodeScannerComponent(props) {
   }
 
   if (!permission.granted) {
-  return (
-    <View style={styles.container}>
-      <View style={{ flex: 1, borderWidth: 0, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ textAlign: 'center'}}>Please give permission to access the camera</Text>
-        <View style={{height:15}}></View>
-        <Button onPress={requestPermission} title="Grant Permission" color="blue" />
+    return (
+      <View style={styles.container}>
+        <View style={{ flex: 1, borderWidth: 0, justifyContent: "center", alignItems: "center" }}>
+          <Text style={{ textAlign: 'center' }}>Please give permission to access the camera</Text>
+          <View style={{ height: 15 }}></View>
+          <Button onPress={requestPermission} title="Grant Permission" color="blue" />
+        </View>
       </View>
-    </View>
-  )
-}
+    )
+  }
 
   return (
     <View style={styles.container}>

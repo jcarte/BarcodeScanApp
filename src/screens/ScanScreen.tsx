@@ -17,12 +17,12 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
     const handleBarCode = async (bc): Promise<void> => {
         console.log("SS: HandleBarcode: ", bc)
 
-        if(bc === lastBarcode){
+        if (bc === lastBarcode) {
             console.log("SS: HandleBarcode: Same barcode, skipping")
             return
         }
 
-        if(isResultsExpanded){
+        if (isResultsExpanded) {
             console.log("SS: HandleBarcode: Results expanded, skipping")
             return
         }
@@ -73,7 +73,7 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
             <ResultsDrawerComponent
                 resultsType={resultsType}
                 isVisible={isResultsVisible}
-                onExpandCollapse={(isResultsExpanded)=> {setIsResultsExpanded(isResultsExpanded)}}
+                onExpandCollapse={(isResultsExpanded) => { setIsResultsExpanded(isResultsExpanded) }}
                 backgroundComponent={
                     <BarcodeScannerComponent
                         onBarCodeScanned={handleBarCode}
