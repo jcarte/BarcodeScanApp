@@ -1,10 +1,33 @@
-
-import { Text, StyleSheet, Button, View, Linking } from "react-native";
+import * as React from 'react'
+import { StyleSheet, View, Linking } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomText from "../components/core/CustomText";
 import CustomButton from "../components/core/CustomButton";
+import { Analytics } from '../lib/Analytics';
 
 export function AboutScreen({ navigation }) {
+
+  const analytics = new Analytics()
+
+  React.useEffect(()=>{
+    analytics.logAboutPageView()//only logs once
+  })
+
+  function handleUpdateTriggersClick() {
+    analytics.logAboutPageClickUpdateTriggers()
+    navigation.navigate("UpdateTriggers") 
+  }
+
+  function handleSendFeedbackClick() {
+    analytics.logAboutPageClickSendFeedback()
+    Linking.openURL(`mailto:info@mypom.app?subject=App-Feedback`)
+  }
+
+  function handleReplayOnboardingClick() {
+    analytics.logAboutPageClickReplayOnboarding()
+    navigation.navigate('OnboardingNav')
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <CustomText variant="heading">About pom</CustomText>
@@ -16,19 +39,19 @@ export function AboutScreen({ navigation }) {
       </View>
       <CustomButton
         style={styles.button}
-        onPress={() => { navigation.navigate("UpdateTriggers") }}
+        onPress={handleUpdateTriggersClick}
         title="Update your triggers"
         variant="Primary"
       />
       <CustomButton
         style={styles.button}
-        onPress={() => Linking.openURL(`mailto:info@mypom.app?subject=App-Feedback`)}
+        onPress={handleSendFeedbackClick}
         title="Send us your feedback"
         variant="Primary"
       />
       <CustomButton
         style={styles.button}
-        onPress={() => navigation.navigate('OnboardingNav')}
+        onPress={handleReplayOnboardingClick}
         title="Replay onboarding"
         variant="Secondary"
       />

@@ -16,6 +16,7 @@ import { TriggerAutoMessageComponent } from "../components/onboarding/TriggerAut
 import CarouselComponent, { PageData } from "../components/core/CarouselComponent";
 import { TriggerData } from "../types/TriggerData";
 import { setHasCompletedOnboardingAsync, setTriggerIngredientsAsync } from "../lib/LocalStorage";
+import { Analytics } from "../lib/Analytics";
 
 
 export function OnboardingScreen({ navigation }) {
@@ -25,11 +26,13 @@ export function OnboardingScreen({ navigation }) {
 
   const caurouselRef = useRef(null);
 
+  const analytics = new Analytics()
+
   //wrapper around next slide function
   const next = () => caurouselRef.current.next()
 
   const saveTriggers = async (triggers: TriggerData[]) => await setTriggerIngredientsAsync(triggers)
-  
+
   const [triggers, setTriggers] = React.useState<TriggerData[]>([])
 
   //Get default triggers from file, load into state
@@ -37,8 +40,8 @@ export function OnboardingScreen({ navigation }) {
     const defaultCats: { categoryName: string, highFodmap: boolean }[] = AssetManager.data.categoryList
 
     const defaultData: TriggerData[] = defaultCats.map(c => {
-        const td: TriggerData = { name: c.categoryName, selected: c.highFodmap }
-        return td
+      const td: TriggerData = { name: c.categoryName, selected: c.highFodmap }
+      return td
     })
 
     setTriggers(defaultData)
@@ -71,7 +74,10 @@ export function OnboardingScreen({ navigation }) {
   const pages: PageData[] = [
     {
       component: getSlidePageComponent("Welcome to pom",
-        <WelcomeComponent onButtonClick={() => { next() }} />),
+        <WelcomeComponent onButtonClick={() => {
+          analytics.logOnboardingPageCompleted("Welcome")
+          next()
+        }} />),
       isSwipeEnabled: true,
     },
     {
@@ -79,10 +85,12 @@ export function OnboardingScreen({ navigation }) {
         <AboutYouComponent
           onDontKnowButtonClick={() => {
             setShowSelectTriggers(false)
+            analytics.logOnboardingPageCompleted("AboutYou")
             next()
           }}
           onKnowButtonClick={() => {
             setShowSelectTriggers(true)
+            analytics.logOnboardingPageCompleted("AboutYou")
             next()
           }}
         />),
@@ -96,24 +104,30 @@ export function OnboardingScreen({ navigation }) {
             onButtonClick={async (tr: TriggerData[]) => {
               setTriggers(tr)//update local state
               await saveTriggers(tr)//save triggers to storage
+              analytics.logOnboardingPageCompleted("TriggerSelect")
               next()
             }}
           />
           : <TriggerAutoMessageComponent onButtonClick={async () => {
             await saveTriggers(triggers)//save default triggers already loaded (FODMAP)
+            analytics.logOnboardingPageCompleted("TriggerAutoMessage")
             next()
           }} />),
       isSwipeEnabled: false,
     },
     {
       component: getSlidePageComponent("Warning",
-        <OnboardWarningComponent onButtonClick={() => { next() }} />),
+        <OnboardWarningComponent onButtonClick={() => {
+          analytics.logOnboardingPageCompleted("Warning")
+          next()
+        }} />),
       isSwipeEnabled: true,
     },
     {
       component: getSlidePageComponent("Permissions",
         <PermissionsComponent onButtonClick={async () => {
           await setOnboardingDone()
+          analytics.logOnboardingPageCompleted("Permissions")
           navigation.navigate("HomeNav")
 
         }} />),

@@ -1,13 +1,10 @@
  # TODO
 
  ### MUST
- - Analytics
- - Painted door on history
 
  ### SHOULD
  - Visual cleanup results - divider shows, 3x list section headers too big, bigger handle, select triggers laggy
  - Make drawer jiggle when new results
- - Show picture of barcode in not found results header 
 
 
 

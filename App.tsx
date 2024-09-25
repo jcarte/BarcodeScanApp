@@ -2,10 +2,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomTabNavigationEventMap, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { AboutScreen } from './src/screens/AboutScreen';
-import { OnboardingScreen } from './src/screens/OnboardingScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
@@ -16,6 +14,9 @@ import { HistoryScreen } from './src/screens/HistoryScreen';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+
+import { AboutScreen } from './src/screens/AboutScreen';
+import { OnboardingScreen } from './src/screens/OnboardingScreen';
 import ScanScreen from './src/screens/ScanScreen';
 import { RoutingScreen } from './src/screens/RoutingScreen';
 import { UpdateTriggersScreen } from './src/screens/UpdateTriggersScreen';
@@ -25,7 +26,7 @@ Sentry.init({
   debug: false, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
 });
 
-const NavStack = createNativeStackNavigator();
+
 
 const HomeTabs = createBottomTabNavigator();
 function HomeNav() {
@@ -49,6 +50,7 @@ function HomeNav() {
           if (route.name === 'Scan') return <MaterialCommunityIcons name="barcode-scan" size={size} color={color} />
           if (route.name === 'About') return <MaterialIcons name="info-outline" size={size} color={color} />
         }
+
       })}
     >
       <HomeTabs.Screen name="History" component={HistoryScreen} />
@@ -60,10 +62,8 @@ function HomeNav() {
 }
 
 
-
+const NavStack = createNativeStackNavigator();
 function App() {
-
-
 
   const isAnalyticsActive = !__DEV__;//only enable on prod not dev
 

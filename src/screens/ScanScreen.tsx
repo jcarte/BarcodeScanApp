@@ -5,6 +5,7 @@ import { FindProductByBarcode } from '../lib/ProductLookup';
 import { GetResultsAsync } from '../lib/ResultsHandler';
 import { ResultsDrawerComponent } from '../components/results/ResultsDrawerComponent';
 import { ProductResult } from '../types/ProductIngredientResult';
+import { Analytics } from '../lib/Analytics';
 
 export default function ScanScreen({ navigation }): React.JSX.Element {
 
@@ -14,6 +15,8 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
     const [result, setResult] = React.useState<ProductResult | null>(null)
     const [isResultsExpanded, setIsResultsExpanded] = React.useState<boolean>(false)
     const [barcodeImage, setBarcodeImage] = React.useState<string>("")//picture taken at moment of detecting barcode
+
+    const analytics = new Analytics()
 
     const handleBarCode = async (barcode, imageUri): Promise<void> => {
         console.log("SS: HandleBarcode: ", barcode)
@@ -30,14 +33,19 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
             return
         }
 
-        console.log("SS: try to find barcode")
+        console.log("SS: try to find product from barcode")
         const productLookup = await FindProductByBarcode(barcode)
-        console.log("SS: product results")
+        console.log("SS: got product results")
 
         setIsResultsVisible(true)//always show regardless of result, starts hidden, shows after first result
         setBarcodeImage(imageUri)
 
         if (!productLookup.isSuccess || !productLookup.product) {
+            const analyticsStatus =
+                productLookup.status === "Errored" ? "error" :
+                    productLookup.status === "FoundIncomplete" ? "incomplete" : "notFound"
+            analytics.logBarcodeScanned(barcode, analyticsStatus)
+
             setResultsType("NotFound")
             setResult(null)
             return
@@ -61,6 +69,8 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
                 ? `${warningCount} potential trigger(s) found`
                 : "No trigger(s) found"
 
+        analytics.logBarcodeScanned(barcode, "ok", resultLevel)//log to analytics
+
         setResultsType("Found")
         setResult({
             brandName: productLookup?.product?.brandName,
@@ -74,12 +84,20 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
 
     }
 
+    function handleDrawerExpandOrCollapse(isResultsExpanded: boolean) {
+        setIsResultsExpanded(isResultsExpanded)
+
+        isResultsExpanded 
+            ? analytics.logBottomSheetExpanded()
+            : analytics.logBottomSheetCollapsed()
+    }
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ResultsDrawerComponent
                 resultsType={resultsType}
                 isVisible={isResultsVisible}
-                onExpandCollapse={(isResultsExpanded) => { setIsResultsExpanded(isResultsExpanded) }}
+                onExpandCollapse={handleDrawerExpandOrCollapse}
                 backgroundComponent={
                     <BarcodeScannerComponent
                         onBarCodeScanned={handleBarCode}
