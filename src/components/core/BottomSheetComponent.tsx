@@ -21,9 +21,9 @@ const BottomSheetComponent = ({
   expandedHeight,
   headerComponent,
   children,
-  isDragEnabled=true,
-  onChange=undefined,
-  startsOpen=true,
+  isDragEnabled = true,
+  onChange = undefined,
+  startsOpen = true,
 }: BottomSheetComponentProps, ref) => {
 
   console.log("BS: Start")
@@ -127,23 +127,23 @@ const BottomSheetComponent = ({
   if (isOpen) {
     return (
 
-      <View style={styles.bottom_sheet_container}>
-        <Animated.View style={[styles.bottom_sheet, containerStyle]}>
-          <GestureDetector gesture={isDragEnabled ? drag : noDrag}>
-            <View style={{ flex: 1 }}>
-              <View style={[styles.bottom_sheet_handle]}>
-                {isDragEnabled && <View style={{width:50, height: 5, borderRadius:5, backgroundColor: GlobalStyles.colours.gray}}/>}
+        <View style={styles.bottom_sheet_container}>
+          <Animated.View style={[styles.bottom_sheet, containerStyle]}>
+            <GestureDetector gesture={isDragEnabled ? drag : noDrag}>
+              <View style={{ flex: 1 }}>
+                <View style={[styles.bottom_sheet_handle]}>
+                  {isDragEnabled && <View style={{ width: 50, height: 5, borderRadius: 5, backgroundColor: GlobalStyles.colours.gray }} />}
+                </View>
+                <View style={{ height: _collapsedHeight - 25 }}>
+                  {headerComponent()}
+                </View>
+                <View style={styles.bottom_sheet_content}>
+                  {children}
+                </View>
               </View>
-              <View style={{ height: _collapsedHeight - 25 }}>
-                {headerComponent()}
-              </View>
-              <View style={styles.bottom_sheet_content}>
-                {children}
-              </View>
-            </View>
-          </GestureDetector>
-        </Animated.View>
-      </View>
+            </GestureDetector>
+          </Animated.View>
+        </View>
 
     )
   }
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     justifyContent: "flex-end",
     bottom: 0,
-    // borderWidth: 3, 
+    // borderWidth: 3,
     // borderColor: 'green',
   },
 
