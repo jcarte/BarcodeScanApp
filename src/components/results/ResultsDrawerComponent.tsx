@@ -1,28 +1,38 @@
 import React, { useEffect, useRef } from "react";
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { View } from "react-native";
 import { ResultsListComponent } from "./ResultsListComponent";
 import { ResultsHeaderComponent } from "./ResultsHeaderComponent";
 import BottomSheetComponent from "../core/BottomSheetComponent";
 import GlobalStyles from "../../lib/GlobalStyles";
-import { ProductResult } from "../../types/ProductIngredientResult";
+import { IngredientResult } from "../../types/ProductIngredientResult";
 import { NotFoundHeaderComponent } from "./NotFoundHeaderComponent";
 
 export interface ResultsDrawerComponentProps {
     resultsType: "NotFound" | "Found"
-    isVisible: boolean,
+    isVisible: boolean
     backgroundComponent: React.ReactNode
     onExpandCollapse?: (isExpanded: boolean) => void
-    result: ProductResult | null
+    imageURI: string
+    productName?: string
+    productBrand?: string
+    resultLevel?: "avoid" | "warning" | "ok" | null
+    resultText?: string
+    ingredients?: IngredientResult[]
 }
 
 
 export function ResultsDrawerComponent({
     resultsType = "NotFound",
     isVisible = false,
-    onExpandCollapse = ()=>{},
-    result = null,
-    backgroundComponent }: ResultsDrawerComponentProps): React.JSX.Element {
+    onExpandCollapse = () => { },
+    backgroundComponent,
+    imageURI,
+    productName = "",
+    productBrand = "",
+    resultLevel = null,
+    resultText = "",
+    ingredients = [],
+}: ResultsDrawerComponentProps): React.JSX.Element {
 
     const sheetRef = useRef(null);
 
@@ -39,38 +49,43 @@ export function ResultsDrawerComponent({
 
 
     return (
-        <View style={{ flex: 1}}>
+        <View style={{ flex: 1 }}>
             <View style={{ flex: 1, backgroundColor: "lightgray" }}>
                 {backgroundComponent}
             </View>
             <BottomSheetComponent
                 collapsedHeight={collapsedHeight}
                 expandedHeight={expandedHeight}
-                onChange={(index:number)=>onExpandCollapse?.(index === 1)}
+                onChange={(index: number) => onExpandCollapse?.(index === 1)}
                 ref={sheetRef}
                 startsOpen={false}
                 isDragEnabled={isDragEnabled}
                 headerComponent={() => (
                     resultsType === "Found"
                         ? (<ResultsHeaderComponent
-                            imageUri={result?.imageURI ?? ""}
-                            nameText={result?.name ?? ""}
-                            brandText={result?.brandName ?? ""}
-                            resultLevel={result?.overallResultLevel}
-                            resultText={result?.overallResultText ?? ""}
+                            imageUri={imageURI ?? ""}
+                            nameText={productName ?? ""}
+                            brandText={productBrand ?? ""}
+                            resultLevel={resultLevel}
+                            resultText={resultText?? ""}
                             style={{ padding: 20, height: 175, flex: 1 }}
                         />)
-                        : (<NotFoundHeaderComponent style={{ padding: 20, height: 175, flex: 1 }} />))
+                        : (<NotFoundHeaderComponent
+                            imageUri={imageURI ?? ""}
+                            style={{ padding: 20, height: 175, flex: 1 }} />))
                 }
             >
-                <View style={{ flex: 1 }}>
-                    {/* Divider */}
-                    <View style={{ marginHorizontal: 20, height: 1, borderBottomWidth: 1, borderColor: GlobalStyles.colours.lightGray }} />
-                    <ResultsListComponent
-                        ingredients={result?.ingredients ?? []}
-                        style={{ paddingHorizontal: 20 }}
-                    />
-                </View>
+                {
+                    resultsType === "Found" &&
+                    <View style={{ flex: 1 }}>
+                        {/* Divider */}
+                        <View style={{ marginHorizontal: 20, height: 1, borderBottomWidth: 1, borderColor: GlobalStyles.colours.lightGray }} />
+                        <ResultsListComponent
+                            ingredients={ingredients ?? []}
+                            style={{ paddingHorizontal: 20 }}
+                        />
+                    </View>
+                }
             </BottomSheetComponent>
         </View>
     )

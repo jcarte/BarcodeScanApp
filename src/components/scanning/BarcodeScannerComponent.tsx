@@ -1,13 +1,35 @@
-import React, { useEffect, useMemo, useRef } from 'react';
-import { Text, View, StyleSheet, Dimensions, Platform, Button } from 'react-native';
-import { BarcodeScanningResult, CameraView, useCameraPermissions } from 'expo-camera'
+import React, { useRef } from 'react';
+import { Text, View, StyleSheet, Button } from 'react-native';
+
+import * as ImageManipulator from 'expo-image-manipulator';
+import { BarcodeScanningResult, CameraCapturedPicture, CameraView, useCameraPermissions } from 'expo-camera'
+
+import { BarcodeBoxGuideComponent } from './BarcodeBoxGuideComponent';
+
+
 
 interface BarcodeScannerComponentProps {
-  onBarCodeScanned?: (barcode: string) => void
+  onBarCodeScanned?: (barcode: string, imageUri: string) => void
   refreshIntervalMS?: number
   timeoutAfterScanMS?: number
 }
 
+class PictureDimension {
+  x: number = 0
+  y: number = 0
+  totalPixels: number = 0
+  dimensionText: string = ""
+  constructor(dimensionText: string) {
+    this.dimensionText = dimensionText
+    if (dimensionText.length > 0 && dimensionText.toLowerCase().indexOf("x") > 0) {
+      const parts = dimensionText.toLowerCase().split("x")
+      this.x = +parts[0]
+      this.y = +parts[1]
+      this.totalPixels = this.x * this.y
+    }
+  }
+
+}
 
 export function BarcodeScannerComponent({
   refreshIntervalMS = 1000,
@@ -18,19 +40,17 @@ export function BarcodeScannerComponent({
   const lastSuccessScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time found a BC and raised the barcode scanned event
   const [permission, requestPermission] = useCameraPermissions();
 
+  const [pictureSize, setPictureSize] = React.useState<PictureDimension | null>(null)//need to get list
+
+  const [isProcessingBarcode, setIsProcessingBarcode] = React.useState<boolean>(false)//so multiple barcodes don't interfere with each other
+
+  const [previousBarcode, setPreviousBarcode] = React.useState<string>("")//so don't keep taking pics of same barcode
+
   console.log("BCS: Start")
 
-  // const screenWidth = useMemo(() => Dimensions.get('window').width, [])
-  // const screenHeight = useMemo(() => Dimensions.get('window').height, [])
+  const cameraRef = useRef<CameraView>(null);
 
-  // const sizePercentThreshold = 0.20
-  // const deadzonePercent = 0.2
-
-
-
-
-
-  const handleBarCodeScanned = async (result: BarcodeScanningResult): Promise<void> => {
+  async function handleBarCodeScannedAsync(result: BarcodeScanningResult): Promise<void> {
 
     //Check if it's time to check barcode again - timeout after each attempt
     if ((new Date().getTime() - lastAttemptScan.current.getTime()) < refreshIntervalMS)
@@ -38,11 +58,33 @@ export function BarcodeScannerComponent({
 
     lastAttemptScan.current = (new Date())//update last attempt time (as this is now an attempt)
 
+    if (isProcessingBarcode) { //don't do another while processing old one
+      // console.log("BCS: Is processing barcode, cancelling")
+      return
+    }
+
     //check if it's been long enough after the last successful barcode detected
     if ((new Date().getTime() - lastSuccessScan.current.getTime()) < timeoutAfterScanMS)
       return
 
-    console.log(result)
+    const barcode = result.data
+
+    if (barcode === previousBarcode) {
+      console.log("BCS: Same barcode as last time, cancelling")
+      return
+    }
+
+    setIsProcessingBarcode(true)//is now working on barcode
+
+
+    ////////CHECK BARCODE IS BIG ENOUGH - DOESNT WORK ON IOS
+    // const screenWidth = useMemo(() => Dimensions.get('window').width, [])
+    // const screenHeight = useMemo(() => Dimensions.get('window').height, [])
+
+    // const sizePercentThreshold = 0.20
+    // const deadzonePercent = 0.2
+
+    // console.log(result)
 
     // //Run barcode size checks, only works on android as ios returns rubbish (width: 0.002)
     // if (Platform.OS == "android") {
@@ -68,33 +110,87 @@ export function BarcodeScannerComponent({
     //     return
     //   }
     // }
+    ////////
 
     //check is only numbers
-    if (result.data.match(/^[0-9]+$/) == null) {
-      console.log("BCS: barcode found in wrong format: ", result.data)
+    if (barcode.match(/^[0-9]+$/) == null) {
+      console.log("BCS: barcode found in wrong format: ", barcode)
+      setIsProcessingBarcode(false)
       return
     }
 
-    //console.log("BCS: Notify parent")
-
+    const b64Image: string = await takePictureAsync()
 
     //Tell parent, found a barcode
-    onBarCodeScanned?.(result.data)
+    onBarCodeScanned?.(barcode, b64Image)
 
     lastSuccessScan.current = new Date()
+    setPreviousBarcode(barcode)
+    setIsProcessingBarcode(false)//finished processing
 
-  };
+  }
+
+  async function choosePictureSizeAsync(): Promise<void> {
+    if (!cameraRef?.current) {
+      console.log("BCS: No camera reference, not setting size")
+      return
+    }
+
+    if (pictureSize) {
+      console.log("BCS: Picture size already set, not setting size")
+      return
+    }
+
+    const sizes = await cameraRef.current.getAvailablePictureSizesAsync()
+    console.log("BCS: Picture Sizes: ", sizes)
+    const picDims = sizes.map((dim) => new PictureDimension(dim))
+
+    picDims.sort((a, b) => a.totalPixels - b.totalPixels);
+    console.log("BCS: Chosen pic size: ", picDims[0].dimensionText)
+    setPictureSize(picDims[0]) //set to the smallest
+  }
+
+  async function takePictureAsync(): Promise<string> {
+
+    if (!cameraRef?.current) {
+      console.log("BCS: No camera reference, can't take pic")
+      return ""
+    }
+
+    try {
+      console.log("BCS: Taking picture")
+      //Take picture for not founds
+      const picture: CameraCapturedPicture = await cameraRef.current.takePictureAsync({
+        base64: true,
+        exif: false,
+        // imageType: 'png',
+        quality: 0,//high compression, low quality
+      })
+
+      console.log("BCS: Resizing picture")
+
+      const RESIZED_WIDTH = 300
+      const image: ImageManipulator.ImageResult = await ImageManipulator.manipulateAsync(
+        picture.uri,
+        [{ resize: { width: RESIZED_WIDTH } }],
+        { base64: true, compress: 0, format: ImageManipulator.SaveFormat.PNG })
+
+      // console.log("IMAGE SIZE BEFORE: ", picture.base64.length)
+      // console.log("IMAGE SIZE AFTER: ", image.base64.length)
+      const b64Image = "data:image/png;base64," + image.base64.replaceAll(" ", "+")
+
+      return b64Image
+
+    } catch (error) {
+      console.log("BCS: Taking picture errored: ", error)
+      return ""
+    }
+  }
 
 
 
-  /*
-    Barcode Types List
-    https://docs.expo.dev/versions/latest/sdk/bar-code-scanner/#supported-formats
-  */
-
-
-  //Permission
-  console.log("BCS: Has Permission: ", permission)
+  // //Permission
+  // console.log("BCS: Has Permission: ", permission)
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -118,90 +214,29 @@ export function BarcodeScannerComponent({
 
       <CameraView
         barcodeScannerSettings={{
+          // Barcode Types List: https://docs.expo.dev/versions/latest/sdk/bar-code-scanner/#supported-formats
           barcodeTypes: [
             "ean13",
             "ean8",
             "upc_a",
             "upc_e",
           ],
-        }}
-        onBarcodeScanned={(e) => handleBarCodeScanned(e)}
-        style={StyleSheet.absoluteFillObject}
-      />
 
-      <View style={styles.grid_container}>
-        <View style={{ flex: 3, borderWidth: 0, }}></View>
-        <View style={{ flex: 2, borderWidth: 0, flexDirection: 'row' }}>
-          <View style={{ flex: 1, borderWidth: 0, }}></View>
-          <View style={{ flex: 6, borderWidth: 0, flexDirection: 'row' }}>
-            <View style={{ flex: 1, borderWidth: 0, justifyContent: "space-between" }}>
-              <View style={styles.grid_tl}></View>
-              <View style={styles.grid_bl}></View>
-            </View>
-            <View style={{ flex: 1, borderWidth: 0, justifyContent: "space-between", alignItems: "flex-end" }}>
-              <View style={styles.grid_tr}></View>
-              <View style={styles.grid_br}></View>
-            </View>
-          </View>
-          <View style={{ flex: 1, borderWidth: 0, }}></View>
-        </View>
-        <View style={{ flex: 3, borderWidth: 0, }}></View>
-      </View>
+        }}
+        onBarcodeScanned={(e) => handleBarCodeScannedAsync(e)}
+        style={StyleSheet.absoluteFillObject}
+        ref={cameraRef}
+        pictureSize={pictureSize?.dimensionText ?? ""}
+        onCameraReady={() => choosePictureSizeAsync()}
+      />
+      <BarcodeBoxGuideComponent />
     </View>
+
   );
 }
-
-const outlineThickness = 2
-const outlineSize = 30
-const outlineColor = "white"
-const outlineBorderRadius = 15
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  grid_container: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    borderWidth: 0,
-    flex: 1,
-  },
-
-  grid_tl: {
-    height: outlineSize,
-    width: outlineSize,
-    borderColor: outlineColor,
-    borderTopWidth: outlineThickness,
-    borderLeftWidth: outlineThickness,
-    borderTopLeftRadius: outlineBorderRadius
-  },
-
-  grid_bl: {
-    height: outlineSize,
-    width: outlineSize,
-    borderColor: outlineColor,
-    borderBottomWidth: outlineThickness,
-    borderLeftWidth: outlineThickness,
-    borderBottomLeftRadius: outlineBorderRadius
-  },
-
-  grid_tr: {
-    height: outlineSize,
-    width: outlineSize,
-    borderColor: outlineColor,
-    borderTopWidth: outlineThickness,
-    borderRightWidth: outlineThickness,
-    borderTopRightRadius: outlineBorderRadius
-  },
-
-  grid_br: {
-    height: outlineSize,
-    width: outlineSize,
-    borderColor: outlineColor,
-    borderBottomWidth: outlineThickness,
-    borderRightWidth: outlineThickness,
-    borderBottomRightRadius: outlineBorderRadius
-  },
-
+  }
 });

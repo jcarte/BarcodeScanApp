@@ -13,23 +13,29 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
     const [resultsType, setResultsType] = React.useState<"NotFound" | "Found">("NotFound")
     const [result, setResult] = React.useState<ProductResult | null>(null)
     const [isResultsExpanded, setIsResultsExpanded] = React.useState<boolean>(false)
+    const [barcodeImage, setBarcodeImage] = React.useState<string>("")//picture taken at moment of detecting barcode
 
-    const handleBarCode = async (bc): Promise<void> => {
-        console.log("SS: HandleBarcode: ", bc)
+    const handleBarCode = async (barcode, imageUri): Promise<void> => {
+        console.log("SS: HandleBarcode: ", barcode)
 
-        if (bc === lastBarcode) {
+        if (barcode === lastBarcode) {
             console.log("SS: HandleBarcode: Same barcode, skipping")
             return
         }
+
+        setLastBarcode(barcode)
 
         if (isResultsExpanded) {
             console.log("SS: HandleBarcode: Results expanded, skipping")
             return
         }
 
-        const productLookup = await FindProductByBarcode(bc)
+        console.log("SS: try to find barcode")
+        const productLookup = await FindProductByBarcode(barcode)
+        console.log("SS: product results")
 
         setIsResultsVisible(true)//always show regardless of result, starts hidden, shows after first result
+        setBarcodeImage(imageUri)
 
         if (!productLookup.isSuccess || !productLookup.product) {
             setResultsType("NotFound")
@@ -64,7 +70,7 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
             overallResultText: resultText,
             ingredients: ings
         })
-        setLastBarcode(bc)
+
 
     }
 
@@ -81,7 +87,12 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
                         timeoutAfterScanMS={3000}
                     />
                 }
-                result={result}
+                imageURI={resultsType == "Found" ? result?.imageURI : barcodeImage}
+                productName={result?.name}
+                productBrand={result?.brandName}
+                resultLevel={result?.overallResultLevel}
+                resultText={result?.overallResultText}
+                ingredients={result?.ingredients}
             />
         </SafeAreaView>
     )
