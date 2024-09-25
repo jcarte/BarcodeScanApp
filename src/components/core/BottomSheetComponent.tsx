@@ -132,7 +132,7 @@ const BottomSheetComponent = ({
           <GestureDetector gesture={isDragEnabled ? drag : noDrag}>
             <View style={{ flex: 1 }}>
               <View style={[styles.bottom_sheet_handle]}>
-                {isDragEnabled && <Feather name="minus" size={35} color={GlobalStyles.colours.gray} />}
+                {isDragEnabled && <View style={{width:50, height: 5, borderRadius:5, backgroundColor: GlobalStyles.colours.gray}}/>}
               </View>
               <View style={{ height: _collapsedHeight - 25 }}>
                 {headerComponent()}
@@ -177,7 +177,8 @@ const styles = StyleSheet.create({
   bottom_sheet_handle: {
     borderWidth: 0,
     alignItems: "center",
-    height: 20,
+    height: 25,
+    justifyContent: "center",
   },
 
   bottom_sheet_content: {

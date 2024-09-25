@@ -35,11 +35,11 @@ export function ResultsHeaderComponent({ imageUri, nameText, brandText, resultLe
                         <View style={{}}>
                             <CustomText color="gray">{brandText}</CustomText>
                         </View>
-                        <View style={{ flexGrow: 1, }}>
+                        <View style={{ flexGrow: 1 }}>
                             <View style={{ flex: 1, justifyContent: "flex-end" }}>
                                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                    <ResultsIconComponent style={{ marginRight: 5 }} level={resultLevel} size={20} />
-                                    <CustomText fontSize={16} weight="bold">{resultText}</CustomText>
+                                    <ResultsIconComponent style={{ marginRight: 7 }} level={resultLevel} size={20} />
+                                    <CustomText fontSize={16} weight="bold" style={{ marginRight: 5 }}>{resultText}</CustomText>
                                 </View>
                             </View>
                         </View>

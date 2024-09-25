@@ -14,23 +14,6 @@ interface BarcodeScannerComponentProps {
   timeoutAfterScanMS?: number
 }
 
-class PictureDimension {
-  x: number = 0
-  y: number = 0
-  totalPixels: number = 0
-  dimensionText: string = ""
-  constructor(dimensionText: string) {
-    this.dimensionText = dimensionText
-    if (dimensionText.length > 0 && dimensionText.toLowerCase().indexOf("x") > 0) {
-      const parts = dimensionText.toLowerCase().split("x")
-      this.x = +parts[0]
-      this.y = +parts[1]
-      this.totalPixels = this.x * this.y
-    }
-  }
-
-}
-
 export function BarcodeScannerComponent({
   refreshIntervalMS = 1000,
   timeoutAfterScanMS = 1000,
@@ -40,11 +23,7 @@ export function BarcodeScannerComponent({
   const lastSuccessScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time found a BC and raised the barcode scanned event
   const [permission, requestPermission] = useCameraPermissions();
 
-  const [pictureSize, setPictureSize] = React.useState<PictureDimension | null>(null)//need to get list
-
   const [isProcessingBarcode, setIsProcessingBarcode] = React.useState<boolean>(false)//so multiple barcodes don't interfere with each other
-
-  const [previousBarcode, setPreviousBarcode] = React.useState<string>("")//so don't keep taking pics of same barcode
 
   console.log("BCS: Start")
 
@@ -69,12 +48,9 @@ export function BarcodeScannerComponent({
 
     const barcode = result.data
 
-    if (barcode === previousBarcode) {
-      console.log("BCS: Same barcode as last time, cancelling")
-      return
-    }
 
     setIsProcessingBarcode(true)//is now working on barcode
+    console.log("BCS: Found barcode", barcode)
 
 
     ////////CHECK BARCODE IS BIG ENOUGH - DOESNT WORK ON IOS
@@ -125,29 +101,8 @@ export function BarcodeScannerComponent({
     onBarCodeScanned?.(barcode, b64Image)
 
     lastSuccessScan.current = new Date()
-    setPreviousBarcode(barcode)
     setIsProcessingBarcode(false)//finished processing
 
-  }
-
-  async function choosePictureSizeAsync(): Promise<void> {
-    if (!cameraRef?.current) {
-      console.log("BCS: No camera reference, not setting size")
-      return
-    }
-
-    if (pictureSize) {
-      console.log("BCS: Picture size already set, not setting size")
-      return
-    }
-
-    const sizes = await cameraRef.current.getAvailablePictureSizesAsync()
-    console.log("BCS: Picture Sizes: ", sizes)
-    const picDims = sizes.map((dim) => new PictureDimension(dim))
-
-    picDims.sort((a, b) => a.totalPixels - b.totalPixels);
-    console.log("BCS: Chosen pic size: ", picDims[0].dimensionText)
-    setPictureSize(picDims[0]) //set to the smallest
   }
 
   async function takePictureAsync(): Promise<string> {
@@ -226,8 +181,6 @@ export function BarcodeScannerComponent({
         onBarcodeScanned={(e) => handleBarCodeScannedAsync(e)}
         style={StyleSheet.absoluteFillObject}
         ref={cameraRef}
-        pictureSize={pictureSize?.dimensionText ?? ""}
-        onCameraReady={() => choosePictureSizeAsync()}
       />
       <BarcodeBoxGuideComponent />
     </View>

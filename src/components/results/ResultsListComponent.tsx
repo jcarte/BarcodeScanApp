@@ -35,7 +35,7 @@ export function ResultsListComponent({ ingredients, style = {} }: ResultsListCom
                                 {item.title === "Non-Triggers" && <ResultsIconComponent level="ok" size={19} />}
                             </View>
                             <CustomText
-                                variant="heading"
+                                variant="subheading"
                                 style={{ marginBottom: 0 }}>
                                 {item.ingredients.length} {item.title}
                             </CustomText>

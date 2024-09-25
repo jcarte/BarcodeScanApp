@@ -45,8 +45,8 @@ export function ResultsRowComponent({ ingredient }: ResultsRowProps): React.JSX.
                     </View>
                 </View>
 
-                <View style={{ flexShrink: 1, width: 40, paddingLeft: 10, }}>
-                    <CustomText color="gray">{percentText}</CustomText>
+                <View style={{ flexShrink: 1, width: 50, paddingLeft: 10, }}>
+                    <CustomText color="gray" textAlign="center">{percentText}</CustomText>
                 </View>
                 <View style={{ flexShrink: 1, paddingLeft: 10 }}>
                     <ResultsIconComponent level={ingredient.level} size={12} />

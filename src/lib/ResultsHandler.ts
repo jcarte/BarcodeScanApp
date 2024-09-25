@@ -12,10 +12,13 @@ interface CategoryLookup {
 
 export async function GetResultsAsync(ingInfos: IngredientInfo[]): Promise<IngredientResult[]> {
 
+    console.log("RH: Getting triggers")
     const triggers: TriggerData[] = await getTriggerIngredientsAsync()
 
+    console.log("RH: Getting categories")
     const ingCatLookup: CategoryLookup[] = AssetManager.data.ingredientCategoryLookup
 
+    console.log("RH: Getting results")
     const results: IngredientResult[] = ingInfos.map(i => {
 
         const catLookup: CategoryLookup | null = ingCatLookup.find(c => i.id == c.ingredientName)
@@ -46,5 +49,6 @@ export async function GetResultsAsync(ingInfos: IngredientInfo[]): Promise<Ingre
         }
     })
 
+    console.log("RH: Got results, returning", results)
     return results
 }

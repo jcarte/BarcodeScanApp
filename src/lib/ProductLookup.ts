@@ -39,9 +39,12 @@ function GetIngredient(o: any): IngredientInfo[] {
         return o.ingredients.flatMap(i => GetIngredient(i))
     }
 
-    const perc = ((o.percent_min + o.percent_max) / 2)/100
+    //use either min/max or estimate
+    const perc = (o.percent_min >= 0 && o.percent_max >= 0)
+        ? ((o.percent_min + o.percent_max) / 2) / 100
+        : o.percent_estimate / 100
 
-    const ing:IngredientInfo = {
+    const ing: IngredientInfo = {
         id: o.id.split(":")[1], //e.g. "cow-milk"
         name: o.id.split(":")[1].replaceAll('-', ' '), //e.g. "cow milk"
         percent: perc,
@@ -92,14 +95,18 @@ function GetIngredients(o: any): IngredientInfo[] {
 
 export async function FindProductByBarcode(barcode: string): Promise<ProductLookupResult> {
 
+    console.log("PL: find product by barcode")
     //Call OFF API
     const url = `https://world.openfoodfacts.org/api/v2/product/${barcode}`//Staging = .net, Prod = .org
     var response: Response, json
 
     try {
+        console.log("PL: Call OFF")
         response = await fetch(url)
+        console.log("PL: Got response from OFF")
         json = await response.json();
     } catch (error) {
+        console.log("PL: OFF call failed", error)
         return { //call errored
             isSuccess: false,
             status: "Errored",
@@ -109,6 +116,7 @@ export async function FindProductByBarcode(barcode: string): Promise<ProductLook
 
     //Check error returned
     if (!response.ok) {
+        console.log("PL: OFF returned not ok response")
         if (response.status >= 500)
             return {//likely server error
                 isSuccess: false,
@@ -124,6 +132,7 @@ export async function FindProductByBarcode(barcode: string): Promise<ProductLook
 
     //Check for incomplete json
     if (!json?.product || (typeof json.product.ingredients === 'undefined') || json.product.ingredients.length === 0) {
+        console.log("PL: OFF returned incomplete")
         return {//likely 404
             isSuccess: false,
             status: "FoundIncomplete",
@@ -131,6 +140,7 @@ export async function FindProductByBarcode(barcode: string): Promise<ProductLook
         }
     }
 
+    console.log("PL: OFF returned ok, getting ingredients")
     let product: ProductInfo = {
         name: json.product.product_name,
         brandName: json.product.brands,
@@ -138,7 +148,8 @@ export async function FindProductByBarcode(barcode: string): Promise<ProductLook
         ingredients: GetIngredients(json.product)
     }
 
-    return {//likely 404
+    console.log("PL: Complete, returning results")
+    return {
         isSuccess: true,
         status: "FoundComplete",
         product: product,

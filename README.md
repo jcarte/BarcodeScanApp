@@ -3,7 +3,7 @@
  ### MUST
 
  ### SHOULD
- - Visual cleanup results - divider shows, 3x list section headers too big, bigger handle, select triggers laggy
+ - Select triggers laggy
  - Make drawer jiggle when new results
 
 

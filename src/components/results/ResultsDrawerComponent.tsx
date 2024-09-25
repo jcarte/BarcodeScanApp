@@ -82,7 +82,7 @@ export function ResultsDrawerComponent({
                         <View style={{ marginHorizontal: 20, height: 1, borderBottomWidth: 1, borderColor: GlobalStyles.colours.lightGray }} />
                         <ResultsListComponent
                             ingredients={ingredients ?? []}
-                            style={{ paddingHorizontal: 20 }}
+                            style={{ paddingHorizontal: 20, paddingBottom: 30 }}
                         />
                     </View>
                 }
