@@ -1,5 +1,5 @@
-import React, { useState, useImperativeHandle, forwardRef, useCallback } from 'react';
-import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import React, { useState, useImperativeHandle, forwardRef, useCallback, useMemo } from 'react';
+import { View, StyleSheet, TouchableOpacity, Dimensions, LayoutChangeEvent } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { Feather } from '@expo/vector-icons';
@@ -29,19 +29,28 @@ const BottomSheetComponent = ({
   console.log("BS: Start")
   const [isOpen, setIsOpen] = useState(startsOpen)
 
+  const [maxHeight, setMaxHeight] = React.useState<number | null>(null)//wait to get this from the view when it's loaded
+
+  const screenHeight = useMemo<number>(() => Dimensions.get('window').height, [])
+
   const getHeight = (index: number): number => {
-    const val: any = index === 0 ? collapsedHeight : expandedHeight
+    const val: string | number = index === 0 ? collapsedHeight : expandedHeight
 
     //console.log(`val:${val}, type: ${typeof val}, last char: ${typeof val === 'string' ? val.slice(-1): "bob"}, parse: ${parseFloat(val)}, window: ${Dimensions.get('window').height}`)
-    if (typeof val === 'number') return val
+    if (typeof val === 'number') {
+      if (maxHeight) return val > maxHeight ? maxHeight : val //if max height has been set (from rendered height of component), check val isn't bigger
+      return val
+    }
     else if (typeof val === 'string' && val.slice(-1) == "%") {
-      return (parseFloat(val) / 100.0) * Dimensions.get('window').height
+      const multipler = (parseFloat(val) / 100.0)
+      if (maxHeight) return multipler * maxHeight
+      return multipler * screenHeight
     }
     else return null
   }
 
-  const _collapsedHeight = getHeight(0)
-  const _expandedHeight = getHeight(1)
+  const _collapsedHeight = useMemo<number>(() => getHeight(0), [collapsedHeight, expandedHeight, maxHeight, screenHeight])
+  const _expandedHeight = useMemo<number>(() => getHeight(1), [collapsedHeight, expandedHeight, maxHeight, screenHeight])
 
   // console.log(`BS: collapsed height: ${getHeight(0)}`)
   // console.log(`BS: expanded height: ${getHeight(1)}`)
@@ -127,23 +136,26 @@ const BottomSheetComponent = ({
   if (isOpen) {
     return (
 
-        <View style={styles.bottom_sheet_container}>
-          <Animated.View style={[styles.bottom_sheet, containerStyle]}>
-            <GestureDetector gesture={isDragEnabled ? drag : noDrag}>
-              <View style={{ flex: 1 }}>
-                <View style={[styles.bottom_sheet_handle]}>
-                  {isDragEnabled && <View style={{ width: 50, height: 5, borderRadius: 5, backgroundColor: GlobalStyles.colours.gray }} />}
-                </View>
-                <View style={{ height: _collapsedHeight - 25 }}>
-                  {headerComponent()}
-                </View>
-                <View style={styles.bottom_sheet_content}>
-                  {children}
-                </View>
+      <View style={styles.bottom_sheet_container} onLayout={(event: LayoutChangeEvent) => {
+        if (!maxHeight)
+          setMaxHeight(event.nativeEvent.layout.height)//get height of view, to set max expanded height of BS
+      }}>
+        <Animated.View style={[styles.bottom_sheet, containerStyle]}>
+          <GestureDetector gesture={isDragEnabled ? drag : noDrag}>
+            <View style={{ flex: 1 }}>
+              <View style={[styles.bottom_sheet_handle]}>
+                {isDragEnabled && <View style={{ width: 50, height: 5, borderRadius: 5, backgroundColor: GlobalStyles.colours.gray }} />}
               </View>
-            </GestureDetector>
-          </Animated.View>
-        </View>
+              <View style={{ height: _collapsedHeight - 25 }}>
+                {headerComponent()}
+              </View>
+              <View style={styles.bottom_sheet_content}>
+                {children}
+              </View>
+            </View>
+          </GestureDetector>
+        </Animated.View>
+      </View>
 
     )
   }
@@ -161,12 +173,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     justifyContent: "flex-end",
     bottom: 0,
-    // borderWidth: 3,
-    // borderColor: 'green',
   },
 
   bottom_sheet: {
-    width: "100%",
+    // width: "100%",
     backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,

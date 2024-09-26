@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { LayoutChangeEvent, View } from "react-native";
+import { View } from "react-native";
 import { ResultsListComponent } from "./ResultsListComponent";
 import { ResultsHeaderComponent } from "./ResultsHeaderComponent";
 import BottomSheetComponent from "../core/BottomSheetComponent";
@@ -36,10 +36,8 @@ export function ResultsDrawerComponent({
 
     const sheetRef = useRef(null);
 
-    const [maxHeight, setMaxHeight] = React.useState<number>(400)//wait to get this from the view when it's loaded
-
     const collapsedHeight = 200
-    const expandedHeight = (resultsType === "Found") ? maxHeight * .98 : collapsedHeight
+    const expandedHeight = (resultsType === "Found") ? "98%" : collapsedHeight
     const isDragEnabled = (resultsType === "Found") ? true : false
 
     useEffect(() => {
@@ -51,9 +49,7 @@ export function ResultsDrawerComponent({
 
 
     return (
-        <View style={{ flex: 1 }} onLayout={(event: LayoutChangeEvent) => {
-            setMaxHeight(event.nativeEvent.layout.height)//get height of view, to set max expanded height of BS -- could move this logic into BS component
-        }}>
+        <View style={{ flex: 1 }}>
             <View style={{ flex: 1, backgroundColor: "lightgray" }}>
                 {backgroundComponent}
             </View>

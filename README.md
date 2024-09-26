@@ -8,10 +8,11 @@
 
 
 
-
 # Run Locally
 
 #### Start Expo version (run JS)
+`export env REACT_NATIVE_PACKAGER_HOSTNAME=192.168.0.57`
+`echo "$REACT_NATIVE_PACKAGER_HOSTNAME"`
 `npx expo start --go`
 
 #### Run dev client locally (some debugging) (dev mode vs production: https://docs.expo.dev/workflow/development-mode/)
