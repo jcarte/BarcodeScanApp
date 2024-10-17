@@ -2,9 +2,9 @@
   "expo": {
     "name": "pom",
     "slug": "BarcodeScanApp",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "android": {
-      "versionCode": 11,
+      "versionCode": 12,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"

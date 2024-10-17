@@ -42,10 +42,14 @@ export function ResultsDrawerComponent({
 
     useEffect(() => {
         if (isVisible)
-            sheetRef.current.open()
+            sheetRef.current?.open()
         else
-            sheetRef.current.close()
+            sheetRef.current?.close()
     }, [isVisible])
+
+    useEffect(() => {
+        sheetRef.current?.jiggle()
+    }, [productName, resultsType, imageURI])
 
 
     return (

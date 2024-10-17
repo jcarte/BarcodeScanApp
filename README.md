@@ -4,13 +4,13 @@
 
  ### SHOULD
  - Select triggers laggy
- - Make drawer jiggle when new results
-
+ - Centralised REM / sizing / responsiveness - research
 
 
 # Run Locally
 
 #### Start Expo version (run JS)
+`export env REACT_NATIVE_PACKAGER_HOSTNAME=192.168.0.36`
 `export env REACT_NATIVE_PACKAGER_HOSTNAME=192.168.0.57`
 `echo "$REACT_NATIVE_PACKAGER_HOSTNAME"`
 `npx expo start --go`

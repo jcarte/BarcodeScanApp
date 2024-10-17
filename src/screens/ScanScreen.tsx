@@ -115,6 +115,7 @@ export default function ScanScreen({ navigation }): React.JSX.Element {
                             onBarCodeScanned={handleBarCode}
                             refreshIntervalMS={750}
                             timeoutAfterScanMS={3000}
+                            isScanningEnabled={!isResultsExpanded && !isProcessingBarcode}
                         />
                         {isProcessingBarcode &&
                             <LoadingComponent style={{

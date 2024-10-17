@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TextStyle } from 'react-native'
+import { Dimensions, Text, TextStyle } from 'react-native'
 import GlobalStyles from "../../lib/GlobalStyles";
 
 interface CustomTextProps {
@@ -13,6 +13,8 @@ interface CustomTextProps {
 }
 
 export default function CustomText(props: CustomTextProps): React.JSX.Element {
+
+    const screenHeight = React.useMemo(() => Dimensions.get('window').height, []) //745 on my phone
 
     const {
         variant = "default",
@@ -41,7 +43,7 @@ export default function CustomText(props: CustomTextProps): React.JSX.Element {
         )
 
     style.marginBottom = style.marginBottom ??
-        (variant === "paragraph" || variant === "heading") ? 15 : 0
+        (variant === "paragraph" || variant === "heading") ? (15/745)*screenHeight : 0
 
     style.fontWeight = style.fontWeight ??
         (variant === "heading" || variant === "subheading" || weight == "bold") ? "bold" : "normal"
@@ -49,9 +51,9 @@ export default function CustomText(props: CustomTextProps): React.JSX.Element {
     style.fontSize = (style.fontSize ?? props.fontSize)
         ? (style.fontSize ?? props.fontSize)
         : ((variant === "heading")
-            ? 24
+            ? (24/745)*screenHeight
             : (variant === "subheading"
-                ? 19 : 14))
+                ? (19/745)*screenHeight : (14/745)*screenHeight))
 
     return (
         <Text style={style}>{children}</Text>

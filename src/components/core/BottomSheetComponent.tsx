@@ -1,8 +1,7 @@
 import React, { useState, useImperativeHandle, forwardRef, useCallback, useMemo } from 'react';
-import { View, StyleSheet, TouchableOpacity, Dimensions, LayoutChangeEvent } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Dimensions, LayoutChangeEvent, Button, GestureResponderEvent } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { Feather } from '@expo/vector-icons';
+import Animated, { AnimatableValue, runOnJS, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import GlobalStyles from '../../lib/GlobalStyles';
 
 interface BottomSheetComponentProps {
@@ -52,9 +51,6 @@ const BottomSheetComponent = ({
   const _collapsedHeight = useMemo<number>(() => getHeight(0), [collapsedHeight, expandedHeight, maxHeight, screenHeight])
   const _expandedHeight = useMemo<number>(() => getHeight(1), [collapsedHeight, expandedHeight, maxHeight, screenHeight])
 
-  // console.log(`BS: collapsed height: ${getHeight(0)}`)
-  // console.log(`BS: expanded height: ${getHeight(1)}`)
-
   const height = useSharedValue(_collapsedHeight);
 
   useImperativeHandle(ref, () => ({
@@ -74,6 +70,10 @@ const BottomSheetComponent = ({
     collapse: () => {
       console.log("BS: Collapse")
       collapseSheet()
+    },
+    jiggle: () => {
+      console.log("BS: Jiggle")
+      jiggle()
     }
   }))
 
@@ -96,7 +96,7 @@ const BottomSheetComponent = ({
       if ((height.value - event.changeY) < _expandedHeight && (height.value - event.changeY) > _collapsedHeight)
         height.value += -event.changeY;
     })
-    .onEnd((event) => {
+    .onEnd((event) => {//if too fast up or down auto collapse/expand
       //console.log("BS:EndDrag:",event)
       const speedThreshold = 500 //speed beyond which to snap
 
@@ -110,14 +110,7 @@ const BottomSheetComponent = ({
         //console.log("BS: fast move down, collapsing")
         runOnJS(collapseSheet)()
       }
-      else if (height.value > ((_expandedHeight - _collapsedHeight) * 0.5 + _collapsedHeight)) {//is below speed but has ended on top half
-        //console.log("BS: slow move, ended in top half, expanding")
-        runOnJS(expandSheet)()
-      }
-      else {//must be moving slow and finished in bottom half
-        //console.log("BS: slow move, ended in bottom half, collapsing")
-        runOnJS(collapseSheet)()
-      }
+
     })
 
   const containerStyle = useAnimatedStyle(() => {
@@ -128,12 +121,74 @@ const BottomSheetComponent = ({
           damping: 5, //How hard the animation decelerates.
           stiffness: 100, //How bouncy the animation is.
           overshootClamping: true, //Whether the animation can bounce over the specified value.
+        }, () => {
+          //on finish animate, wherever finish, if not at ends then snap to the closest
+          if (height.value !== _expandedHeight || height.value !== _collapsedHeight) {
+            if (height.value > ((_expandedHeight - _collapsedHeight) * 0.5 + _collapsedHeight)) {//is below speed but has ended on top half
+              height.value = _expandedHeight
+            }
+            else {//must be moving slow and finished in bottom half
+              height.value = _collapsedHeight
+            }
+          }
         })
     };
   });
 
+  /** Make the tray move up and then will auto snap back down */
+  function jiggle(): void {
+    height.value = _collapsedHeight * 1.25
+  }
+
+
+  const styles = StyleSheet.create({
+
+    bottom_sheet_container: {
+      //flex: 1,
+      width: "100%",
+      height: "100%",
+      position: "absolute",
+      justifyContent: "flex-end",
+      bottom: 0,
+    },
+
+    bottom_sheet: {
+      // width: "100%",
+      backgroundColor: "white",
+      borderTopLeftRadius: (20 / 745) * screenHeight,
+      borderTopRightRadius: (20 / 745) * screenHeight,
+      // borderWidth: 3, 
+      // borderColor: 'blue',
+    },
+
+    bottom_sheet_handle_container: {
+      position: "relative",
+      borderWidth: 0,
+      alignItems: "center",
+      height: (25 / 745) * screenHeight,
+      justifyContent: "center",
+    },
+
+    bottom_sheet_handle: {
+      width: (50 / 745) * screenHeight, 
+      height: (5 / 745) * screenHeight, 
+      borderRadius: (5 / 745) * screenHeight, 
+      backgroundColor: GlobalStyles.colours.gray
+    },
+
+    bottom_sheet_content: {
+      flex: 1,
+      flexGrow: 1,
+      // borderColor: 'pink',
+      //borderWidth: 1,
+      width: "100%",
+    },
+
+  });
 
   if (isOpen) {
+
+
     return (
 
       <View style={styles.bottom_sheet_container} onLayout={(event: LayoutChangeEvent) => {
@@ -143,10 +198,10 @@ const BottomSheetComponent = ({
         <Animated.View style={[styles.bottom_sheet, containerStyle]}>
           <GestureDetector gesture={isDragEnabled ? drag : noDrag}>
             <View style={{ flex: 1 }}>
-              <View style={[styles.bottom_sheet_handle]}>
-                {isDragEnabled && <View style={{ width: 50, height: 5, borderRadius: 5, backgroundColor: GlobalStyles.colours.gray }} />}
+              <View style={[styles.bottom_sheet_handle_container]}>
+                {isDragEnabled && <View style={[styles.bottom_sheet_handle]} />}
               </View>
-              <View style={{ height: _collapsedHeight - 25 }}>
+              <View style={{ height: _collapsedHeight - (25 / 745) * screenHeight }}>
                 {headerComponent()}
               </View>
               <View style={styles.bottom_sheet_content}>
@@ -160,43 +215,7 @@ const BottomSheetComponent = ({
     )
   }
   else return null;
+
+
 }
 export default forwardRef(BottomSheetComponent)
-
-
-const styles = StyleSheet.create({
-
-  bottom_sheet_container: {
-    //flex: 1,
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-    justifyContent: "flex-end",
-    bottom: 0,
-  },
-
-  bottom_sheet: {
-    // width: "100%",
-    backgroundColor: "white",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    // borderWidth: 3, 
-    // borderColor: 'blue',
-  },
-
-  bottom_sheet_handle: {
-    borderWidth: 0,
-    alignItems: "center",
-    height: 25,
-    justifyContent: "center",
-  },
-
-  bottom_sheet_content: {
-    flex: 1,
-    flexGrow: 1,
-    // borderColor: 'pink',
-    //borderWidth: 1,
-    width: "100%",
-  },
-
-});

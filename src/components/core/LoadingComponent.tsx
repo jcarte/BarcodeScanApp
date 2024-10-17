@@ -12,7 +12,7 @@ export function LoadingComponent({ style = {} }: LoadingComponentProps): React.R
 
   return (
     <View style={style}>
-      <ActivityIndicator size="large" color={GlobalStyles.colours.darkRed} />
+      <ActivityIndicator size="large" color={GlobalStyles.colours.darkGreen} />
     </View>
   );
 }

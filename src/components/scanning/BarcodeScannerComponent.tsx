@@ -5,10 +5,12 @@ import * as ImageManipulator from 'expo-image-manipulator';
 import { BarcodeScanningResult, CameraCapturedPicture, CameraView, useCameraPermissions } from 'expo-camera'
 
 import { BarcodeBoxGuideComponent } from './BarcodeBoxGuideComponent';
+import GlobalStyles from '../../lib/GlobalStyles';
 
 
 
 interface BarcodeScannerComponentProps {
+  isScanningEnabled: boolean
   onBarCodeScanned?: (barcode: string, imageUri: string) => void
   refreshIntervalMS?: number
   timeoutAfterScanMS?: number
@@ -17,7 +19,9 @@ interface BarcodeScannerComponentProps {
 export function BarcodeScannerComponent({
   refreshIntervalMS = 1000,
   timeoutAfterScanMS = 1000,
-  onBarCodeScanned = () => { } }: BarcodeScannerComponentProps) {
+  onBarCodeScanned = () => { },
+  isScanningEnabled = true,
+}: BarcodeScannerComponentProps) {
 
   const lastAttemptScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time the BCS found a BC and we assessed it
   const lastSuccessScan = useRef(new Date('0001-01-01T00:00:00Z'))//start at min time - last time found a BC and raised the barcode scanned event
@@ -30,6 +34,11 @@ export function BarcodeScannerComponent({
   const cameraRef = useRef<CameraView>(null);
 
   async function handleBarCodeScannedAsync(result: BarcodeScanningResult): Promise<void> {
+
+    if(!isScanningEnabled){
+      // console.log("BSC: Scanning is not enabled, cancelling")
+      return
+    }
 
     //Check if it's time to check barcode again - timeout after each attempt
     if ((new Date().getTime() - lastAttemptScan.current.getTime()) < refreshIntervalMS)
@@ -191,5 +200,5 @@ export function BarcodeScannerComponent({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
+      }
 });
